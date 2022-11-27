@@ -38,6 +38,8 @@ by PT. Maju Indonesia Tourism **["Find your Tourism needs here!"]**
 
 4. **Integrating backend**
 > Utilizing web version of MID-Tourism to implement a backend for the mobile version of MID-Tourism <br>
+> JSON Data from deployed Heroku app gets fetched from a link in the web into the mobile application <br>
+> Form submissions from mobile application gets posted into a view in the Django project to update the web app database <br>
 
 5. **Revisions**
 > Final front-end revisions <br>
