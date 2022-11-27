@@ -13,8 +13,6 @@ by PT. Maju Indonesia Tourism **["Find your Tourism needs here!"]**
 2. **Initialize your local environment**
 > Clone the repository <br>
 > `git clone` <br>
-> Install dependencies (requirements.txt) <br>
-> `pip install -r requirements.txt` <br>
 
 3. **Branch the Repository**
 > Create a new branch for each working member <br>
