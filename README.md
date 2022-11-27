@@ -4,9 +4,10 @@ by PT. Maju Indonesia Tourism **["Find your Tourism needs here!"]**
 
 ###### What are the instructions to build, run, and deploy the app?
 1. **Install Prerequisites**
-> [Download Git](https://git-scm.com/downloads) <br>
-> [Download Python](https://www.python.org/downloads/) <br>
-> [Download IDE](https://www.jetbrains.com/pycharm/promo/?source=google&medium=cpc&campaign=14122963570&term=python%20editor&gclid=CjwKCAjw7p6aBhBiEiwA83fGupTYvWpJtZpacu_aDl69BH9haCoiEb1hkr8rq6L15hpDVdDNvn7pPhoCy4cQAvD_BwE) <br>
+> [Download Flutter for MacOS](https://docs.flutter.dev/get-started/install/macos) <br>
+> [Download Flutter for Windows](https://docs.flutter.dev/get-started/install/windows) <br>
+> [Download Flutter for Linux](https://docs.flutter.dev/get-started/install/linux) <br>
+> [Download Android Studio for IDE (Recommended)](https://developer.android.com/studio) <br>
 > Run "flutter doctor on command terminal to see if there are any other prerequisites required for your device! <br>
 
 2. **Initialize your local environment**
