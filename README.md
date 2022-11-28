@@ -1,6 +1,6 @@
 MID-Tourism ✈️
 ==============================
-by PT. Maju Indonesia Tourism **["Find your Tourism needs here!"]**
+by PT. Maju Indonesia Tourism **["Find your Tourism needs here! https://github.com/mhmmd-attar/mid_tourism_mobile/releases/tag/v.1"]**
 
 ###### What are the instructions to build, run, and deploy the app?
 1. **Install Prerequisites**
