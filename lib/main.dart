@@ -32,42 +32,42 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.blue,
-        body: Container(
-          alignment: Alignment.center,
-          child: Column(
-            children: [
-              Text("MID Tourism"),
-              Text("Go Anywhere, Know Everywhere\n Experience authenticity and accomodation with MID-Tourism"),
-              TextButton(
+        home: Scaffold(
+            backgroundColor: Colors.blue,
+            body: Container(
+                alignment: Alignment.center,
+                child: Column(
+                    children: [
+                      Text("MID Tourism"),
+                      Text("Go Anywhere, Know Everywhere\n Experience authenticity and accommodation with MID-Tourism"),
+                      TextButton(
                           style: ButtonStyle(
                             backgroundColor:
-                                MaterialStateProperty.all(Colors.red),
+                            MaterialStateProperty.all(Colors.red),
                           ),
                           onPressed: () {
-          
+
                           },
                           child: const Text(
                             'Log-in',
-                            
+
                           )),
-              TextButton(
+                      TextButton(
                           style: ButtonStyle(
                             backgroundColor:
-                                MaterialStateProperty.all(Colors.red),
+                            MaterialStateProperty.all(Colors.red),
                           ),
                           onPressed: () {
-          
+
                           },
                           child: const Text(
                             'Register',
-                            
+
                           )),
-            ]
-          )
+                    ]
+                )
+            )
         )
-      )
     );
   }
 }
