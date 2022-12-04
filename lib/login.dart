@@ -59,7 +59,9 @@ class _MyLoginPage extends State<MyLoginPage> {
                             child: Text("Go Back",
                                 style: TextStyle(fontSize: 20, fontFamily: 'Quicksand',
                                     color: Color(0xffFFFFFF))),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pop(context);
+                              },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Color(0xffd3462c),
                                 shape: StadiumBorder()
@@ -83,8 +85,8 @@ class _MyLoginPage extends State<MyLoginPage> {
                     ],
                   ),
 
-                  Container(
-                    padding: EdgeInsets.fromLTRB(370,3,370,3),
+                  SizedBox(
+                    width: 280,
                     child:TextFormField(
                       decoration: InputDecoration(
                         filled:true,
@@ -97,8 +99,8 @@ class _MyLoginPage extends State<MyLoginPage> {
                       ),
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(370,0,370,3),
+                  SizedBox(
+                    width:280,
                     child:TextFormField(
                       decoration: InputDecoration(
                         filled:true,

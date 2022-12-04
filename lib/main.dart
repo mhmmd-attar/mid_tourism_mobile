@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           style: TextStyle(fontSize: 20, fontFamily: 'Quicksand',
                               color: Color(0xff000000))),
                       onPressed: () {
-                        Navigator.pushReplacement(context,
+                        Navigator.push(context,
                             MaterialPageRoute(builder: (context) => const MyLoginPage(title:'login')),
                         );
                       },
@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             style: TextStyle(fontSize: 20, fontFamily: 'Quicksand',
                                 color: Color(0xffFFFFFF))),
                         onPressed: () {
-                          Navigator.pushReplacement(context,
+                          Navigator.push(context,
                             MaterialPageRoute(builder: (context) => const MyRegisterPage(title:'register')),
                           );
                         },
