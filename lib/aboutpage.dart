@@ -23,10 +23,10 @@ class MyAboutPage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyAboutPage> createState() => _MyAboutPageState();
+  State<MyAboutPage> createState() => _MyAboutPage();
 }
 
-class _MyAboutPageState extends State<MyAboutPage> {
+class _MyAboutPage extends State<MyAboutPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

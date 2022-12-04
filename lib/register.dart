@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 
-class MyLoginApp extends StatelessWidget {
+class MyRegisterApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
@@ -13,20 +13,20 @@ class MyLoginApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.yellow,
       ),
-      home: const MyLoginPage(title: 'login'),
+      home: const MyRegisterPage(title: 'login'),
     );
   }
 }
 
-class MyLoginPage extends StatefulWidget {
-  const MyLoginPage({super.key, required this.title});
+class MyRegisterPage extends StatefulWidget {
+  const MyRegisterPage({super.key, required this.title});
   final String title;
 
   @override
-  State<MyLoginPage> createState() => _MyLoginPage();
+  State<MyRegisterPage> createState() => _MyRegisterPage();
 }
 
-class _MyLoginPage extends State<MyLoginPage> {
+class _MyRegisterPage extends State<MyRegisterPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -105,11 +105,9 @@ class _MyLoginPage extends State<MyLoginPage> {
                         ),
                         onPressed: () {
                         },
-                        child: const Text('Log-in!',)
+                        child: const Text('Register Now!',)
                     ),
                   )
-
-                  // Added behavior when budget is typed
                 ],
               ),
             )
