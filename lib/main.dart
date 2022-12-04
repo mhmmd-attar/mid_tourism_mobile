@@ -10,11 +10,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Homepage',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: const MyHomePage(title: 'Homepage'),
     );
   }
@@ -23,7 +21,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -31,21 +28,28 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
         home: Scaffold(
-            backgroundColor: Colors.blue,
+            backgroundColor: Color(0xff3f8dcd),
             body: Center(
               child: Column(
                 children:
                 <Widget>[
                   Center(
-                    child: Text("MID Tourism"),
+                    child: Text("MID Tourism", style: TextStyle(
+                        fontSize: 60, fontFamily: 'Quicksand',
+                        color: Color(0xffFFFFFF))),
                   ),
                   Center(
-                    child: Text("Go Anywhere, Know Every place"),
+                    child: Text("Go Anywhere, Know Every place", style: TextStyle(
+                        fontSize: 15, fontFamily: 'Quicksand',
+                        color: Color(0xffFFFFFF).withOpacity(0.5))),
                   ),
                   Center(
-                    child: Text("Experience authenticity and accomodation with MID-Tourism"),
+                    child: Text("Experience authenticity and accomodation with MID-Tourism", style: TextStyle(
+                        fontSize: 15, fontFamily: 'Quicksand',
+                        color: Color(0xffFFFFFF).withOpacity(0.5))),
                   ),
                   Container(
                     child: Image(
@@ -55,26 +59,33 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
 
                   Container(
-                        child: TextButton(
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(Colors.red),
-                            ),
-                            onPressed: () {
-                            },
-                            child: const Text('Log-in!',)
-                        ),
-                      ),
+                    margin: EdgeInsets.all(10),
+                    height: 50.0,
+                    child: ElevatedButton(
+                      child: Text("           Login           ",
+                          style: TextStyle(fontSize: 20, fontFamily: 'Quicksand',
+                              color: Color(0xff000000))),
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xffFFFFFF),
+                          shape: StadiumBorder()
+                      )
+                    ),
+                  ),
                   Container(
-                        child: TextButton(
-                            style: ButtonStyle(
-                              backgroundColor:
-                              MaterialStateProperty.all(Colors.red),
-                            ),
-                            onPressed: () {
-                            },
-                            child: const Text('Register',)
-                        ),
-                      ),
+                    margin: EdgeInsets.all(10),
+                    height: 50.0,
+                    child: ElevatedButton(
+                        child: Text("         Register         ",
+                            style: TextStyle(fontSize: 20, fontFamily: 'Quicksand',
+                                color: Color(0xffFFFFFF))),
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                            primary: Color(0xffd3462c),
+                            shape: StadiumBorder()
+                        )
+                    ),
+                  ),
 
 
                   // Added behavior when budget is typed
