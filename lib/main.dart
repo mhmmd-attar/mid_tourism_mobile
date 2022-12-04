@@ -36,13 +36,22 @@ class _MyHomePageState extends State<MyHomePage> {
             backgroundColor: Colors.blue,
             body: Center(
               child: Column(
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.fromLTRB(0,50,0,0),
+                children:
+                <Widget>[
+                  Center(
                     child: Text("MID Tourism"),
                   ),
+                  Center(
+                    child: Text("Go Anywhere, Know Every place"),
+                  ),
+                  Center(
+                    child: Text("Experience authenticity and accomodation with MID-Tourism"),
+                  ),
                   Container(
-                    child: Text("Go Anywhere, Know Everywhere \n Experience authenticity and accomodation with MID-Tourism"),
+                    child: Image(
+                      image: AssetImage("Saly-44.png"),
+                      fit: BoxFit.contain,
+                    ),
                   ),
 
                   Container(
@@ -66,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: const Text('Register',)
                         ),
                       ),
-                  
+
 
                   // Added behavior when budget is typed
                 ],
