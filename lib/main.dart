@@ -34,38 +34,43 @@ class _MyHomePageState extends State<MyHomePage> {
     return MaterialApp(
         home: Scaffold(
             backgroundColor: Colors.blue,
-            body: Container(
-                alignment: Alignment.center,
-                child: Column(
-                    children: [
-                      Text("MID Tourism"),
-                      Text("Go Anywhere, Know Everywhere\n Experience authenticity and accommodation with MID-Tourism"),
-                      TextButton(
-                          style: ButtonStyle(
-                            backgroundColor:
-                            MaterialStateProperty.all(Colors.red),
-                          ),
-                          onPressed: () {
+            body: Center(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.fromLTRB(0,50,0,0),
+                    child: Text("MID Tourism"),
+                  ),
+                  Container(
+                    child: Text("Go Anywhere, Know Everywhere \n Experience authenticity and accomodation with MID-Tourism"),
+                  ),
 
-                          },
-                          child: const Text(
-                            'Log-in',
+                  Container(
+                        child: TextButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(Colors.red),
+                            ),
+                            onPressed: () {
+                            },
+                            child: const Text('Log-in!',)
+                        ),
+                      ),
+                  Container(
+                        child: TextButton(
+                            style: ButtonStyle(
+                              backgroundColor:
+                              MaterialStateProperty.all(Colors.red),
+                            ),
+                            onPressed: () {
+                            },
+                            child: const Text('Register',)
+                        ),
+                      ),
+                  
 
-                          )),
-                      TextButton(
-                          style: ButtonStyle(
-                            backgroundColor:
-                            MaterialStateProperty.all(Colors.red),
-                          ),
-                          onPressed: () {
-
-                          },
-                          child: const Text(
-                            'Register',
-
-                          )),
-                    ]
-                )
+                  // Added behavior when budget is typed
+                ],
+              ),
             )
         )
     );

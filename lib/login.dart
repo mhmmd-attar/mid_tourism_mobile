@@ -2,34 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-class MyApp extends StatelessWidget {
+class MyLoginApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Homepage',
+      title: 'login',
       theme: ThemeData(
         primarySwatch: Colors.yellow,
       ),
-      home: const MyHomePage(title: 'Homepage'),
+      home: const MyHomePage(title: 'login'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class MyLoginPage extends StatefulWidget {
+  const MyLoginPage({super.key, required this.title});
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyLoginPage> createState() => _MyLoginPage();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyLoginPage extends State<MyLoginPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
