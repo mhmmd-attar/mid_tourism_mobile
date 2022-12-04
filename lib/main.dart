@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
+import 'package:mid_tourism_mobile/login.dart';
+import 'package:mid_tourism_mobile/register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,7 +12,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       title: 'Homepage',
       home: const MyHomePage(title: 'Homepage'),
@@ -65,9 +66,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Text("           Login           ",
                           style: TextStyle(fontSize: 20, fontFamily: 'Quicksand',
                               color: Color(0xff000000))),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => const MyLoginPage(title:'login')),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
-                        primary: Color(0xffFFFFFF),
+                        backgroundColor: Color(0xffFFFFFF),
                           shape: StadiumBorder()
                       )
                     ),
@@ -79,9 +84,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Text("         Register         ",
                             style: TextStyle(fontSize: 20, fontFamily: 'Quicksand',
                                 color: Color(0xffFFFFFF))),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => const MyRegisterPage(title:'register')),
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
-                            primary: Color(0xffd3462c),
+                            backgroundColor: Color(0xffd3462c),
                             shape: StadiumBorder()
                         )
                     ),
