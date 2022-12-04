@@ -3,7 +3,7 @@ import 'package:mid_tourism_mobile/drawer.dart';
 
 
 class MyAboutApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyAboutApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -67,8 +67,6 @@ class _MyAboutPage extends State<MyAboutPage> {
                             child: const Text('Register',)
                         ),
                       ),
-                  
-
                   // Added behavior when budget is typed
                 ],
               ),

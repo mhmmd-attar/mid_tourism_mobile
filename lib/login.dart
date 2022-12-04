@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 
 class MyLoginApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyLoginApp({super.key});
 
   // This widget is the root of your application.
   @override

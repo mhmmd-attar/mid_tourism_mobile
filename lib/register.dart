@@ -3,17 +3,17 @@ import 'package:flutter/services.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 
 class MyRegisterApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyRegisterApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'login',
+      title: 'Register',
       theme: ThemeData(
         primarySwatch: Colors.yellow,
       ),
-      home: const MyRegisterPage(title: 'login'),
+      home: const MyRegisterPage(title: 'Register'),
     );
   }
 }
@@ -40,7 +40,7 @@ class _MyRegisterPage extends State<MyRegisterPage> {
                     child: Text("MID Tourism"),
                   ),
                   Container(
-                    child: Text("log-in page"),
+                    child: Text("Register page"),
                   ),
 
                   Row(
