@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 
-
 class MyAboutApp extends StatelessWidget {
   const MyAboutApp({super.key});
 
@@ -32,46 +31,46 @@ class _MyAboutPage extends State<MyAboutPage> {
     return MaterialApp(
         home: Scaffold(
             backgroundColor: Colors.blue,
+            drawer: const drawerapp(),
             body: Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.fromLTRB(0,50,0,0),
+                    padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
                     child: Text("MID Tourism"),
                   ),
                   Container(
-                    child: Text("Go Anywhere, Know Everywhere \n Experience authenticity and accomodation with MID-Tourism"),
+                    child: Text(
+                        "Go Anywhere, Know Everywhere \n Experience authenticity and accomodation with MID-Tourism"),
                   ),
-                  Container(
-                    child: Text("Learn more about MID Tourism")
-                  ),
+                  Container(child: Text("Learn more about MID Tourism")),
 
                   Container(
-                        child: TextButton(
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(Colors.red),
-                            ),
-                            onPressed: () {
-                            },
-                            child: const Text('Log-in!',)
-                        ),
-                      ),
-                  Container(
-                        child: TextButton(
-                            style: ButtonStyle(
-                              backgroundColor:
+                    child: TextButton(
+                        style: ButtonStyle(
+                          backgroundColor:
                               MaterialStateProperty.all(Colors.red),
-                            ),
-                            onPressed: () {
-                            },
-                            child: const Text('Register',)
                         ),
-                      ),
+                        onPressed: () {},
+                        child: const Text(
+                          'Log-in!',
+                        )),
+                  ),
+                  Container(
+                    child: TextButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.red),
+                        ),
+                        onPressed: () {},
+                        child: const Text(
+                          'Register',
+                        )),
+                  ),
                   // Added behavior when budget is typed
                 ],
               ),
-            )
-        )
-    );
+            )));
   }
 }

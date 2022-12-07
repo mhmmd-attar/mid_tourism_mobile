@@ -15,7 +15,7 @@ class _RestaurantForm extends State<RestaurantForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Landmark Form'),
+        title: const Text('Restaurant Form'),
       ),
       drawer: const drawerapp(),
       body: const Center(
