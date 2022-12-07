@@ -13,9 +13,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Homepage',
-      home: const MyHomePage(title: 'Homepage'),
+      home: MyHomePage(title: 'Homepage'),
     );
   }
 }
@@ -41,44 +41,49 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Center(
-                    child: Text("MID Tourism",
-                        style: TextStyle(
-                            fontSize: 60,
-                            fontFamily: 'Quicksand',
-                            color: Color(0xffFFFFFF))),
+                  Container(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: const FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Text("MID Tourism",
+                          style: TextStyle(
+                              fontSize: 60,
+                              fontFamily: 'Quicksand',
+                              color: Color(0xffFFFFFF))),
+                    ),
                   ),
                   Center(
-                    child: Text("Go Anywhere, Know Every place",
+                    child: Text(
+                        "Go Anywhere, Know Every place",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 15,
                             fontFamily: 'Quicksand',
-                            color: Color(0xffFFFFFF).withOpacity(0.5))),
+                            color: const Color(0xffFFFFFF).withOpacity(0.5))),
                   ),
                   Center(
                     child: Text(
                         "Experience authenticity and accomodation with MID-Tourism",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 15,
                             fontFamily: 'Quicksand',
-                            color: Color(0xffFFFFFF).withOpacity(0.5))),
+                            color: const Color(0xffFFFFFF).withOpacity(0.5))),
                   ),
                   Container(
-                    child: Image(
-                      image: AssetImage("Saly-44.png"),
-                      fit: BoxFit.contain,
+                    padding: const EdgeInsets.only(left: 7.5, right: 7.5),
+                    child: const FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Image(
+                        image: AssetImage("Saly-44.png"),
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
-
                   Container(
-                    margin: EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(10),
                     height: 50.0,
                     child: ElevatedButton(
-                        child: Text("           Login           ",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontFamily: 'Quicksand',
-                                color: Color(0xff000000))),
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -88,18 +93,18 @@ class _MyHomePageState extends State<MyHomePage> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xffFFFFFF),
-                            shape: StadiumBorder())),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    height: 50.0,
-                    child: ElevatedButton(
-                        child: Text("         Register         ",
+                            backgroundColor: const Color(0xffFFFFFF),
+                            shape: const StadiumBorder()),
+                        child: const Text("           Login           ",
                             style: TextStyle(
                                 fontSize: 20,
                                 fontFamily: 'Quicksand',
-                                color: Color(0xffFFFFFF))),
+                                color: Color(0xff000000)))),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.all(10),
+                    height: 50.0,
+                    child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -109,8 +114,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xffd3462c),
-                            shape: StadiumBorder())),
+                            backgroundColor: const Color(0xffd3462c),
+                            shape: const StadiumBorder()),
+                        child: const Text("         Register         ",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontFamily: 'Quicksand',
+                                color: Color(0xffFFFFFF)))),
                   ),
 
                   // Added behavior when budget is typed

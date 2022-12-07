@@ -17,7 +17,7 @@ class _Restaurant extends State<RestaurantPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-            backgroundColor: const Color(0xff3f8dcd),
+            backgroundColor: const Color(0xfff2f2f2),
             appBar: AppBar(),
             drawer: const drawerapp(),
             body: Center(
@@ -27,35 +27,40 @@ class _Restaurant extends State<RestaurantPage> {
                       margin: const EdgeInsets.all(20.0),
                       padding: const EdgeInsets.all(20.0),
                       decoration: const BoxDecoration(
-                        color: Colors.white,
+                        image: DecorationImage(
+                          image: AssetImage("restaurant.png"),
+                          fit: BoxFit.cover
+                        ),
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             // ignore: prefer_const_constructors
-                            Center(
+                            FittedBox(
+                              fit : BoxFit.fitWidth,
                               child: const Text("Restaurants",
                                   style: TextStyle(
                                       fontSize: 60,
                                       fontFamily: 'Quicksand',
-                                      color: Colors.black)),
+                                      color: Colors.white)),
                             ),
                             Center(
                               child: Text("Discover cuisine.",
                                   style: TextStyle(
                                       fontSize: 15,
                                       fontFamily: 'Quicksand',
-                                      color: Colors.black.withOpacity(0.5))),
+                                      color: Colors.white.withOpacity(0.8))),
                             ),
                             Center(
                               child: Text(
                                   "Experience authenticity and accomodation with MID-Tourism",
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 15,
                                       fontFamily: 'Quicksand',
                                       color:
-                                          Color(0xffFFFFFF).withOpacity(0.5))),
+                                          const Color(0xffFFFFFF).withOpacity(0.8))),
                             ),
                           ])),
                   FutureBuilder(
@@ -109,14 +114,9 @@ class _Restaurant extends State<RestaurantPage> {
                         }
                       }),
                   Container(
-                    margin: EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(10),
                     height: 50.0,
                     child: ElevatedButton(
-                        child: Text("         Create Restaurant         ",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontFamily: 'Quicksand',
-                                color: Color(0xffFFFFFF))),
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -125,8 +125,13 @@ class _Restaurant extends State<RestaurantPage> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xffd3462c),
-                            shape: StadiumBorder())),
+                            backgroundColor: const Color(0xff24a0ed),
+                            shape: const StadiumBorder()),
+                        child: const Text("Create Restaurant",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontFamily: 'Quicksand',
+                                color: Color(0xffFFFFFF)))),
                   ),
                 ],
               ),
