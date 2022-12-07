@@ -13,6 +13,8 @@ class RestaurantPage extends StatefulWidget {
 }
 
 class _Restaurant extends State<RestaurantPage> {
+  String model = "resto.restaurant";
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -117,11 +119,13 @@ class _Restaurant extends State<RestaurantPage> {
                                 fontSize: 20,
                                 fontFamily: 'Quicksand',
                                 color: Color(0xffFFFFFF))),
-                        onPressed: () {
+                        onPressed: () async {
+                          int pk = await RestaurantFuture().getLength();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const RestaurantForm()),
+                                builder: (context) =>
+                                    RestaurantForm(model: model, pk: pk)),
                           );
                         },
                         style: ElevatedButton.styleFrom(
