@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/pages/homepage/aboutpage.dart';
 
@@ -9,9 +8,9 @@ class MyRegisterApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Register',
-      home: const MyRegisterPage(title: 'Register'),
+      home: MyRegisterPage(title: 'Register'),
     );
   }
 }
@@ -29,7 +28,7 @@ class _MyRegisterPage extends State<MyRegisterPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-            backgroundColor: Color(0xff3f8dcd),
+            backgroundColor: const Color(0xff3f8dcd),
             appBar: AppBar(
               title: Text(widget.title),
             ),
@@ -38,70 +37,87 @@ class _MyRegisterPage extends State<MyRegisterPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Center(
-                    child: Text("MID Tourism",
-                        style: TextStyle(
-                            fontSize: 60,
-                            fontFamily: 'Quicksand',
-                            color: Color(0xffFFFFFF))),
+                  Container(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: const FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Text("MID Tourism",
+                          style: TextStyle(
+                              fontSize: 60,
+                              fontFamily: 'Quicksand',
+                              color: Color(0xffFFFFFF))),
+                    ),
                   ),
                   Center(
                     child: Text("Register Page",
                         style: TextStyle(
                             fontSize: 15,
                             fontFamily: 'Quicksand',
-                            color: Color(0xffFFFFFF).withOpacity(0.5))),
+                            color: const Color(0xffFFFFFF).withOpacity(0.5))),
                   ),
                   Container(
-                    child: Image(
-                      image: AssetImage("Saly-44.png"),
-                      fit: BoxFit.contain,
+                    constraints: const BoxConstraints(maxHeight: 300),
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: const FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Image(
+                        image: AssetImage("Saly-44.png"),
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Container(
-                        margin: EdgeInsets.all(10),
-                        height: 50.0,
-                        child: ElevatedButton(
-                            child: Text("Go Back",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontFamily: 'Quicksand',
-                                    color: Color(0xffFFFFFF))),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Color(0xffd3462c),
-                                shape: StadiumBorder())),
+                          margin: const EdgeInsets.only(bottom: 10, top: 10),
+                          padding: const EdgeInsets.only(left: 7.5, right: 7.5),
+                          child: FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xffd3462c),
+                                    shape: const StadiumBorder()),
+                                child: const Text("Go Back",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontFamily: 'Quicksand',
+                                        color: Color(0xffFFFFFF)))),
+                          )
                       ),
                       Container(
-                        margin: EdgeInsets.all(10),
-                        height: 50.0,
-                        child: ElevatedButton(
-                            child: Text("About Us?",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontFamily: 'Quicksand',
-                                    color: Color(0xff000000))),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
+                          margin: const EdgeInsets.only(bottom: 10, top: 10),
+                          padding: const EdgeInsets.only(left: 7.5, right: 7.5),
+                          child: FittedBox(
+                            fit: BoxFit.fitHeight,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
                                         const MyAboutPage(title: 'About')),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Color(0xffFFFFFF),
-                                shape: StadiumBorder())),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xffFFFFFF),
+                                    shape: const StadiumBorder()),
+                                child: const Text("About Us?",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontFamily: 'Quicksand',
+                                        color: Color(0xff000000)))),
+                          )
                       ),
                     ],
                   ),
-                  SizedBox(
+                  Container(
+                    padding: const EdgeInsets.only(left: 7.5, right: 7.5),
                     width: 280,
+                    height: 40,
                     child: TextFormField(
                       decoration: InputDecoration(
                         filled: true,
@@ -113,8 +129,10 @@ class _MyRegisterPage extends State<MyRegisterPage> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  Container(
+                    padding: const EdgeInsets.only(left: 7.5, right: 7.5),
                     width: 280,
+                    height: 40,
                     child: TextFormField(
                       decoration: InputDecoration(
                         filled: true,
@@ -127,18 +145,19 @@ class _MyRegisterPage extends State<MyRegisterPage> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.all(10),
-                    height: 50.0,
+                    margin: const EdgeInsets.all(10),
                     child: ElevatedButton(
-                        child: Text("           Register Now!           ",
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xffd3462c),
+                            shape: const StadiumBorder(),
+                            minimumSize: const Size(280, 50)
+                        ),
+                        child: const Text("Register Now!",
                             style: TextStyle(
                                 fontSize: 20,
                                 fontFamily: 'Quicksand',
-                                color: Color(0xff000000))),
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xffd3462c),
-                            shape: StadiumBorder())),
+                                color: Color(0xff000000)))),
                   ),
                 ],
               ),

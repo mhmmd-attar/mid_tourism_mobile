@@ -94,8 +94,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xffFFFFFF),
-                            shape: const StadiumBorder()),
-                        child: const Text("           Login           ",
+                            shape: const StadiumBorder(),
+                            minimumSize: const Size(280, 50)
+                        ),
+                        child: const Text("Login",
                             style: TextStyle(
                                 fontSize: 20,
                                 fontFamily: 'Quicksand',
@@ -103,7 +105,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Container(
                     margin: const EdgeInsets.all(10),
-                    height: 50.0,
                     child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(
@@ -115,8 +116,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xffd3462c),
-                            shape: const StadiumBorder()),
-                        child: const Text("         Register         ",
+                            shape: const StadiumBorder(),
+                            minimumSize: const Size(280, 50)
+                        ),
+                        child: const Text("Register",
                             style: TextStyle(
                                 fontSize: 20,
                                 fontFamily: 'Quicksand',
