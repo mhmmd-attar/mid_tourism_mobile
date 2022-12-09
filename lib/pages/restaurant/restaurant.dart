@@ -85,6 +85,7 @@ class _Restaurant extends State<RestaurantPage> {
                             );
                           } else {
                             return ListView.builder(
+                                shrinkWrap: true,
                                 itemCount: snapshot.data!.length,
                                 itemBuilder: (_, index) => Container(
                                     margin: const EdgeInsets.symmetric(
@@ -104,7 +105,7 @@ class _Restaurant extends State<RestaurantPage> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            "${snapshot.data![index].fields.itemTitle}",
+                                            "${snapshot.data![index].fields.restoName}",
                                             style: const TextStyle(
                                               fontSize: 18.0,
                                               fontWeight: FontWeight.bold,
@@ -121,15 +122,13 @@ class _Restaurant extends State<RestaurantPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const RestaurantForm()),
+                                builder: (context) => const RestaurantForm()),
                           );
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xff24a0ed),
                             shape: const StadiumBorder(),
-                            minimumSize: const Size(260, 50)
-                        ),
+                            minimumSize: const Size(260, 50)),
                         child: const Text("Create Restaurant",
                             style: TextStyle(
                                 fontSize: 20,
