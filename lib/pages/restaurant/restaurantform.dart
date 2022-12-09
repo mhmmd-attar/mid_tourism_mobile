@@ -124,13 +124,13 @@ class _RestaurantForm extends State<RestaurantForm> {
                                     // Added behavior when name is typed
                                     onChanged: (String? value) {
                                       setState(() {
-                                        resto_name = value!;
+                                        resto_address = value!;
                                       });
                                     },
                                     // Added behavior when data is saved
                                     onSaved: (String? value) {
                                       setState(() {
-                                        resto_name = value!;
+                                        resto_address = value!;
                                       });
                                     },
                                     // Validator as form validation
@@ -157,13 +157,13 @@ class _RestaurantForm extends State<RestaurantForm> {
                                     // Added behavior when name is typed
                                     onChanged: (String? value) {
                                       setState(() {
-                                        resto_name = value!;
+                                        resto_email = value!;
                                       });
                                     },
                                     // Added behavior when data is saved
                                     onSaved: (String? value) {
                                       setState(() {
-                                        resto_name = value!;
+                                        resto_email = value!;
                                       });
                                     },
                                     // Validator as form validation
@@ -227,13 +227,13 @@ class _RestaurantForm extends State<RestaurantForm> {
                                     // Added behavior when name is typed
                                     onChanged: (String? value) {
                                       setState(() {
-                                        resto_name = value!;
+                                        resto_description = value!;
                                       });
                                     },
                                     // Added behavior when data is saved
                                     onSaved: (String? value) {
                                       setState(() {
-                                        resto_name = value!;
+                                        resto_description = value!;
                                       });
                                     },
                                     // Validator as form validation
@@ -260,13 +260,13 @@ class _RestaurantForm extends State<RestaurantForm> {
                                     // Added behavior when name is typed
                                     onChanged: (String? value) {
                                       setState(() {
-                                        resto_name = value!;
+                                        resto_delivery = value!;
                                       });
                                     },
                                     // Added behavior when data is saved
                                     onSaved: (String? value) {
                                       setState(() {
-                                        resto_name = value!;
+                                        resto_delivery = value!;
                                       });
                                     },
                                     // Validator as form validation
@@ -297,8 +297,7 @@ class _RestaurantForm extends State<RestaurantForm> {
                                                     restoAddress: resto_address,
                                                     restoEmail: resto_email,
                                                     restoPhone: resto_phone,
-                                                    restoDescription:
-                                                    resto_description,
+                                                    restoDescription: resto_description,
                                                     restoPhoto: resto_photo,
                                                     restoDelivery: resto_delivery);
                                                 Map<String, dynamic> jsonFields =

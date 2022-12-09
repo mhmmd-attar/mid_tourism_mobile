@@ -1,45 +1,31 @@
 import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
-import 'package:mid_tourism_mobile/drawer.dart';
-import 'package:mid_tourism_mobile/pages/restaurant/restaurantform.dart';
-import 'package:mid_tourism_mobile/pages/homepage/login.dart';
-import 'package:mid_tourism_mobile/pages/homepage/register.dart';
 import 'dart:convert';
 
 class RestaurantFuture {
   Future<List<Restaurant>> fetchRestaurant() async {
     var url = Uri.parse(
         'https://mid-tourism.up.railway.app/resto/show_restaurant_json');
-    print("Fetching...");
     var response = await http.get(
       url,
       headers: {
         "Content-Type": "application/json",
       },
     );
-    print("Converting...");
     // decode the response into the json form
     var data = jsonDecode(utf8.decode(response.bodyBytes));
-    print("Put into list...");
-    print(data);
     // convert the json data into Watchlist object
     List<Restaurant> listResto = [];
-    print("List created...");
     for (var d in data) {
-      print(d);
       if (d != null) {
         listResto.add(Restaurant.fromJson(d));
-        print(listResto);
       }
     }
-    print(listResto);
     return listResto;
   }
 
   Future<int> getLength() async {
     var url = Uri.parse(
         'https://mid-tourism.up.railway.app/resto/show_restaurant_json');
-    print("Fetching...");
     var response = await http.get(
       url,
       headers: {
@@ -48,16 +34,11 @@ class RestaurantFuture {
     );
     // decode the response into the json form
     var data = jsonDecode(utf8.decode(response.bodyBytes));
-    print("Put into list...");
-    print(data);
     // convert the json data into Watchlist object
     List<Restaurant> listWatchlist = [];
-    print("List created...");
     for (var d in data) {
-      print(d);
       if (d != null) {
         listWatchlist.add(Restaurant.fromJson(d));
-        print(listWatchlist);
       }
     }
 
