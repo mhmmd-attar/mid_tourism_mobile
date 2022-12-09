@@ -1,9 +1,4 @@
 import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
-import 'package:mid_tourism_mobile/drawer.dart';
-import 'package:mid_tourism_mobile/pages/restaurant/restaurantform.dart';
-import 'package:mid_tourism_mobile/pages/homepage/login.dart';
-import 'package:mid_tourism_mobile/pages/homepage/register.dart';
 import 'dart:convert';
 
 class RestaurantFuture {
@@ -18,18 +13,14 @@ class RestaurantFuture {
     );
     // decode the response into the json form
     var data = jsonDecode(utf8.decode(response.bodyBytes));
-    print(data);
     // convert the json data into Watchlist object
-    List<Restaurant> listWatchlist = [];
+    List<Restaurant> listResto = [];
     for (var d in data) {
-      print(d);
       if (d != null) {
-        listWatchlist.add(Restaurant.fromJson(d));
-        print(listWatchlist);
+        listResto.add(Restaurant.fromJson(d));
       }
     }
-    print(listWatchlist);
-    return listWatchlist;
+    return listResto;
   }
 
   Future<int> getLength() async {
@@ -43,13 +34,11 @@ class RestaurantFuture {
     );
     // decode the response into the json form
     var data = jsonDecode(utf8.decode(response.bodyBytes));
-    print(data);
     // convert the json data into Watchlist object
     List<Restaurant> listWatchlist = [];
     for (var d in data) {
       if (d != null) {
         listWatchlist.add(Restaurant.fromJson(d));
-        print(listWatchlist);
       }
     }
 
