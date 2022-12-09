@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
-import 'package:mid_tourism_mobile/pages/homepage/login.dart';
-import 'package:mid_tourism_mobile/pages/homepage/register.dart';
 import 'package:mid_tourism_mobile/pages/landmark/landmark_form.dart';
 
 class LandmarkPage extends StatefulWidget {
@@ -72,7 +70,7 @@ class _Landmark extends State<LandmarkPage> {
               )
             ),
             FutureBuilder(
-              future: LandmarksFuture().fetchLandmarks(),
+              future: LandmarkFuture().fetchLandmarks(),
               builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.data == null) {
                   return const Center(
