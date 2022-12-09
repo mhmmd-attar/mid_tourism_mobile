@@ -137,7 +137,7 @@ class _TransportForm extends State<TransportForm> {
                               // Validator as form validation
                               validator: (String? value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Hotel address cannot be empty!';
+                                  return 'Vehicle type cannot be empty!';
                                 }
                                 return null;
                               },
