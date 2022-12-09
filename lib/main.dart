@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Center(
                     child: Text(
-                        "Experience authenticity and accomodation with MID-Tourism",
+                        "Experience authenticity and accommodation with MID-Tourism",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 15,
