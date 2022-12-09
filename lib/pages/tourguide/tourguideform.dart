@@ -17,7 +17,7 @@ class _TourguideForm extends State<TourguideForm> {
       appBar: AppBar(
         title: const Text('Tour Guide Form'),
       ),
-      drawer: const drawerapp(),
+      drawer: const AppDrawer(),
       body: const Center(
         child: Text('this is a form'),
       ),

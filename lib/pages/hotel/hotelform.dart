@@ -17,7 +17,7 @@ class _HotelForm extends State<HotelForm> {
       appBar: AppBar(
         title: const Text('Hotel Form'),
       ),
-      drawer: const drawerapp(),
+      drawer: const AppDrawer(),
       body: const Center(
         child: Text('this is a form'),
       ),

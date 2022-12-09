@@ -31,7 +31,7 @@ class _MyAboutPage extends State<MyAboutPage> {
     return MaterialApp(
         home: Scaffold(
             backgroundColor: Colors.blue,
-            drawer: const drawerapp(),
+            drawer: const AppDrawer(),
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

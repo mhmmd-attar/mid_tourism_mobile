@@ -24,7 +24,7 @@ class _RestaurantForm extends State<RestaurantForm> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(),
-        drawer: const drawerapp(),
+        drawer: const AppDrawer(),
         body: Center(
             child: Column(children: <Widget>[
           Container(

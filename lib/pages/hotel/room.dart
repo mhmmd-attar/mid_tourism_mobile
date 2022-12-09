@@ -16,7 +16,7 @@ class _Room extends State<RoomPage> {
       appBar: AppBar(
         title: const Text('Rooms'),
       ),
-      drawer: const drawerapp(),
+      drawer: const AppDrawer(),
       body: Center(
         child: TextButton(
           onPressed: () {

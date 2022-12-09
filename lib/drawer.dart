@@ -6,8 +6,8 @@ import 'package:mid_tourism_mobile/pages/restaurant/restaurant.dart';
 import 'package:mid_tourism_mobile/pages/tourguide/tourguide.dart';
 import 'package:mid_tourism_mobile/pages/transportation/transport.dart';
 
-class drawerapp extends StatelessWidget {
-  const drawerapp({super.key});
+class AppDrawer extends StatelessWidget {
+  const AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -16,7 +16,7 @@ class _Hotel extends State<HotelPage> {
       appBar: AppBar(
         title: const Text('Hotels'),
       ),
-      drawer: const drawerapp(),
+      drawer: const AppDrawer(),
       body: Center(
         child: TextButton(
           onPressed: () {

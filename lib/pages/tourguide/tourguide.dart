@@ -16,7 +16,7 @@ class _Tourguide extends State<TourguidePage> {
       appBar: AppBar(
         title: const Text('Tour Guide'),
       ),
-      drawer: const drawerapp(),
+      drawer: const AppDrawer(),
       body: Center(
         child: TextButton(
           onPressed: () {
