@@ -23,17 +23,17 @@ class RestaurantFuture {
     print("Put into list...");
     print(data);
     // convert the json data into Watchlist object
-    List<Restaurant> listWatchlist = [];
+    List<Restaurant> listResto = [];
     print("List created...");
     for (var d in data) {
       print(d);
       if (d != null) {
-        listWatchlist.add(Restaurant.fromJson(d));
-        print(listWatchlist);
+        listResto.add(Restaurant.fromJson(d));
+        print(listResto);
       }
     }
-    print(listWatchlist);
-    return listWatchlist;
+    print(listResto);
+    return listResto;
   }
 
   Future<int> getLength() async {

@@ -116,20 +116,20 @@ class _Restaurant extends State<RestaurantPage> {
                       }),
                   Container(
                     margin: const EdgeInsets.all(10),
-                    height: 50.0,
                     child: ElevatedButton(
                         onPressed: () async {
-                          int pk = await RestaurantFuture().getLength();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    RestaurantForm(model: model, pk: pk)),
+                                    const RestaurantForm()),
                           );
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xff24a0ed),
-                            shape: const StadiumBorder()),
+                            shape: const StadiumBorder(),
+                            minimumSize: const Size(260, 50)
+                        ),
                         child: const Text("Create Restaurant",
                             style: TextStyle(
                                 fontSize: 20,

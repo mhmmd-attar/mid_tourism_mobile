@@ -37,37 +37,31 @@ class _MyAboutPage extends State<MyAboutPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                    child: Text("MID Tourism"),
+                    padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+                    child: const Text("MID Tourism"),
                   ),
-                  Container(
-                    child: Text(
-                        "Go Anywhere, Know Everywhere \n Experience authenticity and accomodation with MID-Tourism"),
-                  ),
-                  Container(child: Text("Learn more about MID Tourism")),
+                  const Text(
+                      "Go Anywhere, Know Everywhere \n Experience authenticity and accomodation with MID-Tourism"),
+                  const Text("Learn more about MID Tourism"),
 
-                  Container(
-                    child: TextButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.red),
-                        ),
-                        onPressed: () {},
-                        child: const Text(
-                          'Log-in!',
-                        )),
-                  ),
-                  Container(
-                    child: TextButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.red),
-                        ),
-                        onPressed: () {},
-                        child: const Text(
-                          'Register',
-                        )),
-                  ),
+                  TextButton(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.red),
+                      ),
+                      onPressed: () {},
+                      child: const Text(
+                        'Log-in!',
+                      )),
+                  TextButton(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.red),
+                      ),
+                      onPressed: () {},
+                      child: const Text(
+                        'Register',
+                      )),
                   // Added behavior when budget is typed
                 ],
               ),
