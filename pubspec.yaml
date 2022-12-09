@@ -65,7 +65,8 @@ flutter:
     - assets/Saly-44.png
     - assets/LoginButton.png
     - assets/RegisterButton.png
-
+    - assets/hotel.png
+    - assets/restaurant.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,37 +1,30 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-Future<List<Landmark>> fetchRestaurant() async {
-  var url = Uri.parse('https://mid-tourism.up.railway.app/resto/show_restaurant_json');
+Future<List<Landmark>> fetchLandmarks() async {
+  var url = Uri.parse(
+      'https://mid-tourism.up.railway.app/landmarks/json');
   var response = await http.get(
     url,
     headers: {
       "Content-Type": "application/json",
     },
   );
-  print("Converting...");
   // decode the response into the json form
   var data = jsonDecode(utf8.decode(response.bodyBytes));
-  print("Put into list...");
-  print(data);
-  // convert the json data into Watchlist object
-  List<Landmark> listWatchlist = [];
-  print("List created...");
+  // convert the json data into Hotel object
+  List<Landmark> listLandmarks = [];
   for (var d in data) {
-    print(d);
     if (d != null) {
-      listWatchlist.add(Landmark.fromJson(d));
-      print(listWatchlist);
+      listLandmarks.add(Landmark.fromJson(d));
     }
   }
-  print(listWatchlist);
-  return listWatchlist;
+  return listLandmarks;
 }
 
-Future<int> getLength() async {
+Future<int> getLandmarksLength() async {
   var url = Uri.parse(
-      'https://mid-tourism.up.railway.app/resto/show_restaurant_json');
-  print("Fetching...");
+      'https://mid-tourism.up.railway.app/landmarks/json');
   var response = await http.get(
     url,
     headers: {
@@ -40,20 +33,15 @@ Future<int> getLength() async {
   );
   // decode the response into the json form
   var data = jsonDecode(utf8.decode(response.bodyBytes));
-  print("Put into list...");
-  print(data);
-  // convert the json data into Watchlist object
-  List<Landmark> listWatchlist = [];
-  print("List created...");
+  // convert the json data into Hotel object
+  List<Landmark> listLandmarks = [];
   for (var d in data) {
-    print(d);
     if (d != null) {
-      listWatchlist.add(Landmark.fromJson(d));
-      print(listWatchlist);
+      listLandmarks.add(Landmark.fromJson(d));
     }
   }
 
-  return listWatchlist.length;
+  return listLandmarks.length;
 }
 
 List<Landmark> landmarkFromJson(String str) => List<Landmark>.from(json.decode(str).map((x) => Landmark.fromJson(x)));

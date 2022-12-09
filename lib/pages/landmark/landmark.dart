@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/pages/landmark/landmark_form.dart';
+import 'package:mid_tourism_mobile/models/landmark_model.dart';
 
 class LandmarkPage extends StatefulWidget {
   const LandmarkPage({super.key});
@@ -70,7 +71,7 @@ class _Landmark extends State<LandmarkPage> {
               )
             ),
             FutureBuilder(
-              future: LandmarkFuture().fetchLandmarks(),
+              future: fetchLandmarks(),
               builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.data == null) {
                   return const Center(
@@ -128,11 +129,11 @@ class _Landmark extends State<LandmarkPage> {
               height: 50.0,
               child: ElevatedButton(
                 onPressed: () {
-                  int pk = LandmarkFuture().getLength();
+                  int pk = getLandmarksLength() as int;
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => LandmarkForm()
+                        builder: (context) => const LandmarkForm()
                     ),
                   );
                 },
