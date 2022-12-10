@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/pages/homepage/login.dart';
 import 'package:mid_tourism_mobile/pages/homepage/register.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,9 +14,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Homepage',
-      home: MyHomePage(title: 'Homepage'),
+    return MaterialApp(
+      title: 'MID-Tourism',
+      home: const MyHomePage(title: 'Homepage'),
+      routes: {
+        "/login": (BuildContext context) => const MyLoginApp(),
+      },
     );
   }
 }
@@ -53,8 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   Center(
-                    child: Text(
-                        "Go Anywhere, Know Every place",
+                    child: Text("Go Anywhere, Know Every place",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 15,
@@ -95,8 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xffFFFFFF),
                             shape: const StadiumBorder(),
-                            minimumSize: const Size(280, 50)
-                        ),
+                            minimumSize: const Size(280, 50)),
                         child: const Text("Login",
                             style: TextStyle(
                                 fontSize: 20,
@@ -117,8 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xffd3462c),
                             shape: const StadiumBorder(),
-                            minimumSize: const Size(280, 50)
-                        ),
+                            minimumSize: const Size(280, 50)),
                         child: const Text("Register",
                             style: TextStyle(
                                 fontSize: 20,

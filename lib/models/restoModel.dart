@@ -44,6 +44,26 @@ class RestaurantFuture {
 
     return listWatchlist.length;
   }
+
+  createRestaurant(resto_name, resto_address, resto_email, resto_phone,
+      resto_description, resto_photo, resto_delivery) async {
+    var url = Uri.parse(
+        'https://mid-tourism.up.railway.app/resto/create_resto_flutter');
+    var data = {
+      "resto_name": resto_name,
+      "resto_address": resto_address,
+      "resto_email": resto_email,
+      "resto_phone": resto_phone,
+      "resto_description": resto_description,
+      "resto_photo": resto_photo,
+      "resto_delivery": resto_delivery,
+    };
+    try {
+      final response = await http.post(url, body: data);
+    } catch (e) {
+      print("$e LOOK");
+    }
+  }
 }
 
 List<Restaurant> restaurantFromJson(String str) =>
