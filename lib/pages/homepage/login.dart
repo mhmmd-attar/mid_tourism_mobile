@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/pages/homepage/aboutpage.dart';
@@ -27,23 +26,8 @@ class MyLoginPage extends StatefulWidget {
 }
 
 class _MyLoginPage extends State<MyLoginPage> {
-  doLogin(username, password) async {
-    try {
-      final response = await http.post(
-          Uri.parse(
-              "https://mid-tourism.up.railway.app/homepage/login_flutter"),
-          headers: {'Content-Type': 'application/json; charset=UTF-8'},
-          body: jsonEncode({
-            "username": username,
-            "password": password,
-          }));
-    } catch (e) {
-      print("$e LOOK");
-    }
-  }
-
-  String username = "default";
-  String password = "default";
+  String username = "";
+  String password = "";
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -172,18 +156,7 @@ class _MyLoginPage extends State<MyLoginPage> {
                   Container(
                     margin: const EdgeInsets.all(10),
                     child: ElevatedButton(
-                        onPressed: () {
-                          try {
-                            doLogin(username, password);
-                          } catch (e) {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return const AlertDialog(
-                                      content: Text('Could not login!'));
-                                });
-                          }
-                        },
+                        onPressed: () {},
                         style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xffd3462c),
                             shape: const StadiumBorder(),
