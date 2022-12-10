@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
-import 'package:mid_tourism_mobile/models/hotelModel.dart';
+import 'package:mid_tourism_mobile/models/transportModel.dart';
 import 'package:mid_tourism_mobile/pages/transportation/transportform.dart';
-
-enum booleanEnum { yes, no }
 
 class TransportForm extends StatefulWidget {
   const TransportForm({super.key});
@@ -14,13 +12,13 @@ class TransportForm extends StatefulWidget {
 
 class _TransportForm extends State<TransportForm> {
   final _formKey = GlobalKey<FormState>();
-  String companyName = "";
-  String transportName = "";
-  String transportPrice = "";
-  String description = "";
-  bool availability = false;
+  String nameCompany = "";
+  String nameTransport = "";
+  String priceTransport = "";
+  String desc = "";
+  bool available = true;
+  String model = "transport.transport";
   int pk = 1;
-  booleanEnum? _booleanEnum;
 
   @override
   Widget build(BuildContext context) {
