@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/pages/homepage/aboutpage.dart';
+import 'package:http/http.dart' as http;
 
 class MyLoginApp extends StatelessWidget {
   const MyLoginApp({super.key});
@@ -24,6 +27,23 @@ class MyLoginPage extends StatefulWidget {
 }
 
 class _MyLoginPage extends State<MyLoginPage> {
+  doLogin(username, password) async {
+    try {
+      final response = await http.post(
+          Uri.parse(
+              "https://mid-tourism.up.railway.app/homepage/login_flutter"),
+          headers: {'Content-Type': 'application/json; charset=UTF-8'},
+          body: jsonEncode({
+            "username": username,
+            "password": password,
+          }));
+    } catch (e) {
+      print("$e LOOK");
+    }
+  }
+
+  String username = "default";
+  String password = "default";
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -70,48 +90,46 @@ class _MyLoginPage extends State<MyLoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Container(
-                        margin: const EdgeInsets.only(bottom: 10, top: 10),
-                        padding: const EdgeInsets.only(left: 7.5, right: 7.5),
-                        child: FittedBox(
-                          fit: BoxFit.fitWidth,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xffd3462c),
-                                  shape: const StadiumBorder()),
-                              child: const Text("Go Back",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontFamily: 'Quicksand',
-                                      color: Color(0xffFFFFFF)))),
-                        )
-                      ),
+                          margin: const EdgeInsets.only(bottom: 10, top: 10),
+                          padding: const EdgeInsets.only(left: 7.5, right: 7.5),
+                          child: FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xffd3462c),
+                                    shape: const StadiumBorder()),
+                                child: const Text("Go Back",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontFamily: 'Quicksand',
+                                        color: Color(0xffFFFFFF)))),
+                          )),
                       Container(
                           margin: const EdgeInsets.only(bottom: 10, top: 10),
                           padding: const EdgeInsets.only(left: 7.5, right: 7.5),
-                        child: FittedBox(
-                          fit: BoxFit.fitHeight,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                      const MyAboutPage(title: 'About')),
-                                );
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xffFFFFFF),
-                                  shape: const StadiumBorder()),
-                              child: const Text("About Us?",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontFamily: 'Quicksand',
-                                      color: Color(0xff000000)))),
-                        )
-                      ),
+                          child: FittedBox(
+                            fit: BoxFit.fitHeight,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MyAboutPage(title: 'About')),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xffFFFFFF),
+                                    shape: const StadiumBorder()),
+                                child: const Text("About Us?",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontFamily: 'Quicksand',
+                                        color: Color(0xff000000)))),
+                          )),
                     ],
                   ),
                   Container(
@@ -127,6 +145,9 @@ class _MyLoginPage extends State<MyLoginPage> {
                         ),
                         hintText: "Email",
                       ),
+                      onChanged: (String? value) {
+                        username = value!;
+                      },
                     ),
                   ),
                   Container(
@@ -134,6 +155,7 @@ class _MyLoginPage extends State<MyLoginPage> {
                     width: 280,
                     height: 40,
                     child: TextFormField(
+                      obscureText: true,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
@@ -142,17 +164,30 @@ class _MyLoginPage extends State<MyLoginPage> {
                         ),
                         hintText: "Password",
                       ),
+                      onChanged: (String? value) {
+                        password = value!;
+                      },
                     ),
                   ),
                   Container(
                     margin: const EdgeInsets.all(10),
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          try {
+                            doLogin(username, password);
+                          } catch (e) {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return const AlertDialog(
+                                      content: Text('Could not login!'));
+                                });
+                          }
+                        },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xffd3462c),
                             shape: const StadiumBorder(),
-                            minimumSize: const Size(280, 50)
-                        ),
+                            minimumSize: const Size(280, 50)),
                         child: const Text("Log-in!",
                             style: TextStyle(
                                 fontSize: 20,
