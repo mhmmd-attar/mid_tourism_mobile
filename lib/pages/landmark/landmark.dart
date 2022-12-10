@@ -16,9 +16,7 @@ class _Landmark extends State<LandmarkPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xfff2f2f2),
-      appBar: AppBar(
-        title: const Text('Landmarks'),
-      ),
+      appBar: AppBar(),
       drawer: const AppDrawer(),
       body: Center(
         child: Column(
@@ -48,7 +46,7 @@ class _Landmark extends State<LandmarkPage> {
                   ),
                   Center(
                     child: Text(
-                      "",
+                      "Beautiful places across the islands!",
                       style: TextStyle(
                         fontSize: 15,
                         fontFamily: 'Quicksand',
@@ -69,6 +67,32 @@ class _Landmark extends State<LandmarkPage> {
                   ),
                 ]
               )
+            ),
+            Container(
+              margin: const EdgeInsets.all(10),
+              height: 50.0,
+              child: ElevatedButton(
+                  onPressed: () {
+                    int pk = getLandmarksLength() as int;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LandmarkForm()
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xff24a0ed),
+                      shape: const StadiumBorder()),
+                  child: const Text(
+                      "Register a Landmark",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Quicksand',
+                        color: Color(0xffFFFFFF),
+                      )
+                  )
+              ),
             ),
             FutureBuilder(
               future: fetchLandmarks(),
@@ -91,12 +115,13 @@ class _Landmark extends State<LandmarkPage> {
                     );
                   } else {
                     return ListView.builder(
+                      shrinkWrap: true,
                       itemCount: snapshot.data!.length,
                       itemBuilder: (_, index) => Container(
                         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                         padding: const EdgeInsets.all(20.0),
                         decoration: BoxDecoration(
-                          color: Colors.blue,
+                          color: Colors.white,
                           borderRadius:
                           BorderRadius.circular(15.0),
                           boxShadow: const [
@@ -110,7 +135,7 @@ class _Landmark extends State<LandmarkPage> {
                           MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "${snapshot.data![index].fields.itemTitle}",
+                              "${snapshot.data![index].fields.name}",
                               style: const TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
@@ -123,32 +148,6 @@ class _Landmark extends State<LandmarkPage> {
                   }
                 }
               }
-            ),
-            Container(
-              margin: const EdgeInsets.all(10),
-              height: 50.0,
-              child: ElevatedButton(
-                onPressed: () {
-                  int pk = getLandmarksLength() as int;
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LandmarkForm()
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xff24a0ed),
-                  shape: const StadiumBorder()),
-                child: const Text(
-                  "Register a Landmark",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'Quicksand',
-                    color: Color(0xffFFFFFF),
-                  )
-                )
-              ),
             ),
           ],
         ),
