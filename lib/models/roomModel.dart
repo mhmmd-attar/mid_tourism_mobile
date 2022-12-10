@@ -1,4 +1,50 @@
 import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+class RoomFuture {
+  Future<List<Room>> fetchRoom() async {
+    var url = Uri.parse(
+        'https://mid-tourism.up.railway.app/hotel/json_room');
+    var response = await http.get(
+      url,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    );
+    // decode the response into the json form
+    var data = jsonDecode(utf8.decode(response.bodyBytes));
+    // convert the json data into Hotel object
+    List<Room> listRoom = [];
+    for (var d in data) {
+      if (d != null) {
+        listRoom.add(Room.fromJson(d));
+      }
+    }
+    return listRoom;
+  }
+
+  Future<int> getLength() async {
+    var url = Uri.parse(
+        'https://mid-tourism.up.railway.app/hotel/json_room');
+    var response = await http.get(
+      url,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    );
+    // decode the response into the json form
+    var data = jsonDecode(utf8.decode(response.bodyBytes));
+    // convert the json data into Hotel object
+    List<Room> listRoom = [];
+    for (var d in data) {
+      if (d != null) {
+        listRoom.add(Room.fromJson(d));
+      }
+    }
+
+    return listRoom.length;
+  }
+}
 
 List<Room> roomFromJson(String str) => List<Room>.from(json.decode(str).map((x) => Room.fromJson(x)));
 

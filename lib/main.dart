@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
             appBar: AppBar(
               title: Text(widget.title),
             ),
-            drawer: const drawerapp(),
+            drawer: const AppDrawer(),
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Center(
                     child: Text(
-                        "Experience authenticity and accomodation with MID-Tourism",
+                        "Experience authenticity and accommodation with MID-Tourism",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 15,

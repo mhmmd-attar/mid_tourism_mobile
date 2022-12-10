@@ -30,7 +30,7 @@ class _MyLoginPage extends State<MyLoginPage> {
         home: Scaffold(
             backgroundColor: const Color(0xff3f8dcd),
             appBar: AppBar(title: const Text("Log in Page")),
-            drawer: const drawerapp(),
+            drawer: const AppDrawer(),
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

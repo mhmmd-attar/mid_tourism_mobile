@@ -26,7 +26,7 @@ class _RestaurantForm extends State<RestaurantForm> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(),
-        drawer: const drawerapp(),
+        drawer: const AppDrawer(),
         body: SingleChildScrollView(
             child: Center(
                 child: Column(children: <Widget>[
@@ -299,6 +299,23 @@ class _RestaurantForm extends State<RestaurantForm> {
                                               resto_photo,
                                               resto_delivery);
 
+                                          Fields newFields = Fields(
+                                              restoName: resto_name,
+                                              restoAddress: resto_address,
+                                              restoEmail: resto_email,
+                                              restoPhone: resto_phone,
+                                              restoDescription:
+                                                  resto_description,
+                                              restoPhoto: resto_photo,
+                                              restoDelivery: resto_delivery);
+                                          Map<String, dynamic> jsonFields =
+                                              newFields.toJson();
+                                          Restaurant newRestaurant = Restaurant(
+                                              model: model,
+                                              pk: pk,
+                                              fields: newFields);
+                                          Map<String, dynamic> jsonRestaurant =
+                                              newRestaurant.toJson();
                                           showDialog(
                                               context: context,
                                               builder: (BuildContext context) {

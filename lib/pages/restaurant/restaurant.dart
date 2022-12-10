@@ -21,7 +21,7 @@ class _Restaurant extends State<RestaurantPage> {
         home: Scaffold(
             backgroundColor: const Color(0xfff2f2f2),
             appBar: AppBar(),
-            drawer: const drawerapp(),
+            drawer: const AppDrawer(),
             body: Center(
               child: Column(
                 children: <Widget>[
