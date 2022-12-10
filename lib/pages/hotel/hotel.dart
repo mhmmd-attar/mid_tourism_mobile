@@ -1,3 +1,4 @@
+import 'package:auto_size_text_field/auto_size_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/pages/hotel/hotelform.dart';
@@ -117,8 +118,8 @@ class _Hotel extends State<HotelPage> {
                         shrinkWrap: true,
                         itemCount: snapshot.data!.length,
                         itemBuilder: (_, index) => Container(
+                          height: 240,
                           margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                          height: 225,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(15.0),
@@ -133,10 +134,16 @@ class _Hotel extends State<HotelPage> {
                               child: Column(children: [
                                 Expanded(child: ClipRRect(
                                   borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), bottomLeft: Radius.circular(15)),
-                                  child: Image.network(
-                                    'https://mid-tourism.up.railway.app/media/${snapshot.data![index].fields.hotelPhoto}',
-                                    fit: BoxFit.fill,
-                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        fit: BoxFit.fill,
+                                        image: NetworkImage(
+                                          'https://mid-tourism.up.railway.app/media/${snapshot.data![index].fields.hotelPhoto}',
+                                        ),
+                                      )
+                                    ),
+                                  )
                                 ))
                               ])
                             ),
@@ -145,10 +152,11 @@ class _Hotel extends State<HotelPage> {
                               child: Container(
                                 padding: const EdgeInsets.all(8),
                                 child: Column(children: [
-                                  Container(
-                                    child: Column(children: [
-                                      Align(
-                                        alignment: Alignment.topLeft,
+                                  Column(children: [
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child : FittedBox(
+                                        fit: BoxFit.fitWidth,
                                         child: Text(
                                           snapshot.data![index].fields.hotelName,
                                           style: const TextStyle(
@@ -158,110 +166,112 @@ class _Hotel extends State<HotelPage> {
                                           ),
                                         ),
                                       ),
-                                      TextField(
-                                        enabled: false,
-                                        readOnly: true,
-                                        controller: TextEditingController(text: snapshot.data![index].fields.hotelAddress),
-                                        decoration: const InputDecoration(
-                                          labelText: "Hotel Address",
-                                          isDense: true,
-                                          contentPadding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 0),
-                                          border: InputBorder.none,
-                                        ),
-                                      ),
-                                      TextField(
-                                        enabled: false,
-                                        readOnly: true,
-                                        controller: TextEditingController(text: snapshot.data![index].fields.email),
-                                        decoration: const InputDecoration(
-                                          labelText: "Email",
-                                          isDense: true,
-                                          contentPadding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 0),
-                                          border: InputBorder.none,
-                                        ),
-                                      ),
-                                      TextField(
-                                        enabled: false,
-                                        readOnly: true,
-                                        controller: TextEditingController(text: "${snapshot.data![index].fields.star}/5"),
-                                        decoration: const InputDecoration(
-                                          labelText: "Rating",
-                                          isDense: true,
-                                          contentPadding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 0),
-                                          border: InputBorder.none,
-                                        ),
-                                      ),
-                                      TextField(
-                                        enabled: false,
-                                        readOnly: true,
-                                        controller: TextEditingController(text: snapshot.data![index].fields.description),
-                                        decoration: const InputDecoration(
-                                          labelText: "Description",
-                                          isDense: true,
-                                          contentPadding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 0),
-                                          border: InputBorder.none,
-                                        ),
-                                      ),
-                                    ])
-                                  ),
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: FittedBox(
-                                      fit: BoxFit.fitWidth,
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        crossAxisAlignment: CrossAxisAlignment.end,
-                                        children: [
-                                          Container(
-                                              padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 6, 12),
-                                              child: FittedBox(
-                                                  child: ElevatedButton(
-                                                      style: ElevatedButton.styleFrom(
-                                                        backgroundColor: Colors.blue,
-                                                      ),
-                                                      onPressed: () {
-                                                        Navigator.pushReplacement(
-                                                            context,
-                                                            MaterialPageRoute( builder: (context) => RoomPage(
-                                                                hotelPk: snapshot.data![index].pk
-                                                            ))
-                                                        );
-                                                      },
-                                                      child: const Text(
-                                                          "Check Availability",
-                                                          style: TextStyle(color: Colors.white)
-                                                      )
-                                                  )
-                                              )
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsetsDirectional.fromSTEB(6, 0, 12, 12),
-                                            height: 36,
-                                            width: 72,
-                                            child: FittedBox(
-                                              child: ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor: Colors.red,
-                                                ),
-                                                onPressed: () {
-                                                  Navigator.pushReplacement(
-                                                    context,
-                                                    MaterialPageRoute( builder: (context) => RoomPage(
-                                                      hotelPk: snapshot.data![index].pk
-                                                    ))
-                                                  );
-                                                },
-                                                child: const Text(
-                                                  "Delete",
-                                                  style: TextStyle(color: Colors.white)
-                                                )
-                                              ),
-                                            )
-                                          ),
-                                        ],
+                                    ),
+                                    AutoSizeTextField(
+                                      enabled: false,
+                                      readOnly: true,
+                                      controller: TextEditingController(text: snapshot.data![index].fields.hotelAddress),
+                                      decoration: const InputDecoration(
+                                        labelText: "Hotel Address",
+                                        isDense: true,
+                                        contentPadding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 0),
+                                        border: InputBorder.none,
                                       ),
                                     ),
-                                  ),
+                                    AutoSizeTextField(
+                                      enabled: false,
+                                      readOnly: true,
+                                      controller: TextEditingController(text: snapshot.data![index].fields.email),
+                                      decoration: const InputDecoration(
+                                        labelText: "Email",
+                                        isDense: true,
+                                        contentPadding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 0),
+                                        border: InputBorder.none,
+                                      ),
+                                    ),
+                                    TextField(
+                                      enabled: false,
+                                      readOnly: true,
+                                      controller: TextEditingController(text: "${snapshot.data![index].fields.star}/5"),
+                                      decoration: const InputDecoration(
+                                        labelText: "Rating",
+                                        isDense: true,
+                                        contentPadding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 0),
+                                        border: InputBorder.none,
+                                      ),
+                                    ),
+                                    AutoSizeTextField(
+                                      enabled: false,
+                                      readOnly: true,
+                                      maxLines: 2,
+                                      controller: TextEditingController(text: snapshot.data![index].fields.description),
+                                      decoration: const InputDecoration(
+                                        labelText: "Description",
+                                        isDense: true,
+                                        contentPadding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 0),
+                                        border: InputBorder.none,
+                                      ),
+                                    ),
+                                  ]),
+                                  Expanded(
+                                      child: Align(
+                                        alignment: Alignment.bottomRight,
+                                        child: FittedBox(
+                                          fit: BoxFit.fitWidth,
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            children: [
+                                              Container(
+                                                  padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 6, 10),
+                                                  child: FittedBox(
+                                                      child: ElevatedButton(
+                                                          style: ElevatedButton.styleFrom(
+                                                            backgroundColor: Colors.blue,
+                                                          ),
+                                                          onPressed: () {
+                                                            Navigator.pushReplacement(
+                                                                context,
+                                                                MaterialPageRoute( builder: (context) => RoomPage(
+                                                                    hotelPk: snapshot.data![index].pk
+                                                                ))
+                                                            );
+                                                          },
+                                                          child: const Text(
+                                                              "Check Availability",
+                                                              style: TextStyle(color: Colors.white)
+                                                          )
+                                                      )
+                                                  )
+                                              ),
+                                              Container(
+                                                  padding: const EdgeInsetsDirectional.fromSTEB(6, 0, 12, 10),
+                                                  child: FittedBox(
+                                                    child: ElevatedButton(
+                                                        style: ElevatedButton.styleFrom(
+                                                            backgroundColor: Colors.red,
+                                                            maximumSize: const Size(74, 36)
+                                                        ),
+                                                        onPressed: () {
+                                                          Navigator.pushReplacement(
+                                                              context,
+                                                              MaterialPageRoute( builder: (context) => RoomPage(
+                                                                  hotelPk: snapshot.data![index].pk
+                                                              ))
+                                                          );
+                                                        },
+                                                        child: const Text(
+                                                            "Delete",
+                                                            style: TextStyle(color: Colors.white)
+                                                        )
+                                                    ),
+                                                  )
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                  )
                                 ]),
                               ),
                             ),

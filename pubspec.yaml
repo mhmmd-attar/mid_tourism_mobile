@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.5
   pbp_django_auth: ^0.2.3
+  auto_size_text_field: ^2.1.0
 
 dev_dependencies:
   flutter_test:
