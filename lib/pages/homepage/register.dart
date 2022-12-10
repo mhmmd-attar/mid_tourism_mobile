@@ -99,7 +99,7 @@ class _MyRegisterPage extends State<MyRegisterPage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                        const MyAboutPage(title: 'About')),
+                                        const MyAboutPage()),
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(

@@ -12,14 +12,13 @@ class MyAboutApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyAboutPage(title: 'About'),
+      home: const MyAboutPage(),
     );
   }
 }
 
 class MyAboutPage extends StatefulWidget {
-  const MyAboutPage({super.key, required this.title});
-  final String title;
+  const MyAboutPage({super.key});
 
   @override
   State<MyAboutPage> createState() => _MyAboutPage();
