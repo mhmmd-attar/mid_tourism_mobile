@@ -26,7 +26,7 @@ class drawerapp extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const MyHomePage(title: 'Homepage')),
+                    builder: (context) => const MyHomePage()),
               );
             },
           ),

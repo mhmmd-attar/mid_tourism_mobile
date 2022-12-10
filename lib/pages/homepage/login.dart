@@ -1,41 +1,35 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/pages/homepage/aboutpage.dart';
-import 'package:http/http.dart' as http;
-
-class MyLoginApp extends StatelessWidget {
-  const MyLoginApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'login',
-      home: MyLoginPage(title: 'Login'),
-    );
-  }
-}
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 class MyLoginPage extends StatefulWidget {
-  const MyLoginPage({super.key, required this.title});
-  final String title;
+  const MyLoginPage({super.key});
 
   @override
   State<MyLoginPage> createState() => _MyLoginPage();
 }
 
 class _MyLoginPage extends State<MyLoginPage> {
-  String username = "";
-  String password = "";
+  final _loginFormKey = GlobalKey<FormState>();
+  bool isPasswordVisible = false;
+  void togglePasswordView() {
+    setState(() {
+      isPasswordVisible = !isPasswordVisible;
+    });
+  }
+
+  String _username = "";
+  String _password = "";
+
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return MaterialApp(
         home: Scaffold(
             backgroundColor: const Color(0xff3f8dcd),
-            appBar: AppBar(
-              title: Text(widget.title),
-            ),
+            appBar: AppBar(title: const Text("Log in Page")),
             drawer: const drawerapp(),
             body: Center(
               child: Column(
@@ -98,11 +92,11 @@ class _MyLoginPage extends State<MyLoginPage> {
                             fit: BoxFit.fitHeight,
                             child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.push(
+                                  Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const MyAboutPage(title: 'About')),
+                                            const MyAboutPage()),
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -130,7 +124,7 @@ class _MyLoginPage extends State<MyLoginPage> {
                         hintText: "Email",
                       ),
                       onChanged: (String? value) {
-                        username = value!;
+                        _username = value!;
                       },
                     ),
                   ),
@@ -149,14 +143,46 @@ class _MyLoginPage extends State<MyLoginPage> {
                         hintText: "Password",
                       ),
                       onChanged: (String? value) {
-                        password = value!;
+                        _password = value!;
                       },
                     ),
                   ),
                   Container(
                     margin: const EdgeInsets.all(10),
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          print(_username + _password);
+                          final response = await request.login(
+                              "https://mid-tourism.up.railway.app/homepage/login_flutter/",
+                              {
+                                'username': _username,
+                                'password': _password,
+                              });
+                          if (request.loggedIn) {
+                            // Code here will run if the login succeeded.
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return const AlertDialog(
+                                      content: Text(
+                                          "You've successfully logged in!"));
+                                });
+
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MyAboutPage(),
+                                ));
+                          } else {
+                            // Code here will run if the login failed (wrong username/password).
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return const AlertDialog(
+                                      content: Text('Wrong Credentials!'));
+                                });
+                          }
+                        },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xffd3462c),
                             shape: const StadiumBorder(),
