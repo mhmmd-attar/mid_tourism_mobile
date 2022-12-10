@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
-import 'package:mid_tourism_mobile/models/hotelModel.dart';
+import 'package:mid_tourism_mobile/models/transportModel.dart';
 import 'package:mid_tourism_mobile/pages/transportation/transportform.dart';
-
-enum booleanEnum { yes, no }
 
 class TransportForm extends StatefulWidget {
   const TransportForm({super.key});
@@ -14,13 +12,13 @@ class TransportForm extends StatefulWidget {
 
 class _TransportForm extends State<TransportForm> {
   final _formKey = GlobalKey<FormState>();
-  String companyName = "";
-  String transportName = "";
-  String transportPrice = "";
-  String description = "";
-  bool availability = false;
+  String nameCompany = "";
+  String nameTransport = "";
+  String priceTransport = "";
+  String desc = "";
+  bool available = true;
+  String model = "transport.transport";
   int pk = 1;
-  booleanEnum? _booleanEnum;
 
   @override
   Widget build(BuildContext context) {
@@ -92,13 +90,13 @@ class _TransportForm extends State<TransportForm> {
                               // Added behavior when name is typed
                               onChanged: (String? value) {
                                 setState(() {
-                                  companyName = value!;
+                                  nameCompany = value!;
                                 });
                               },
                               // Added behavior when data is saved
                               onSaved: (String? value) {
                                 setState(() {
-                                  companyName = value!;
+                                  nameCompany = value!;
                                 });
                               },
                               // Validator as form validation
@@ -125,19 +123,19 @@ class _TransportForm extends State<TransportForm> {
                               // Added behavior when name is typed
                               onChanged: (String? value) {
                                 setState(() {
-                                  transportName = value!;
+                                  nameTransport = value!;
                                 });
                               },
                               // Added behavior when data is saved
                               onSaved: (String? value) {
                                 setState(() {
-                                  transportName = value!;
+                                  nameTransport = value!;
                                 });
                               },
                               // Validator as form validation
                               validator: (String? value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Vehicle type cannot be empty!';
+                                  return 'Hotel address cannot be empty!';
                                 }
                                 return null;
                               },
@@ -158,13 +156,13 @@ class _TransportForm extends State<TransportForm> {
                               // Added behavior when name is typed
                               onChanged: (String? value) {
                                 setState(() {
-                                  transportPrice = value!;
+                                  priceTransport = value!;
                                 });
                               },
                               // Added behavior when data is saved
                               onSaved: (String? value) {
                                 setState(() {
-                                  transportPrice = value!;
+                                  priceTransport = value!;
                                 });
                               },
                               // Validator as form validation
@@ -176,6 +174,46 @@ class _TransportForm extends State<TransportForm> {
                               },
                             ),
                           ),
+                          Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          minimumSize: const Size(280, 50),
+                                          shape: const StadiumBorder(),
+                                          backgroundColor:
+                                              const Color(0xff3f8dcd)),
+                                      onPressed: () {
+                                        if (_formKey.currentState!.validate()) {
+                                          _formKey.currentState!.save();
+                                          Fields uwawfields = Fields(
+                                            companyName: nameCompany,
+                                            transportName: nameTransport,
+                                            transportPrice: priceTransport,
+                                            description: desc,
+                                            availability: available,
+                                          );
+                                          Map<String, dynamic> jsonFields =
+                                              uwawfields.toJson();
+                                          Transport uwaw = Transport(
+                                              model: model,
+                                              pk: pk,
+                                              fields: uwawfields);
+                                          Map<String, dynamic> jsonRoom =
+                                              uwaw.toJson();
+                                          showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return const AlertDialog(
+                                                    content: Text(
+                                                        'Successfully saved!'));
+                                              });
+                                        }
+                                      },
+                                      child: const Text("Save",
+                                          style: TextStyle(
+                                              color: Colors.white))))),
                         ],
                       ),
                     ),
