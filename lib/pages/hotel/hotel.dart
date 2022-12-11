@@ -27,7 +27,8 @@ class _Hotel extends State<HotelPage> {
                 padding: const EdgeInsets.all(20.0),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage("hotel.png"), fit: BoxFit.cover),
+                      image: AssetImage("assets/hotel.png"),
+                      fit: BoxFit.cover),
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
                 child: Column(

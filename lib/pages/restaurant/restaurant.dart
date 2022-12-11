@@ -30,7 +30,7 @@ class _Restaurant extends State<RestaurantPage> {
                       padding: const EdgeInsets.all(20.0),
                       decoration: const BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage("restaurant.png"),
+                            image: AssetImage("assets/restaurant.png"),
                             fit: BoxFit.cover),
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
