@@ -28,7 +28,7 @@ class _Tourguide extends State<TourguidePage> {
                     padding: const EdgeInsets.all(20.0),
                     decoration: const BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage("tourguide.jpg"),
+                          image: AssetImage("assets/tourguide.jpg"),
                           fit: BoxFit.cover),
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),

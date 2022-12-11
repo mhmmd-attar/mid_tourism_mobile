@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/models/tourguideModel.dart';
 import 'package:intl/intl.dart';
+import 'package:mid_tourism_mobile/pages/tourguide/tourguide.dart';
 
 class TourguideForm extends StatefulWidget {
   const TourguideForm({super.key});
@@ -187,51 +188,79 @@ TextEditingController _date = TextEditingController();
                                       },
                                     ),
                                   ),
-
                                   Padding(
-                                      padding: const EdgeInsets.all(15.0),
+                                      padding: const EdgeInsets.only(top: 10.0),
                                       child: Align(
-                                          alignment: Alignment.bottomCenter,
-                                          child: ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                  minimumSize: const Size(280, 50),
-                                                  shape: const StadiumBorder(),
-                                                  backgroundColor: const Color(0xff3f8dcd)
-                                              ),
-                                              onPressed: () {
-                                                if (_formKey.currentState!
-                                                    .validate()) {
-                                                  _formKey.currentState!.save();
-                                                  Fields newFields = Fields(
-                                                    company: company,
-                                                    date: date,
-                                                    destination: destination,
-                                                    isBooked: isBooked,
+                                        alignment: Alignment.bottomCenter,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    minimumSize: const Size(120, 50),
+                                                    shape: const StadiumBorder(),
+                                                    backgroundColor:
+                                                    const Color(0xff6c757d)
+                                                ),
+                                                onPressed: () {
+                                                  Navigator.pushReplacement(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) => const TourguidePage()),
                                                   );
-                                                  Map<String, dynamic> jsonFields =
-                                                  newFields.toJson();
-                                                  Tourguide newTourguide =
-                                                  Tourguide(
-                                                      model: model,
-                                                      pk: pk,
-                                                      fields: newFields
-                                                  );
-                                                  Map<String, dynamic>
-                                                  jsonTourguide =
-                                                  newTourguide.toJson();
-                                                  showDialog(
-                                                      context: context,
-                                                      builder:
-                                                          (BuildContext context) {
-                                                        return const AlertDialog(
-                                                            content: Text(
-                                                                'Successfully saved!'));
-                                                      });
-                                                }
-                                              },
-                                              child: const Text("Save",
-                                                  style: TextStyle(
-                                                      color: Colors.white))))),
+                                                },
+                                                child: const Text("Back",
+                                                    style: TextStyle(
+                                                        color: Colors.white
+                                                    )
+                                                )
+                                            ),
+                                            ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    minimumSize: const Size(120, 50),
+                                                    shape: const StadiumBorder(),
+                                                    backgroundColor:
+                                                    const Color(0xff3f8dcd)),
+                                                onPressed: () {
+                                                  if (_formKey.currentState!
+                                                      .validate()) {
+                                                    _formKey.currentState!.save();
+                                                    Fields newFields = Fields(
+                                                      company: company,
+                                                      date: date,
+                                                      destination: destination,
+                                                      isBooked: isBooked,
+                                                    );
+                                                    Map<String, dynamic> jsonFields =
+                                                    newFields.toJson();
+                                                    Tourguide newTourguide =
+                                                    Tourguide(
+                                                        model: model,
+                                                        pk: pk,
+                                                        fields: newFields
+                                                    );
+                                                    Map<String, dynamic>
+                                                    jsonTourguide =
+                                                    newTourguide.toJson();
+                                                    showDialog(
+                                                        context: context,
+                                                        builder:
+                                                            (BuildContext context) {
+                                                          return const AlertDialog(
+                                                              content: Text(
+                                                                  'Successfully saved!'));
+                                                        });
+                                                  }
+                                                },
+                                                child: const Text("Save",
+                                                    style: TextStyle(
+                                                        color: Colors.white)
+                                                )
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                  ),
                                 ],
                               ),
                             ),
