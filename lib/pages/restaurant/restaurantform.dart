@@ -1,7 +1,12 @@
+import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/models/restoModel.dart';
 import 'package:mid_tourism_mobile/pages/restaurant/restaurant.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class RestaurantForm extends StatefulWidget {
   const RestaurantForm({super.key});
@@ -15,14 +20,13 @@ class _RestaurantForm extends State<RestaurantForm> {
   String resto_address = "";
   String resto_email = "";
   String resto_phone = "";
-  String resto_photo = "blank";
+  String resto_photo = "";
   String resto_description = "";
   String resto_delivery = "";
-  String model = "resto.restaurant";
-  int pk = 1;
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
         appBar: AppBar(),
         drawer: const AppDrawer(),
@@ -277,6 +281,11 @@ class _RestaurantForm extends State<RestaurantForm> {
                             ),
                           ),
                           Padding(
+                            // Using padding of 8 pixels
+                            padding: const EdgeInsets.all(8.0),
+                            // Child HERE
+                          ),
+                          Padding(
                               padding: const EdgeInsets.all(15.0),
                               child: Align(
                                   alignment: Alignment.bottomCenter,
@@ -286,17 +295,28 @@ class _RestaurantForm extends State<RestaurantForm> {
                                           shape: const StadiumBorder(),
                                           backgroundColor:
                                               const Color(0xff3f8dcd)),
-                                      onPressed: () {
+                                      onPressed: () async {
                                         if (_formKey.currentState!.validate()) {
                                           _formKey.currentState!.save();
-                                          RestaurantFuture().createRestaurant(
-                                              resto_name,
-                                              resto_address,
-                                              resto_email,
-                                              resto_phone,
-                                              resto_description,
-                                              resto_photo,
-                                              resto_delivery);
+
+                                          try {
+                                            final response = await request.post(
+                                                'https://mid-tourism.up.railway.app/resto/create_resto_flutter/',
+                                                {
+                                                  "resto_name": resto_name,
+                                                  "resto_address":
+                                                      resto_address,
+                                                  "resto_email": resto_email,
+                                                  "resto_phone": resto_phone,
+                                                  "resto_description":
+                                                      resto_description,
+                                                  "resto_photo": resto_photo,
+                                                  "resto_delivery":
+                                                      resto_delivery,
+                                                });
+                                          } catch (e) {
+                                            print("$e LOOK");
+                                          }
                                           showDialog(
                                               context: context,
                                               builder: (BuildContext context) {

@@ -5,6 +5,8 @@ import 'package:mid_tourism_mobile/pages/homepage/login.dart';
 import 'package:mid_tourism_mobile/pages/homepage/register.dart';
 import 'package:mid_tourism_mobile/models/restoModel.dart';
 import 'package:auto_size_text_field/auto_size_text_field.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 class RestaurantPage extends StatefulWidget {
   const RestaurantPage({super.key});
@@ -16,6 +18,7 @@ class RestaurantPage extends StatefulWidget {
 class _Restaurant extends State<RestaurantPage> {
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(),
       drawer: const AppDrawer(),
@@ -28,7 +31,8 @@ class _Restaurant extends State<RestaurantPage> {
                 padding: const EdgeInsets.all(20.0),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage("restaurant.png"), fit: BoxFit.cover),
+                      image: AssetImage("assets/restaurant.png"),
+                      fit: BoxFit.cover),
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
                 child: Column(
@@ -136,7 +140,7 @@ class _Restaurant extends State<RestaurantPage> {
                                                     image: DecorationImage(
                                                   fit: BoxFit.fill,
                                                   image: NetworkImage(
-                                                    'https://mid-tourism.up.railway.app/media/${snapshot.data![index].fields.restoPhoto}',
+                                                    'https://mid-tourism.up.railway.app/media/assets/${snapshot.data![index].fields.restoPhoto}',
                                                   ),
                                                 )),
                                               )))
@@ -267,7 +271,23 @@ class _Restaurant extends State<RestaurantPage> {
                                                                       const Size(
                                                                           74,
                                                                           36)),
-                                                          onPressed: () {},
+                                                          onPressed: () async {
+                                                            try {
+                                                              final response =
+                                                                  await request.get(
+                                                                      'https://mid-tourism.up.railway.app/resto/delete_restaurant_flutter/${snapshot.data![index].pk}');
+                                                            } catch (e) {
+                                                              print("$e LOOK");
+                                                            }
+                                                            Navigator
+                                                                .pushReplacement(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          RestaurantPage()),
+                                                            );
+                                                          },
                                                           child: const Text(
                                                               "Delete",
                                                               style: TextStyle(
