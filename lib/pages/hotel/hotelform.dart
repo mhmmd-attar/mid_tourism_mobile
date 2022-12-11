@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/models/hotelModel.dart';
+import 'package:mid_tourism_mobile/pages/hotel/hotel.dart';
 
 class HotelForm extends StatefulWidget {
   const HotelForm({super.key});
@@ -244,46 +245,76 @@ class _HotelForm extends State<HotelForm> {
                             ),
                           ),
                           Padding(
-                              padding: const EdgeInsets.all(15.0),
+                              padding: const EdgeInsets.only(top: 10.0),
                               child: Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          minimumSize: const Size(280, 50),
-                                          shape: const StadiumBorder(),
-                                          backgroundColor:
-                                              const Color(0xff3f8dcd)),
-                                      onPressed: () {
-                                        if (_formKey.currentState!.validate()) {
-                                          _formKey.currentState!.save();
-                                          Fields newFields = Fields(
-                                            hotelName: hotelName,
-                                            hotelAddress: hotelAddress,
-                                            email: hotelEmail,
-                                            star: hotelStar,
-                                            description: hotelDescription,
-                                            hotelPhoto: hotelPhoto,
+                                alignment: Alignment.bottomCenter,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            minimumSize: const Size(120, 50),
+                                            shape: const StadiumBorder(),
+                                            backgroundColor:
+                                            const Color(0xff6c757d)
+                                        ),
+                                        onPressed: () {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => const HotelPage()),
                                           );
-                                          Map<String, dynamic> jsonFields =
-                                              newFields.toJson();
-                                          Hotel newHotel = Hotel(
-                                              model: model,
-                                              pk: pk,
-                                              fields: newFields);
-                                          Map<String, dynamic> jsonHotel =
-                                              newHotel.toJson();
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return const AlertDialog(
-                                                    content: Text(
-                                                        'Successfully saved!'));
-                                              });
-                                        }
-                                      },
-                                      child: const Text("Save",
-                                          style: TextStyle(
-                                              color: Colors.white))))),
+                                        },
+                                        child: const Text("Back",
+                                            style: TextStyle(
+                                                color: Colors.white
+                                            )
+                                        )
+                                    ),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            minimumSize: const Size(120, 50),
+                                            shape: const StadiumBorder(),
+                                            backgroundColor:
+                                            const Color(0xff3f8dcd)),
+                                        onPressed: () {
+                                          if (_formKey.currentState!.validate()) {
+                                            _formKey.currentState!.save();
+                                            Fields newFields = Fields(
+                                              hotelName: hotelName,
+                                              hotelAddress: hotelAddress,
+                                              email: hotelEmail,
+                                              star: hotelStar,
+                                              description: hotelDescription,
+                                              hotelPhoto: hotelPhoto,
+                                            );
+                                            Map<String, dynamic> jsonFields =
+                                            newFields.toJson();
+                                            Hotel newHotel = Hotel(
+                                                model: model,
+                                                pk: pk,
+                                                fields: newFields);
+                                            Map<String, dynamic> jsonHotel =
+                                            newHotel.toJson();
+                                            showDialog(
+                                                context: context,
+                                                builder: (BuildContext context) {
+                                                  return const AlertDialog(
+                                                      content: Text(
+                                                          'Successfully saved!')
+                                                  );
+                                                });
+                                          }
+                                        },
+                                        child: const Text("Save",
+                                            style: TextStyle(
+                                                color: Colors.white)
+                                        )
+                                    ),
+                                  ],
+                                ),
+                              )
+                          ),
                         ],
                       ),
                     ),
