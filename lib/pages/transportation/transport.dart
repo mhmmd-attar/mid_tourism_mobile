@@ -8,10 +8,10 @@ class TransportPage extends StatefulWidget {
   const TransportPage({super.key});
 
   @override
-  State<TransportPage> createState() => _Hotel();
+  State<TransportPage> createState() => _Transport();
 }
 
-class _Hotel extends State<TransportPage> {
+class _Transport extends State<TransportPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
