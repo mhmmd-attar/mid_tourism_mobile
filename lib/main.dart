@@ -92,7 +92,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Container(
                     margin: const EdgeInsets.all(10),
-                    height: 50.0,
                     child: ElevatedButton(
                         onPressed: () {
                           Navigator.pushReplacement(
