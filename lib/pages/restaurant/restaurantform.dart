@@ -20,7 +20,6 @@ class _RestaurantForm extends State<RestaurantForm> {
   String resto_delivery = "";
   String model = "resto.restaurant";
   int pk = 1;
-  // int pk = RestaurantFuture().getLength() as int;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +50,7 @@ class _RestaurantForm extends State<RestaurantForm> {
                                 color: Colors.black)),
                       )),
                   Center(
-                    child: Text("Discover cuisine.",
+                    child: Text("Delight in cuisine.",
                         style: TextStyle(
                             fontSize: 15,
                             fontFamily: 'Quicksand',

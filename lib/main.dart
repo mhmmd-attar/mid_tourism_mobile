@@ -3,6 +3,7 @@ import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/pages/homepage/login.dart';
 import 'package:mid_tourism_mobile/pages/homepage/register.dart';
 import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,19 +15,27 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'MID-Tourism',
-      home: const MyHomePage(title: 'Homepage'),
-      routes: {
-        "/login": (BuildContext context) => const MyLoginApp(),
+    return Provider(
+      create: (_) {
+        CookieRequest request = CookieRequest();
+        return request;
       },
+      child: MaterialApp(
+        title: 'MID-Tourism',
+        home: const MyHomePage(),
+        routes: {
+          "/login": (BuildContext context) => const MyLoginPage(),
+        },
+      ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
+  const MyHomePage({super.key});
+
+  final String title = "Homepage";
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -37,9 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return MaterialApp(
         home: Scaffold(
             backgroundColor: const Color(0xff3f8dcd),
-            appBar: AppBar(
-              title: Text(widget.title),
-            ),
+            appBar: AppBar(title: Text(widget.title)),
             drawer: const AppDrawer(),
             body: Center(
               child: Column(
@@ -88,11 +95,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: 50.0,
                     child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    const MyLoginPage(title: 'Log In')),
+                                    const MyLoginPage()),
                           );
                         },
                         style: ElevatedButton.styleFrom(
@@ -109,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     margin: const EdgeInsets.all(10),
                     child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
