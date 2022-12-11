@@ -158,14 +158,17 @@ class _Hotel extends State<HotelPage> {
                                       alignment: Alignment.topLeft,
                                       child : FittedBox(
                                         fit: BoxFit.fitWidth,
-                                        child: Text(
-                                          snapshot.data![index].fields.hotelName,
-                                          style: const TextStyle(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black,
+                                        child: ConstrainedBox(
+                                          constraints: const BoxConstraints(minWidth: 1, minHeight: 1),
+                                          child: Text(
+                                            snapshot.data![index].fields.hotelName,
+                                            style: const TextStyle(
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black,
+                                            ),
                                           ),
-                                        ),
+                                        )
                                       ),
                                     ),
                                     AutoSizeTextField(
