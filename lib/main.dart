@@ -33,7 +33,9 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
+
   final String title = "Homepage";
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -44,9 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return MaterialApp(
         home: Scaffold(
             backgroundColor: const Color(0xff3f8dcd),
-            appBar: AppBar(
-              title: Text(widget.title),
-            ),
+            appBar: AppBar(title: Text(widget.title)),
             drawer: const AppDrawer(),
             body: Center(
               child: Column(

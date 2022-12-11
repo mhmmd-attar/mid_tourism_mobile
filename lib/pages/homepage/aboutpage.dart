@@ -1,22 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 
-class MyAboutApp extends StatelessWidget {
-  const MyAboutApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'About',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyAboutPage(),
-    );
-  }
-}
-
 class MyAboutPage extends StatefulWidget {
   const MyAboutPage({super.key});
 

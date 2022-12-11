@@ -1,19 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/pages/homepage/aboutpage.dart';
-
-class MyRegisterApp extends StatelessWidget {
-  const MyRegisterApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Register',
-      home: MyRegisterPage(title: 'Register'),
-    );
-  }
-}
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 class MyRegisterPage extends StatefulWidget {
   const MyRegisterPage({super.key, required this.title});

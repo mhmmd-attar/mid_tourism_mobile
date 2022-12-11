@@ -4,6 +4,8 @@ import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/pages/hotel/hotelform.dart';
 import 'package:mid_tourism_mobile/pages/hotel/room.dart';
 import 'package:mid_tourism_mobile/models/hotelModel.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 class HotelPage extends StatefulWidget {
   const HotelPage({super.key});
@@ -15,6 +17,8 @@ class HotelPage extends StatefulWidget {
 class _Hotel extends State<HotelPage> {
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
       appBar: AppBar(),
       drawer: const AppDrawer(),

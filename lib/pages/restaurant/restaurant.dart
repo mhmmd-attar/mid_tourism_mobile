@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/pages/restaurant/restaurantform.dart';
-import 'package:mid_tourism_mobile/pages/homepage/login.dart';
-import 'package:mid_tourism_mobile/pages/homepage/register.dart';
 import 'package:mid_tourism_mobile/models/restoModel.dart';
 import 'package:auto_size_text_field/auto_size_text_field.dart';
 import 'package:provider/provider.dart';
