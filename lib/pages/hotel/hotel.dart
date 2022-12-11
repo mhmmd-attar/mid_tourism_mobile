@@ -27,7 +27,7 @@ class _Hotel extends State<HotelPage> {
                 padding: const EdgeInsets.all(20.0),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage("hotel.png"), fit: BoxFit.cover),
+                      image: AssetImage("assets/hotel.png"), fit: BoxFit.cover),
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
                 child: Column(
@@ -149,17 +149,22 @@ class _Hotel extends State<HotelPage> {
                                         Align(
                                           alignment: Alignment.topLeft,
                                           child: FittedBox(
-                                            fit: BoxFit.fitWidth,
-                                            child: Text(
-                                              snapshot.data![index].fields
-                                                  .hotelName,
-                                              style: const TextStyle(
-                                                fontSize: 24,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ),
+                                              fit: BoxFit.fitWidth,
+                                              child: ConstrainedBox(
+                                                constraints:
+                                                    const BoxConstraints(
+                                                        minWidth: 1,
+                                                        minHeight: 1),
+                                                child: Text(
+                                                  snapshot.data![index].fields
+                                                      .hotelName,
+                                                  style: const TextStyle(
+                                                    fontSize: 24,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              )),
                                         ),
                                         AutoSizeTextField(
                                           enabled: false,
@@ -239,33 +244,6 @@ class _Hotel extends State<HotelPage> {
                                                         const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                             0, 0, 6, 10),
-                                                    child: FittedBox(
-                                                        child: ElevatedButton(
-                                                            style:
-                                                                ElevatedButton
-                                                                    .styleFrom(
-                                                              backgroundColor:
-                                                                  Colors.blue,
-                                                            ),
-                                                            onPressed: () {
-                                                              Navigator.pushReplacement(
-                                                                  context,
-                                                                  MaterialPageRoute(
-                                                                      builder: (context) => RoomPage(
-                                                                          hotelPk: snapshot
-                                                                              .data![index]
-                                                                              .pk)));
-                                                            },
-                                                            child: const Text(
-                                                                "Check Availability",
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .white))))),
-                                                Container(
-                                                    padding:
-                                                        const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                            6, 0, 12, 10),
                                                     child: FittedBox(
                                                       child: ElevatedButton(
                                                           style: ElevatedButton

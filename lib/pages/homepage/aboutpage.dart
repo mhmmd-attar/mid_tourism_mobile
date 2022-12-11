@@ -40,7 +40,7 @@ class _MyAboutPage extends State<MyAboutPage> {
                     child: const Text("MID Tourism"),
                   ),
                   const Text(
-                      "Go Anywhere, Know Everywhere \n Experience authenticity and accomodation with MID-Tourism"),
+                      "Go Anywhere, Know Everywhere \n Experience authenticity and accommodation with MID-Tourism"),
                   const Text("Learn more about MID Tourism"),
 
                   TextButton(

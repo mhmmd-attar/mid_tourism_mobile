@@ -26,7 +26,7 @@ class _Landmark extends State<LandmarkPage> {
               padding: const EdgeInsets.all(20.0),
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("restaurant.png"), //TODO
+                  image: AssetImage("assets/restaurant.png"), //TODO
                   fit: BoxFit.cover
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(20)),
