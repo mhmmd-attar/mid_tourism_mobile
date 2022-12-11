@@ -107,18 +107,17 @@ class _Tourguide extends State<TourguidePage> {
                               shrinkWrap: true,
                               itemCount: snapshot.data!.length,
                               itemBuilder: (_, index) => Container(
+                                  height: 200,
                                   margin: const EdgeInsets.symmetric(
-                                      horizontal: 16, vertical: 12),
-                                  padding: const EdgeInsets.all(20.0),
+                                      horizontal: 20, vertical: 12),
                                   decoration: BoxDecoration(
-                                      color: Colors.blue,
-                                      borderRadius:
-                                      BorderRadius.circular(15.0),
-                                      boxShadow: const [
-                                        BoxShadow(
-                                            color: Colors.black,
-                                            blurRadius: 2.0)
-                                      ]),
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color: Colors.black, blurRadius: 2.0)
+                                    ],
+                                  ),
                                   child: Row(children: [
                                     Expanded(
                                       flex: 64,
@@ -180,7 +179,7 @@ class _Tourguide extends State<TourguidePage> {
                                                       .isBooked
                                                       .toString()),
                                               decoration: const InputDecoration(
-                                                labelText: "Booking Availability",
+                                                labelText: "is Booked",
                                                 isDense: true,
                                                 contentPadding:
                                                 EdgeInsetsDirectional.fromSTEB(

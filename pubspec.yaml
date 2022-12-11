@@ -68,6 +68,7 @@ flutter:
     - assets/Saly-44.png
     - assets/LoginButton.png
     - assets/RegisterButton.png
+    - assets/tourguide.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
