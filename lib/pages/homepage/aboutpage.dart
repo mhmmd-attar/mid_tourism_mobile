@@ -30,7 +30,7 @@ class _MyAboutPage extends State<MyAboutPage> {
                             fit: BoxFit.fitWidth,
                             child: Padding(
                               padding: EdgeInsets.only(
-                                  left: 50, top: 50, right: 50, bottom: 20),
+                                  left: 150, top: 50, right: 150, bottom: 20),
                               child: Image(
                                 image: AssetImage("Saly-44.png"),
                                 fit: BoxFit.contain,
@@ -41,7 +41,7 @@ class _MyAboutPage extends State<MyAboutPage> {
                         'About Us',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 30,
+                            fontSize: 45,
                             fontFamily: 'Quicksand',
                             color: const Color(0xffFFFFFF)),
                       ),
@@ -62,10 +62,122 @@ class _MyAboutPage extends State<MyAboutPage> {
                             fit: BoxFit.fitWidth,
                             child: Padding(
                               padding: EdgeInsets.only(
-                                  left: 50, top: 50, right: 50, bottom: 20),
+                                  left: 20, top: 100, right: 20, bottom: 20),
+                              child: Text(
+                                'What do we offer?',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 30,
+                                    fontFamily: 'Quicksand',
+                                    color: Color(0xffFFFFFF)),
+                              ),
+                            ))),
+                    Container(
+                      child: Text(
+                        'The Essentials',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontFamily: 'Quicksand',
+                            color: const Color(0xffFFFFFF).withOpacity(0.7)),
+                      ),
+                    ),
+                    Container(
+                        child: const FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  left: 200, right: 200, bottom: 20),
                               child: Image(
                                 image: AssetImage("essential.png"),
                                 fit: BoxFit.contain,
+                              ),
+                            ))),
+                    Container(
+                        child: const FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  left: 20, right: 20, bottom: 50),
+                              child: Text(
+                                "We'll find you a place to crash and and a way to get there!",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 30,
+                                    fontFamily: 'Quicksand',
+                                    color: const Color(0xffFFFFFF)),
+                              ),
+                            ))),
+                    Container(
+                      child: Text(
+                        'The Experience',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontFamily: 'Quicksand',
+                            color: const Color(0xffFFFFFF).withOpacity(0.7)),
+                      ),
+                    ),
+                    Container(
+                        child: const FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  left: 200, right: 200, bottom: 20),
+                              child: Image(
+                                image: AssetImage("experience.png"),
+                                fit: BoxFit.contain,
+                              ),
+                            ))),
+                    Container(
+                        child: const FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  left: 20, right: 20, bottom: 50),
+                              child: Text(
+                                "Connect with a local tourguide to visit the world's wonders!",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 30,
+                                    fontFamily: 'Quicksand',
+                                    color: const Color(0xffFFFFFF)),
+                              ),
+                            ))),
+                    Container(
+                      child: Text(
+                        'The Entertainment',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontFamily: 'Quicksand',
+                            color: const Color(0xffFFFFFF).withOpacity(0.7)),
+                      ),
+                    ),
+                    Container(
+                        child: const FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  left: 200, right: 200, bottom: 20),
+                              child: Image(
+                                image: AssetImage("entertainment.png"),
+                                fit: BoxFit.contain,
+                              ),
+                            ))),
+                    Container(
+                        child: const FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  left: 20, right: 20, bottom: 50),
+                              child: Text(
+                                "Sing, dance, and prance around various cultures and cuisines!",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 30,
+                                    fontFamily: 'Quicksand',
+                                    color: const Color(0xffFFFFFF)),
                               ),
                             ))),
                   ],
