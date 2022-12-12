@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:mid_tourism_mobile/drawer.dart';
-import 'package:mid_tourism_mobile/models/tourguide_model.dart';
-import 'package:mid_tourism_mobile/pages/tourguide/tourguide.dart';
 
 class TourguideForm extends StatefulWidget {
   const TourguideForm({super.key});
@@ -204,26 +202,25 @@ class _TourguideForm extends State<TourguideForm> {
                                           backgroundColor:
                                           const Color(0xff3f8dcd)),
                                       onPressed: () async {
-                                        if (_formKey.currentState!
-                                            .validate()) {
+                                        if (_formKey.currentState!.validate()) {
                                           _formKey.currentState!.save();
                                           try {
-                                            final response = await request.post(
-                                                'https://mid-tourism.up.railway.app/tourguide/add_schedule_flutter/',
-                                                {
-                                                  "date": date,
-                                                  "company": company,
-                                                  "destination": destination,
-                                                  "isBooked":isBooked,
-
-                                                });
+                                            final uri = Uri.parse(
+                                                'https://mid-tourism.up.railway.app/tourguide/add_schedule_flutter/');
+                                            final request =
+                                            http.MultipartRequest(
+                                                'POST', uri);
+                                            request.fields["date"] = date;
+                                            request.fields["company"] = company;
+                                            request.fields["destination"] = destination;
+                                            final response =
+                                            await request.send();
                                           } catch (e) {
-                                            print("ERROR FOUND");
+                                            print("$e ERROR FOUND");
                                           }
                                           showDialog(
                                               context: context,
-                                              builder:
-                                                  (BuildContext context) {
+                                              builder: (BuildContext context) {
                                                 return const AlertDialog(
                                                     content: Text(
                                                         'Successfully saved!'));
