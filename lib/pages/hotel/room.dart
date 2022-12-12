@@ -118,7 +118,7 @@ class _Room extends State<RoomPage> {
                   ),
                 ),
                   FutureBuilder(
-                      future: fetchRoom(),
+                      future: RoomFuture().fetchRoom(widget.hotelPk),
                       builder: (context, AsyncSnapshot snapshot) {
                         if (snapshot.data == null) {
                           return const Center(
@@ -269,12 +269,33 @@ class _Room extends State<RoomPage> {
                             );
                           }
                         }
-                      }
-                    ),
+                      }),
+                  Container(
+                    margin: const EdgeInsets.all(10),
+                    child: ElevatedButton(
+                        onPressed: () async {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RoomForm(
+                                      hotelPk: widget.hotelPk,
+                                    )),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xff24a0ed),
+                            shape: const StadiumBorder(),
+                            minimumSize: const Size(260, 50)),
+                        child: const Text("Create Room",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontFamily: 'Quicksand',
+                                color: Color(0xffFFFFFF)))),
+                  ),
                 ],
               ),
-            )
-      )
+            )),
+      ),
     );
   }
 }
