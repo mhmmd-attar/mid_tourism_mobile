@@ -90,49 +90,78 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    height: 50.0,
-                    child: ElevatedButton(
+                  Visibility(
+                      visible: !request.loggedIn,
+                      child: Container(
+                        margin: const EdgeInsets.all(10),
+                        height: 50.0,
+                        child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const MyLoginPage()),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xffFFFFFF),
+                                shape: const StadiumBorder(),
+                                minimumSize: const Size(280, 50)),
+                            child: const Text("Login",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontFamily: 'Quicksand',
+                                    color: Color(0xff000000)))),
+                  )),
+                  Visibility(
+                      visible: !request.loggedIn,
+                      child: Container(
+                        margin: const EdgeInsets.all(10),
+                        child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const MyRegisterPage(title: 'Register')),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xffd3462c),
+                                shape: const StadiumBorder(),
+                                minimumSize: const Size(280, 50)),
+                            child: const Text("Register",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontFamily: 'Quicksand',
+                                    color: Color(0xffFFFFFF)))),
+                  )),
+                  Visibility(
+                    visible: request.loggedIn,
+                    child: Container(
+                      margin: const EdgeInsets.all(10),
+                      child: ElevatedButton(
                         onPressed: () {
+                          request.logout,
                           Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                const MyLoginPage()),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xffFFFFFF),
-                            shape: const StadiumBorder(),
-                            minimumSize: const Size(280, 50)),
-                        child: const Text("Login",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontFamily: 'Quicksand',
-                                color: Color(0xff000000)))),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                const MyRegisterPage(title: 'Register')),
+                          context,
+                          MaterialPageRoute(
+                          builder: (context) =>
+                          const MyHomePage()),
                           );
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xffd3462c),
                             shape: const StadiumBorder(),
                             minimumSize: const Size(280, 50)),
-                        child: const Text("Register",
+                        child: const Text("Log Out",
                             style: TextStyle(
                                 fontSize: 20,
                                 fontFamily: 'Quicksand',
                                 color: Color(0xffFFFFFF)))),
-                  ),
+                  ),)
+
 
                   // Added behavior when budget is typed
                 ],

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text_field/auto_size_text_field.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/pages/tourguide/tourguide_form.dart';
 import 'package:mid_tourism_mobile/models/tourguide_model.dart';
