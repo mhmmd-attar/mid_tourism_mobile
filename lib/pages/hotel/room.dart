@@ -36,8 +36,7 @@ class _Room extends State<RoomPage> {
                       padding: const EdgeInsets.all(20.0),
                       decoration: const BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage("hotel.png"),
-                            fit: BoxFit.cover),
+                            image: AssetImage("hotel.png"), fit: BoxFit.cover),
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
                       child: Column(
@@ -71,7 +70,7 @@ class _Room extends State<RoomPage> {
                             ),
                           ])),
                   FutureBuilder(
-                      future: RoomFuture().fetchRoom(),
+                      future: RoomFuture().fetchRoom(widget.hotelPk),
                       builder: (context, AsyncSnapshot snapshot) {
                         if (snapshot.data == null) {
                           return const Center(
@@ -100,7 +99,7 @@ class _Room extends State<RoomPage> {
                                     decoration: BoxDecoration(
                                         color: Colors.blue,
                                         borderRadius:
-                                        BorderRadius.circular(15.0),
+                                            BorderRadius.circular(15.0),
                                         boxShadow: const [
                                           BoxShadow(
                                               color: Colors.black,
@@ -108,89 +107,94 @@ class _Room extends State<RoomPage> {
                                         ]),
                                     child: Column(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
                                             "Room Type :    ${snapshot.data![index].fields.roomType}",
                                             style: const TextStyle(
-                                              fontSize: 18.0,
-                                              fontWeight: FontWeight.bold,
-                                              color: Color(0xffFFFFFF)
-                                            ),
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xffFFFFFF)),
                                           ),
                                           Text(
                                             "Room Price :    ${snapshot.data![index].fields.roomPrice}",
                                             style: const TextStyle(
-                                              fontSize: 18.0,
-                                              fontWeight: FontWeight.bold,
-                                              color: Color(0xffFFFFFF)
-                                            ),
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xffFFFFFF)),
                                           ),
                                           Container(
-                                            padding: const EdgeInsets.only(top: 10),
+                                            padding:
+                                                const EdgeInsets.only(top: 10),
                                             child: Text(
                                               "${snapshot.data![index].fields.roomDescription}",
                                               style: const TextStyle(
-                                                fontSize: 18.0,
-                                                color: Color(0xffFFFFFF)
-                                              ),
+                                                  fontSize: 18.0,
+                                                  color: Color(0xffFFFFFF)),
                                             ),
                                           ),
                                           Container(
                                               padding: const EdgeInsets.all(10),
                                               child: Row(
-                                                  mainAxisAlignment: MainAxisAlignment.end,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
                                                   children: [
                                                     ElevatedButton(
-                                                        style: ElevatedButton.styleFrom(
-                                                            backgroundColor: const Color(0xffFFFFFF),
-                                                            minimumSize: const Size(120, 45)
-                                                        ),
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                                backgroundColor:
+                                                                    const Color(
+                                                                        0xffFFFFFF),
+                                                                minimumSize:
+                                                                    const Size(
+                                                                        120,
+                                                                        45)),
                                                         onPressed: () {
                                                           Navigator.pushReplacement(
                                                               context,
                                                               MaterialPageRoute(
-                                                                  builder: (context) => RoomPage(hotelPk: snapshot.data![index].pk)
-                                                              )
-                                                          );
+                                                                  builder: (context) => RoomPage(
+                                                                      hotelPk: snapshot
+                                                                          .data![
+                                                                              index]
+                                                                          .pk)));
                                                         },
                                                         child: const Text(
                                                             "Book",
                                                             style: TextStyle(
-                                                                color: Colors.black
-                                                            )
-                                                        )
-                                                    ),
+                                                                color: Colors
+                                                                    .black))),
                                                     Container(
-                                                      padding: const EdgeInsets.only(left: 15),
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 15),
                                                       child: ElevatedButton(
-                                                          style: ElevatedButton.styleFrom(
-                                                              backgroundColor: const Color(0xffa64452),
-                                                              minimumSize: const Size(120, 45)
-                                                          ),
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                                  backgroundColor:
+                                                                      const Color(
+                                                                          0xffa64452),
+                                                                  minimumSize:
+                                                                      const Size(
+                                                                          120,
+                                                                          45)),
                                                           onPressed: () {
                                                             Navigator.pushReplacement(
                                                                 context,
                                                                 MaterialPageRoute(
-                                                                    builder: (context) => RoomPage(hotelPk: snapshot.data![index].pk)
-                                                                )
-                                                            );
+                                                                    builder: (context) => RoomPage(
+                                                                        hotelPk: snapshot
+                                                                            .data![index]
+                                                                            .pk)));
                                                           },
                                                           child: const Text(
                                                               "Delete",
                                                               style: TextStyle(
-                                                                  color: Colors.white
-                                                              )
-                                                          )
-                                                      ),
+                                                                  color: Colors
+                                                                      .white))),
                                                     )
-                                                  ]
-                                              )
-                                            )
-                                          ]
-                                    )
-                                )
-                            );
+                                                  ]))
+                                        ])));
                           }
                         }
                       }),
@@ -201,15 +205,15 @@ class _Room extends State<RoomPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                RoomForm(hotelPk: widget.hotelPk,)),
+                                builder: (context) => RoomForm(
+                                      hotelPk: widget.hotelPk,
+                                    )),
                           );
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xff24a0ed),
                             shape: const StadiumBorder(),
-                            minimumSize: const Size(260, 50)
-                        ),
+                            minimumSize: const Size(260, 50)),
                         child: const Text("Create Room",
                             style: TextStyle(
                                 fontSize: 20,
@@ -218,8 +222,7 @@ class _Room extends State<RoomPage> {
                   ),
                 ],
               ),
-            )
-        ),
+            )),
       ),
     );
   }
