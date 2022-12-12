@@ -140,7 +140,7 @@ class _Restaurant extends State<RestaurantPage> {
                                                     image: DecorationImage(
                                                   fit: BoxFit.fill,
                                                   image: NetworkImage(
-                                                    'https://mid-tourism.up.railway.app/media/assets/${snapshot.data![index].fields.restoPhoto}',
+                                                    'https://mid-tourism.up.railway.app/media/${snapshot.data![index].fields.restoPhoto}',
                                                   ),
                                                 )),
                                               )))
