@@ -66,26 +66,29 @@ class _Transport extends State<TransportPage> {
                             )),
                       ),
                     ])),
-            Container(
-              margin: const EdgeInsets.all(10),
-              child: ElevatedButton(
-                  onPressed: () async {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const TransportForm()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff24a0ed),
-                      shape: const StadiumBorder(),
-                      minimumSize: const Size(260, 50)),
-                  child: const Text("Add Vehicle",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'Quicksand',
-                        color: Color(0xffFFFFFF),
-                      ))),
+            Visibility(
+              visible: request.loggedIn,
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                child: ElevatedButton(
+                    onPressed: () async {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const TransportForm()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xff24a0ed),
+                        shape: const StadiumBorder(),
+                        minimumSize: const Size(260, 50)),
+                    child: const Text("Add Vehicle",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'Quicksand',
+                          color: Color(0xffFFFFFF),
+                        ))),
+              ),
             ),
             FutureBuilder(
                 future: fetchTransport(),
@@ -195,9 +198,8 @@ class _Transport extends State<TransportPage> {
                                           readOnly: true,
                                           maxLines: 2,
                                           controller: TextEditingController(
-                                              text: snapshot.data![index].fields
-                                                  .availability
-                                                  .toString()),
+                                              text:
+                                                  '${(snapshot.data![index].fields.availability) ? "AVAILABLE" : "UNAVAILABLE"}'),
                                           decoration: const InputDecoration(
                                             labelText: "Availability",
                                             isDense: true,
@@ -208,66 +210,100 @@ class _Transport extends State<TransportPage> {
                                           ),
                                         ),
                                       ]),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.bottomRight,
-                                          child: FittedBox(
-                                            fit: BoxFit.fitWidth,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Container(
-                                                    padding:
-                                                        const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                            0, 0, 6, 10),
-                                                    child: FittedBox(
-                                                        child: ElevatedButton(
-                                                            style:
-                                                                ElevatedButton
-                                                                    .styleFrom(
-                                                              backgroundColor:
-                                                                  Colors.blue,
-                                                            ),
-                                                            onPressed: () {},
-                                                            child: const Text(
-                                                                "Change Availability",
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .white))))),
-                                                Container(
-                                                    padding:
-                                                        const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                            6, 0, 12, 10),
-                                                    child: FittedBox(
-                                                      child: ElevatedButton(
-                                                          style: ElevatedButton
-                                                              .styleFrom(
+                                      Visibility(
+                                          visible: request.loggedIn,
+                                          child: Expanded(
+                                            child: Align(
+                                              alignment: Alignment.bottomRight,
+                                              child: FittedBox(
+                                                fit: BoxFit.fitWidth,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  children: [
+                                                    Container(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                0, 0, 6, 10),
+                                                        child: FittedBox(
+                                                            child:
+                                                                ElevatedButton(
+                                                                    style: ElevatedButton
+                                                                        .styleFrom(
+                                                                      backgroundColor:
+                                                                          Colors
+                                                                              .blue,
+                                                                    ),
+                                                                    onPressed:
+                                                                        () async {
+                                                                      try {
+                                                                        final response =
+                                                                            await request.get('https://mid-tourism.up.railway.app/rental_transport/change_availability_flutter/${snapshot.data![index].pk}');
+                                                                      } catch (e) {
+                                                                        print(
+                                                                            "$e HUHHHH??!!!!");
+                                                                      }
+                                                                      Navigator
+                                                                          .pushReplacement(
+                                                                        context,
+                                                                        MaterialPageRoute(
+                                                                            builder: (context) =>
+                                                                                const TransportPage()),
+                                                                      );
+                                                                    },
+                                                                    child: const Text(
+                                                                        "Change Availability",
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                Colors.white))))),
+                                                    Container(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                6, 0, 12, 10),
+                                                        child: FittedBox(
+                                                          child: ElevatedButton(
+                                                              style: ElevatedButton.styleFrom(
                                                                   backgroundColor:
                                                                       Colors
                                                                           .red,
                                                                   maximumSize:
                                                                       const Size(
-                                                                          74,
-                                                                          36)),
-                                                          onPressed: () {
-
-                                                          },
-                                                          child: const Text(
-                                                              "Delete",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .white))),
-                                                    )),
-                                              ],
+                                                                          74, 36)),
+                                                              onPressed:
+                                                                  () async {
+                                                                try {
+                                                                  final response =
+                                                                      await request
+                                                                          .get(
+                                                                              'https://mid-tourism.up.railway.app/rental_transport/remove_transport_flutter/${snapshot.data![index].pk}');
+                                                                } catch (e) {
+                                                                  print(
+                                                                      "$e HUHHHH??!!!!");
+                                                                }
+                                                                Navigator
+                                                                    .pushReplacement(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder:
+                                                                          (context) =>
+                                                                              const TransportPage()),
+                                                                );
+                                                              },
+                                                              child: const Text(
+                                                                  "Delete",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white))),
+                                                        )),
+                                                  ],
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                      )
+                                          ))
                                     ]),
                                   ),
                                 ),
