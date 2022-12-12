@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:html';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -5,6 +8,10 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/models/resto_model.dart';
 import 'package:mid_tourism_mobile/pages/restaurant/restaurant.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io' as io;
+import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 
 class RestaurantForm extends StatefulWidget {
   const RestaurantForm({super.key});
@@ -14,13 +21,73 @@ class RestaurantForm extends StatefulWidget {
 
 class _RestaurantForm extends State<RestaurantForm> {
   final _formKey = GlobalKey<FormState>();
+  final ImagePicker picker = ImagePicker();
+
+  Future getImage(ImageSource media) async {
+    var img = await picker.pickImage(source: media);
+
+    setState(() {
+      resto_photo = img;
+    });
+  }
+
+  void myAlert() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            title: Text('Please choose media to select'),
+            content: Container(
+              height: MediaQuery.of(context).size.height / 6,
+              child: Column(
+                children: [
+                  ElevatedButton(
+                    //if user click this button, user can upload image from gallery
+                    onPressed: () {
+                      Navigator.pop(context);
+                      getImage(ImageSource.gallery);
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.image),
+                        Text('From Gallery'),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
+                    //if user click this button. user can upload image from camera
+                    onPressed: () {
+                      Navigator.pop(context);
+                      getImage(ImageSource.camera);
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.camera),
+                        Text('From Camera'),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
   String resto_name = "";
   String resto_address = "";
   String resto_email = "";
   String resto_phone = "";
-  String resto_photo = "";
+  XFile? resto_photo;
   String resto_description = "";
   String resto_delivery = "";
+  Uint8List? resto_photo_bytes;
+  String base64photo = "";
 
   @override
   Widget build(BuildContext context) {
@@ -279,11 +346,37 @@ class _RestaurantForm extends State<RestaurantForm> {
                               },
                             ),
                           ),
-                          Padding(
-                            // Using padding of 8 pixels
-                            padding: const EdgeInsets.all(8.0),
-                            // Child HERE
+                          ElevatedButton(
+                            onPressed: () {
+                              myAlert();
+                            },
+                            child: Text('Upload Photo'),
                           ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          //if image not null show the image
+                          //if image null show text
+                          resto_photo != null
+                              ? Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.network(
+                                      //to show image, you type like this.
+                                      resto_photo!.path,
+                                      fit: BoxFit.cover,
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 300,
+                                    ),
+                                  ),
+                                )
+                              : Text(
+                                  "No Image",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+
                           Padding(
                               padding: const EdgeInsets.all(15.0),
                               child: Align(
@@ -297,8 +390,45 @@ class _RestaurantForm extends State<RestaurantForm> {
                                       onPressed: () async {
                                         if (_formKey.currentState!.validate()) {
                                           _formKey.currentState!.save();
-
                                           try {
+                                            Uint8List resto_photo_bytes =
+                                                await resto_photo!
+                                                    .readAsBytes();
+                                            final uri = Uri.parse(
+                                                'https://mid-tourism.up.railway.app/resto/create_resto_flutter/');
+                                            final request =
+                                                http.MultipartRequest(
+                                                    'POST', uri);
+                                            var multipartFile = await http
+                                                    .MultipartFile
+                                                .fromBytes('resto_photo',
+                                                    resto_photo_bytes,
+                                                    filename:
+                                                        'resto_photo_$resto_email',
+                                                    contentType: MediaType(
+                                                        'image', 'jpg'));
+                                            request.files.add(multipartFile);
+                                            request.fields["resto_name"] =
+                                                resto_name;
+                                            request.fields["resto_address"] =
+                                                resto_address;
+                                            request.fields["resto_email"] =
+                                                resto_email;
+                                            request.fields["resto_phone"] =
+                                                resto_phone;
+                                            request.fields[
+                                                    "resto_description"] =
+                                                resto_description;
+                                            request.fields["resto_delivery"] =
+                                                resto_delivery;
+
+                                            final response =
+                                                await request.send();
+                                          } catch (e) {
+                                            print("$e LOOK 1");
+                                          }
+
+                                          var unused_method = """try {
                                             final response = await request.post(
                                                 'https://mid-tourism.up.railway.app/resto/create_resto_flutter/',
                                                 {
@@ -309,13 +439,13 @@ class _RestaurantForm extends State<RestaurantForm> {
                                                   "resto_phone": resto_phone,
                                                   "resto_description":
                                                       resto_description,
-                                                  "resto_photo": resto_photo,
+                                                  "resto_photo": "",
                                                   "resto_delivery":
                                                       resto_delivery,
                                                 });
                                           } catch (e) {
-                                            print("$e LOOK");
-                                          }
+                                            print(" LOOK");
+                                          }""";
                                           showDialog(
                                               context: context,
                                               builder: (BuildContext context) {
