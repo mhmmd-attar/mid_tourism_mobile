@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mid_tourism_mobile/pages/transportation/transport.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/models/transport_model.dart';
 import 'package:mid_tourism_mobile/pages/transportation/transport_form.dart';
+import 'package:http/http.dart' as http;
 
 class TransportForm extends StatefulWidget {
   const TransportForm({super.key});
@@ -223,24 +225,29 @@ class _TransportForm extends State<TransportForm> {
                                           shape: const StadiumBorder(),
                                           backgroundColor:
                                               const Color(0xff3f8dcd)),
-                                      onPressed: () {
+                                      onPressed: () async {
                                         if (_formKey.currentState!.validate()) {
                                           _formKey.currentState!.save();
-                                          Fields uwawfields = Fields(
-                                            companyName: nameCompany,
-                                            transportName: nameTransport,
-                                            transportPrice: priceTransport,
-                                            description: desc,
-                                            availability: available,
-                                          );
-                                          Map<String, dynamic> jsonFields =
-                                              uwawfields.toJson();
-                                          Transport uwaw = Transport(
-                                              model: model,
-                                              pk: pk,
-                                              fields: uwawfields);
-                                          Map<String, dynamic> jsonRoom =
-                                              uwaw.toJson();
+                                          try {
+                                            final uri = Uri.parse(
+                                                'https://mid-tourism.up.railway.app/rental_transport/create_transport_flutter/');
+                                            final request =
+                                                http.MultipartRequest(
+                                                    'POST', uri);
+                                            request.fields["company_name"] =
+                                                nameCompany;
+                                            request.fields["transport_name"] =
+                                                nameTransport;
+                                            request.fields["transport_price"] =
+                                                priceTransport;
+                                            request.fields["description"] =
+                                                desc;
+
+                                            final response =
+                                                await request.send();
+                                          } catch (e) {
+                                            print("$e HUHHHH??!!!");
+                                          }
                                           showDialog(
                                               context: context,
                                               builder: (BuildContext context) {
@@ -248,6 +255,12 @@ class _TransportForm extends State<TransportForm> {
                                                     content: Text(
                                                         'Successfully saved!'));
                                               });
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const TransportPage()),
+                                          );
                                         }
                                       },
                                       child: const Text("Save",
