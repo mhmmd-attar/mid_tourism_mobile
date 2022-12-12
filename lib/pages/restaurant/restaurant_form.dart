@@ -423,33 +423,14 @@ class _RestaurantForm extends State<RestaurantForm> {
                                           } catch (e) {
                                             print("$e LOOK 1");
                                           }
-
-                                          var unused_method = """try {
-                                            final response = await request.post(
-                                                'https://mid-tourism.up.railway.app/resto/create_resto_flutter/',
-                                                {
-                                                  "resto_name": resto_name,
-                                                  "resto_address":
-                                                      resto_address,
-                                                  "resto_email": resto_email,
-                                                  "resto_phone": resto_phone,
-                                                  "resto_description":
-                                                      resto_description,
-                                                  "resto_photo": "",
-                                                  "resto_delivery":
-                                                      resto_delivery,
-                                                });
-                                          } catch (e) {
-                                            print(" LOOK");
-                                          }""";
-
                                           showDialog(
                                               context: context,
                                               builder: (BuildContext context) {
                                                 return const AlertDialog(
                                                     content: Text(
                                                         'Successfully saved!'));
-                                              });
+                                              }
+                                          );
                                           Navigator.pushReplacement(
                                             context,
                                             MaterialPageRoute(
@@ -459,8 +440,7 @@ class _RestaurantForm extends State<RestaurantForm> {
                                         }
                                       },
                                       child: const Text("Save",
-                                          style: TextStyle(
-                                              color: Colors.white))))),
+                                          style: TextStyle(color: Colors.white))))),
                         ],
                       ),
                     ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text_field/auto_size_text_field.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/pages/hotel/hotel_form.dart';
 import 'package:mid_tourism_mobile/pages/hotel/room.dart';
@@ -223,14 +222,12 @@ class _Hotel extends State<HotelPage> {
                                             readOnly: true,
                                             maxLines: 2,
                                             controller: TextEditingController(
-                                                text: snapshot.data![index].fields
-                                                    .description),
+                                                text: snapshot.data![index].fields.description),
                                             decoration: const InputDecoration(
                                               labelText: "Description",
                                               isDense: true,
                                               contentPadding:
-                                                  EdgeInsetsDirectional.fromSTEB(
-                                                      8, 8, 8, 0),
+                                                  EdgeInsetsDirectional.fromSTEB(8, 8, 8, 0),
                                               border: InputBorder.none,
                                             ),
                                           ),
@@ -247,36 +244,65 @@ class _Hotel extends State<HotelPage> {
                                                     CrossAxisAlignment.end,
                                                 children: [
                                                   Container(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                              0, 0, 6, 10),
+                                                      padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 6, 10),
                                                       child: FittedBox(
                                                         child: ElevatedButton(
-                                                            style: ElevatedButton
-                                                                .styleFrom(
-                                                                    backgroundColor:
-                                                                        Colors
-                                                                            .red,
-                                                                    maximumSize:
-                                                                        const Size(
-                                                                            74,
-                                                                            36)),
+                                                            style: ElevatedButton.styleFrom(
+                                                                    backgroundColor: Colors.blue,
+                                                                    maximumSize: const Size(105, 50)
+                                                            ),
                                                             onPressed: () {
                                                               Navigator.pushReplacement(
                                                                   context,
                                                                   MaterialPageRoute(
-                                                                      builder: (context) => RoomPage(
-                                                                          hotelPk: snapshot
-                                                                              .data![index]
-                                                                              .pk)));
+                                                                      builder: (context) => RoomPage(hotelPk: snapshot.data![index].pk)
+                                                                  )
+                                                              );
+                                                            },
+                                                            child: const Text(
+                                                                "Check Availability",
+                                                                textAlign: TextAlign.center,
+                                                                style: TextStyle(
+                                                                  fontSize: 12,
+                                                                  color: Colors.white,
+                                                                )
+                                                            )
+                                                        ),
+                                                      )
+                                                  ),
+                                                  Container(
+                                                      padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 6, 10),
+                                                      child: FittedBox(
+                                                        child: ElevatedButton(
+                                                            style: ElevatedButton.styleFrom(
+                                                                backgroundColor: Colors.red,
+                                                                maximumSize: const Size(74, 50)
+                                                            ),
+                                                            onPressed: () async {
+                                                              try {
+                                                                final response = await request.get(
+                                                                    'https://mid-tourism.up.railway.app/hotel/delete_hotel_flutter/${snapshot.data![index].pk}'
+                                                                );
+                                                              } catch (e) {
+                                                                print("$e LOOK");
+                                                              }
+                                                              Navigator.pushReplacement(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                    builder: (context) => const HotelPage()
+                                                                ),
+                                                              );
                                                             },
                                                             child: const Text(
                                                                 "Delete",
+                                                                textAlign: TextAlign.center,
                                                                 style: TextStyle(
-                                                                    color: Colors
-                                                                        .white))),
-                                                      )),
+                                                                  color: Colors.white,
+                                                                )
+                                                            )
+                                                        ),
+                                                      )
+                                                  ),
                                                 ],
                                               ),
                                             ),
