@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mid_tourism_mobile/pages/tourguide/tourguide.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:http/http.dart' as http;
@@ -225,6 +226,12 @@ class _TourguideForm extends State<TourguideForm> {
                                                     content: Text(
                                                         'Successfully saved!'));
                                               });
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                const TourguidePage()),
+                                          );
                                         }
                                       },
                                       child: const Text("Save",
