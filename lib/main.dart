@@ -143,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       margin: const EdgeInsets.all(10),
                       child: ElevatedButton(
                         onPressed: () {
-                          request.logout,
+                          request.logout;
                           Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
