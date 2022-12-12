@@ -122,6 +122,7 @@ class _TourguideForm extends State<TourguideForm> {
                                 decoration: const InputDecoration(
                                   hintText: "Enter the booking date",
                                   labelText: "Booking date",
+                                  //border: OutlineInputBorder()
                                 ),
                                 readOnly:
                                     true, // when true user cannot edit text
