@@ -31,7 +31,7 @@ class _Transport extends State<TransportPage> {
                 padding: const EdgeInsets.all(20.0),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage("transportation.png"),
+                      image: AssetImage("assets/transportation.png"),
                       fit: BoxFit.cover),
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
