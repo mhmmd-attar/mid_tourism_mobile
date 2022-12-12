@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: const FittedBox(
                       fit: BoxFit.fitWidth,
                       child: Image(
-                        image: AssetImage("Saly-44.png"),
+                        image: AssetImage("assets/Saly-44.png"),
                         fit: BoxFit.contain,
                       ),
                     ),
