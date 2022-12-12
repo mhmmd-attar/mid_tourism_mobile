@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:mid_tourism_mobile/models/restoModel.dart';
+import 'package:mid_tourism_mobile/models/resto_model.dart';
 import 'package:http/http.dart' as http;
 
 List<Transport> transportFromJson(String str) =>
@@ -13,49 +13,47 @@ List<Transport> transportFromJson(String str) =>
 String transportToJson(List<Transport> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class TransportFuture {
-  Future<List<Transport>> fetchTransport() async {
-    var url =
-        Uri.parse('https://mid-tourism.up.railway.app/rental_transport/json');
-    var response = await http.get(
-      url,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    );
-    // decode the response into the json form
-    var data = jsonDecode(utf8.decode(response.bodyBytes));
-    // convert the json data into Transport object
-    List<Transport> listTransport = [];
-    for (var d in data) {
-      if (d != null) {
-        listTransport.add(Transport.fromJson(d));
-      }
+Future<List<Transport>> fetchTransport() async {
+  var url =
+      Uri.parse('https://mid-tourism.up.railway.app/rental_transport/json');
+  var response = await http.get(
+    url,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  );
+  // decode the response into the json form
+  var data = jsonDecode(utf8.decode(response.bodyBytes));
+  // convert the json data into Transport object
+  List<Transport> listTransport = [];
+  for (var d in data) {
+    if (d != null) {
+      listTransport.add(Transport.fromJson(d));
     }
-    return listTransport;
   }
-
-  Future<int> getLength() async {
-    var url = Uri.parse('https://mid-tourism.up.railway.app/Transport/json');
-    var response = await http.get(
-      url,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    );
-    // decode the response into the json form
-    var data = jsonDecode(utf8.decode(response.bodyBytes));
-    // convert the json data into Transport object
-    List<Transport> listTransport = [];
-    for (var d in data) {
-      if (d != null) {
-        listTransport.add(Transport.fromJson(d));
-      }
-    }
-
-    return listTransport.length;
-  }
+  return listTransport;
 }
+//
+// Future<int> getLength() async {
+//   var url = Uri.parse('https://mid-tourism.up.railway.app/Transport/json');
+//   var response = await http.get(
+//     url,
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   );
+//   // decode the response into the json form
+//   var data = jsonDecode(utf8.decode(response.bodyBytes));
+//   // convert the json data into Transport object
+//   List<Transport> listTransport = [];
+//   for (var d in data) {
+//     if (d != null) {
+//       listTransport.add(Transport.fromJson(d));
+//     }
+//   }
+//
+//   return listTransport.length;
+// }
 
 class Transport {
   Transport({

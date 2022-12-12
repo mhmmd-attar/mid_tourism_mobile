@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text_field/auto_size_text_field.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+
 import 'package:mid_tourism_mobile/drawer.dart';
-import 'package:mid_tourism_mobile/pages/hotel/roomform.dart';
+import 'package:mid_tourism_mobile/pages/hotel/room_form.dart';
 import 'package:mid_tourism_mobile/pages/hotel/hotel.dart';
-import 'package:mid_tourism_mobile/models/roomModel.dart';
+import 'package:mid_tourism_mobile/models/room_model.dart';
 
 class RoomPage extends StatefulWidget {
   const RoomPage({super.key, required this.hotelPk});
@@ -16,6 +19,8 @@ class RoomPage extends StatefulWidget {
 class _Room extends State<RoomPage> {
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Rooms'),
@@ -69,7 +74,7 @@ class _Room extends State<RoomPage> {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                           context,
                           MaterialPageRoute( builder: (context) => RoomForm(
                               hotelPk: widget.hotelPk
@@ -94,10 +99,7 @@ class _Room extends State<RoomPage> {
                   margin: const EdgeInsets.all(10),
                   child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute( builder: (context) => const HotelPage())
-                        );
+                        Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xff24a0ed),
@@ -116,7 +118,7 @@ class _Room extends State<RoomPage> {
                   ),
                 ),
                   FutureBuilder(
-                      future: RoomFuture().fetchRoom(),
+                      future: fetchRoom(),
                       builder: (context, AsyncSnapshot snapshot) {
                         if (snapshot.data == null) {
                           return const Center(
@@ -229,12 +231,6 @@ class _Room extends State<RoomPage> {
                                                                     backgroundColor: Colors.blue,
                                                                   ),
                                                                   onPressed: () {
-                                                                    Navigator.pushReplacement(
-                                                                        context,
-                                                                        MaterialPageRoute( builder: (context) => RoomPage(
-                                                                            hotelPk: snapshot.data![index].roomHotel
-                                                                        ))
-                                                                    );
                                                                   },
                                                                   child: const Text(
                                                                       "Book Room",
@@ -252,12 +248,6 @@ class _Room extends State<RoomPage> {
                                                                     maximumSize: const Size(74, 36)
                                                                 ),
                                                                 onPressed: () {
-                                                                  Navigator.pushReplacement(
-                                                                      context,
-                                                                      MaterialPageRoute( builder: (context) => RoomPage(
-                                                                          hotelPk: snapshot.data![index].pk
-                                                                      ))
-                                                                  );
                                                                 },
                                                                 child: const Text(
                                                                     "Delete",

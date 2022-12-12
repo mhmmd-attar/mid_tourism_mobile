@@ -22,27 +22,27 @@ Future<List<Landmark>> fetchLandmarks() async {
   return listLandmarks;
 }
 
-Future<int> getLandmarksLength() async {
-  var url = Uri.parse(
-      'https://mid-tourism.up.railway.app/landmarks/json');
-  var response = await http.get(
-    url,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  );
-  // decode the response into the json form
-  var data = jsonDecode(utf8.decode(response.bodyBytes));
-  // convert the json data into Hotel object
-  List<Landmark> listLandmarks = [];
-  for (var d in data) {
-    if (d != null) {
-      listLandmarks.add(Landmark.fromJson(d));
-    }
-  }
-
-  return listLandmarks.length;
-}
+// Future<int> getLandmarksLength() async {
+//   var url = Uri.parse(
+//       'https://mid-tourism.up.railway.app/landmarks/json');
+//   var response = await http.get(
+//     url,
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   );
+//   // decode the response into the json form
+//   var data = jsonDecode(utf8.decode(response.bodyBytes));
+//   // convert the json data into Hotel object
+//   List<Landmark> listLandmarks = [];
+//   for (var d in data) {
+//     if (d != null) {
+//       listLandmarks.add(Landmark.fromJson(d));
+//     }
+//   }
+//
+//   return listLandmarks.length;
+// }
 
 List<Landmark> landmarkFromJson(String str) => List<Landmark>.from(json.decode(str).map((x) => Landmark.fromJson(x)));
 

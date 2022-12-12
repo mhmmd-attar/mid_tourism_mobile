@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+
 import 'package:mid_tourism_mobile/drawer.dart';
 
 class LandmarkForm extends StatefulWidget {
@@ -13,10 +16,10 @@ class _LandmarkForm extends State<LandmarkForm> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Landmark Form'),
-      ),
+      appBar: AppBar(),
       drawer: const AppDrawer(),
       body: const Center(
         child: Text('this is a form'),

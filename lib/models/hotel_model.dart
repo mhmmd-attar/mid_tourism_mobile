@@ -1,50 +1,48 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class HotelFuture {
-  Future<List<Hotel>> fetchHotel() async {
-    var url = Uri.parse(
-        'https://mid-tourism.up.railway.app/hotel/json');
-    var response = await http.get(
-      url,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    );
-    // decode the response into the json form
-    var data = jsonDecode(utf8.decode(response.bodyBytes));
-    // convert the json data into Hotel object
-    List<Hotel> listHotel = [];
-    for (var d in data) {
-      if (d != null) {
-        listHotel.add(Hotel.fromJson(d));
-      }
+Future<List<Hotel>> fetchHotel() async {
+  var url = Uri.parse(
+      'https://mid-tourism.up.railway.app/hotel/json');
+  var response = await http.get(
+    url,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  );
+  // decode the response into the json form
+  var data = jsonDecode(utf8.decode(response.bodyBytes));
+  // convert the json data into Hotel object
+  List<Hotel> listHotel = [];
+  for (var d in data) {
+    if (d != null) {
+      listHotel.add(Hotel.fromJson(d));
     }
-    return listHotel;
   }
-
-  Future<int> getLength() async {
-    var url = Uri.parse(
-        'https://mid-tourism.up.railway.app/hotel/json');
-    var response = await http.get(
-      url,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    );
-    // decode the response into the json form
-    var data = jsonDecode(utf8.decode(response.bodyBytes));
-    // convert the json data into Hotel object
-    List<Hotel> listHotel = [];
-    for (var d in data) {
-      if (d != null) {
-        listHotel.add(Hotel.fromJson(d));
-      }
-    }
-
-    return listHotel.length;
-  }
+  return listHotel;
 }
+
+// Future<int> getLength() async {
+//   var url = Uri.parse(
+//       'https://mid-tourism.up.railway.app/hotel/json');
+//   var response = await http.get(
+//     url,
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   );
+//   // decode the response into the json form
+//   var data = jsonDecode(utf8.decode(response.bodyBytes));
+//   // convert the json data into Hotel object
+//   List<Hotel> listHotel = [];
+//   for (var d in data) {
+//     if (d != null) {
+//       listHotel.add(Hotel.fromJson(d));
+//     }
+//   }
+//
+//   return listHotel.length;
+// }
 
 List<Hotel> hotelFromJson(String str) => List<Hotel>.from(json.decode(str).map((x) => Hotel.fromJson(x)));
 

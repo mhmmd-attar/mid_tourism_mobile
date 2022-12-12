@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mid_tourism_mobile/drawer.dart';
-import 'package:mid_tourism_mobile/main.dart';
-import 'package:mid_tourism_mobile/pages/homepage/aboutpage.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:mid_tourism_mobile/pages/hotel/hotel.dart';
+
+import 'package:mid_tourism_mobile/drawer.dart';
+import 'package:mid_tourism_mobile/pages/homepage/about.dart';
 
 class MyLoginPage extends StatefulWidget {
   const MyLoginPage({super.key});
@@ -164,8 +163,9 @@ class _MyLoginPage extends State<MyLoginPage> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const HotelPage(),
-                            ));
+                              builder: (context) => const MyAboutPage(),
+                            )
+                        );
                       } else {
                         // Code here will run if the login failed (wrong username/password).
                         showDialog(

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+
 import 'package:mid_tourism_mobile/drawer.dart';
-import 'package:mid_tourism_mobile/models/roomModel.dart';
+import 'package:mid_tourism_mobile/models/room_model.dart';
 
 class RoomForm extends StatefulWidget {
   const RoomForm({super.key, required this.hotelPk});
@@ -22,6 +25,8 @@ class _RoomForm extends State<RoomForm> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Room Form'),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:mid_tourism_mobile/main.dart';
 import 'package:mid_tourism_mobile/pages/hotel/hotel.dart';
 import 'package:mid_tourism_mobile/pages/landmark/landmark.dart';
@@ -25,8 +26,7 @@ class AppDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => const MyHomePage()),
+                MaterialPageRoute(builder: (context) => const MyHomePage()),
               );
             },
           ),
@@ -35,8 +35,7 @@ class AppDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => const HotelPage()),
+                MaterialPageRoute(builder: (context) => const HotelPage()),
               );
             },
           ),
@@ -59,7 +58,7 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('Tourguide'),
+            title: const Text('Tourguides'),
             onTap: () {
               Navigator.pushReplacement(
                 context,
@@ -68,7 +67,7 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('Transportation'),
+            title: const Text('Transportations'),
             onTap: () {
               Navigator.pushReplacement(
                 context,

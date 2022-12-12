@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mid_tourism_mobile/drawer.dart';
-import 'package:mid_tourism_mobile/pages/tourguide/tourguideform.dart';
-import 'package:mid_tourism_mobile/pages/homepage/login.dart';
-import 'package:mid_tourism_mobile/pages/homepage/register.dart';
-import 'package:mid_tourism_mobile/models/tourguideModel.dart';
 import 'package:auto_size_text_field/auto_size_text_field.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+
+import 'package:mid_tourism_mobile/drawer.dart';
+import 'package:mid_tourism_mobile/pages/tourguide/tourguide_form.dart';
+import 'package:mid_tourism_mobile/models/tourguide_model.dart';
 
 class TourguidePage extends StatefulWidget {
   const TourguidePage({super.key});
@@ -16,6 +17,8 @@ class TourguidePage extends StatefulWidget {
 class _Tourguide extends State<TourguidePage> {
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
       appBar: AppBar(),
       drawer: const AppDrawer(),
@@ -82,7 +85,7 @@ class _Tourguide extends State<TourguidePage> {
                           color: Color(0xffFFFFFF)))),
             ),
             FutureBuilder(
-                future: TourguideFuture().fetchTourguide(),
+                future: fetchTourguide(),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (snapshot.data == null) {
                     return const Center(child: CircularProgressIndicator());

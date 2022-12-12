@@ -1,34 +1,37 @@
-import 'dart:html';
 import 'package:flutter/material.dart';
-import 'package:mid_tourism_mobile/drawer.dart';
-import 'package:mid_tourism_mobile/models/restoModel.dart';
-import 'package:mid_tourism_mobile/pages/restaurant/restaurant.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 
-class RestaurantForm extends StatefulWidget {
-  const RestaurantForm({super.key});
+import 'package:mid_tourism_mobile/drawer.dart';
+import 'package:mid_tourism_mobile/models/hotel_model.dart';
+import 'package:mid_tourism_mobile/pages/hotel/hotel.dart';
+
+class HotelForm extends StatefulWidget {
+  const HotelForm({super.key});
+
   @override
-  State<RestaurantForm> createState() => _RestaurantForm();
+  State<HotelForm> createState() => _HotelForm();
 }
 
-class _RestaurantForm extends State<RestaurantForm> {
+class _HotelForm extends State<HotelForm> {
   final _formKey = GlobalKey<FormState>();
-  String resto_name = "";
-  String resto_address = "";
-  String resto_email = "";
-  String resto_phone = "";
-  String resto_photo = "";
-  String resto_description = "";
-  String resto_delivery = "";
+  String hotelName = "";
+  String hotelAddress = "";
+  String hotelEmail = "";
+  int hotelStar = 0;
+  String hotelDescription = "";
+  String hotelPhoto = "";
+  String model = "hotel.hotel";
+  int pk = 1;
 
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
+
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: const Text('Hotel Form'),
+        ),
         drawer: const AppDrawer(),
         body: SingleChildScrollView(
             child: Center(
@@ -47,14 +50,14 @@ class _RestaurantForm extends State<RestaurantForm> {
                       padding: const EdgeInsets.only(left: 15, right: 15),
                       child: const FittedBox(
                         fit: BoxFit.fitWidth,
-                        child: Text("Restaurants",
+                        child: Text("Hotels",
                             style: TextStyle(
                                 fontSize: 60,
                                 fontFamily: 'Quicksand',
                                 color: Colors.black)),
                       )),
                   Center(
-                    child: Text("Delight in cuisine.",
+                    child: Text("Discover hotels.",
                         style: TextStyle(
                             fontSize: 15,
                             fontFamily: 'Quicksand',
@@ -62,7 +65,7 @@ class _RestaurantForm extends State<RestaurantForm> {
                   ),
                   Center(
                     child: Text(
-                        "Experience authenticity and accomodation with MID-Tourism",
+                        "Experience authenticity and accommodation with MID-Tourism",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 15,
@@ -84,8 +87,8 @@ class _RestaurantForm extends State<RestaurantForm> {
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
                               decoration: InputDecoration(
-                                hintText: "Enter your Restaurant Name!",
-                                labelText: "Restaurant Name",
+                                hintText: "Enter your Hotel Name!",
+                                labelText: "Hotel Name",
                                 // Added a circular border to make it neater
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5.0),
@@ -94,19 +97,19 @@ class _RestaurantForm extends State<RestaurantForm> {
                               // Added behavior when name is typed
                               onChanged: (String? value) {
                                 setState(() {
-                                  resto_name = value!;
+                                  hotelName = value!;
                                 });
                               },
                               // Added behavior when data is saved
                               onSaved: (String? value) {
                                 setState(() {
-                                  resto_name = value!;
+                                  hotelName = value!;
                                 });
                               },
                               // Validator as form validation
                               validator: (String? value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Restaurant name cannot be empty!';
+                                  return 'Hotel name cannot be empty!';
                                 }
                                 return null;
                               },
@@ -117,8 +120,8 @@ class _RestaurantForm extends State<RestaurantForm> {
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
                               decoration: InputDecoration(
-                                hintText: "Enter your Restaurant Address!",
-                                labelText: "Restaurant Address",
+                                hintText: "Enter your Hotel Address!",
+                                labelText: "Hotel Address",
                                 // Added a circular border to make it neater
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5.0),
@@ -127,19 +130,19 @@ class _RestaurantForm extends State<RestaurantForm> {
                               // Added behavior when name is typed
                               onChanged: (String? value) {
                                 setState(() {
-                                  resto_address = value!;
+                                  hotelAddress = value!;
                                 });
                               },
                               // Added behavior when data is saved
                               onSaved: (String? value) {
                                 setState(() {
-                                  resto_address = value!;
+                                  hotelAddress = value!;
                                 });
                               },
                               // Validator as form validation
                               validator: (String? value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Restaurant address cannot be empty!';
+                                  return 'Hotel address cannot be empty!';
                                 }
                                 return null;
                               },
@@ -150,8 +153,8 @@ class _RestaurantForm extends State<RestaurantForm> {
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
                               decoration: InputDecoration(
-                                hintText: "Enter your Restaurant Email!",
-                                labelText: "Restaurant Email",
+                                hintText: "Enter your Hotel Email!",
+                                labelText: "Hotel Email",
                                 // Added a circular border to make it neater
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5.0),
@@ -160,19 +163,19 @@ class _RestaurantForm extends State<RestaurantForm> {
                               // Added behavior when name is typed
                               onChanged: (String? value) {
                                 setState(() {
-                                  resto_email = value!;
+                                  hotelEmail = value!;
                                 });
                               },
                               // Added behavior when data is saved
                               onSaved: (String? value) {
                                 setState(() {
-                                  resto_email = value!;
+                                  hotelEmail = value!;
                                 });
                               },
                               // Validator as form validation
                               validator: (String? value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Restaurant email cannot be empty!';
+                                  return 'Hotel email cannot be empty!';
                                 }
                                 return null;
                               },
@@ -183,9 +186,8 @@ class _RestaurantForm extends State<RestaurantForm> {
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
                               decoration: InputDecoration(
-                                hintText:
-                                    "Enter your restaurant's phone number!",
-                                labelText: "Amount",
+                                hintText: "Enter your hotel's star rating!",
+                                labelText: "Star Rating",
                                 // Added a circular border to make it neater
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5.0),
@@ -194,21 +196,21 @@ class _RestaurantForm extends State<RestaurantForm> {
                               // Added behavior when name is typed
                               onChanged: (String? value) {
                                 setState(() {
-                                  resto_phone = value!;
+                                  hotelStar = int.parse(value!);
                                 });
                               },
                               // Added behavior when data is saved
                               onSaved: (String? value) {
                                 setState(() {
-                                  resto_phone = value!;
+                                  hotelStar = int.parse(value!);
                                 });
                               },
                               // Validator as form validation
                               validator: (String? value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Phone number cannot be empty!';
+                                  return 'Hotel star cannot be empty!';
                                 } else if (double.tryParse(value) == null) {
-                                  return 'Phone number needs to be a number!';
+                                  return 'Hotel star needs to be a number!';
                                 }
                                 return null;
                               },
@@ -219,8 +221,8 @@ class _RestaurantForm extends State<RestaurantForm> {
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
                               decoration: InputDecoration(
-                                hintText: "Enter your Restaurant Description!",
-                                labelText: "Restaurant Description",
+                                hintText: "Enter your Hotel Description!",
+                                labelText: "Hotel Description",
                                 // Added a circular border to make it neater
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5.0),
@@ -229,112 +231,95 @@ class _RestaurantForm extends State<RestaurantForm> {
                               // Added behavior when name is typed
                               onChanged: (String? value) {
                                 setState(() {
-                                  resto_description = value!;
+                                  hotelDescription = value!;
                                 });
                               },
                               // Added behavior when data is saved
                               onSaved: (String? value) {
                                 setState(() {
-                                  resto_description = value!;
+                                  hotelDescription = value!;
                                 });
                               },
                               // Validator as form validation
                               validator: (String? value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Restaurant description cannot be empty!';
+                                  return 'Hotel description cannot be empty!';
                                 }
                                 return null;
                               },
                             ),
                           ),
                           Padding(
-                            // Using padding of 8 pixels
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                hintText: "Enter your Restaurant Website!",
-                                labelText: "Restaurant Website",
-                                // Added a circular border to make it neater
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                              ),
-                              // Added behavior when name is typed
-                              onChanged: (String? value) {
-                                setState(() {
-                                  resto_delivery = value!;
-                                });
-                              },
-                              // Added behavior when data is saved
-                              onSaved: (String? value) {
-                                setState(() {
-                                  resto_delivery = value!;
-                                });
-                              },
-                              // Validator as form validation
-                              validator: (String? value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Restaurant website cannot be empty!';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          Padding(
-                            // Using padding of 8 pixels
-                            padding: const EdgeInsets.all(8.0),
-                            // Child HERE
-                          ),
-                          Padding(
-                              padding: const EdgeInsets.all(15.0),
+                              padding: const EdgeInsets.only(top: 10.0),
                               child: Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          minimumSize: const Size(280, 50),
-                                          shape: const StadiumBorder(),
-                                          backgroundColor:
-                                              const Color(0xff3f8dcd)),
-                                      onPressed: () async {
-                                        if (_formKey.currentState!.validate()) {
-                                          _formKey.currentState!.save();
-
-                                          try {
-                                            final response = await request.post(
-                                                'https://mid-tourism.up.railway.app/resto/create_resto_flutter/',
-                                                {
-                                                  "resto_name": resto_name,
-                                                  "resto_address":
-                                                      resto_address,
-                                                  "resto_email": resto_email,
-                                                  "resto_phone": resto_phone,
-                                                  "resto_description":
-                                                      resto_description,
-                                                  "resto_photo": resto_photo,
-                                                  "resto_delivery":
-                                                      resto_delivery,
-                                                });
-                                          } catch (e) {
-                                            print("$e LOOK");
-                                          }
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return const AlertDialog(
-                                                    content: Text(
-                                                        'Successfully saved!'));
-                                              });
+                                alignment: Alignment.bottomCenter,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            minimumSize: const Size(120, 50),
+                                            shape: const StadiumBorder(),
+                                            backgroundColor:
+                                            const Color(0xff6c757d)
+                                        ),
+                                        onPressed: () {
                                           Navigator.pushReplacement(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const RestaurantPage()),
+                                                builder: (context) => const HotelPage()),
                                           );
-                                        }
-                                      },
-                                      child: const Text("Save",
-                                          style: TextStyle(
-                                              color: Colors.white))))),
+                                        },
+                                        child: const Text("Back",
+                                            style: TextStyle(
+                                                color: Colors.white
+                                            )
+                                        )
+                                    ),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            minimumSize: const Size(120, 50),
+                                            shape: const StadiumBorder(),
+                                            backgroundColor:
+                                            const Color(0xff3f8dcd)),
+                                        onPressed: () {
+                                          if (_formKey.currentState!.validate()) {
+                                            _formKey.currentState!.save();
+                                            Fields newFields = Fields(
+                                              hotelName: hotelName,
+                                              hotelAddress: hotelAddress,
+                                              email: hotelEmail,
+                                              star: hotelStar,
+                                              description: hotelDescription,
+                                              hotelPhoto: hotelPhoto,
+                                            );
+                                            Map<String, dynamic> jsonFields =
+                                            newFields.toJson();
+                                            Hotel newHotel = Hotel(
+                                                model: model,
+                                                pk: pk,
+                                                fields: newFields);
+                                            Map<String, dynamic> jsonHotel =
+                                            newHotel.toJson();
+                                            showDialog(
+                                                context: context,
+                                                builder: (BuildContext context) {
+                                                  return const AlertDialog(
+                                                      content: Text(
+                                                          'Successfully saved!')
+                                                  );
+                                                });
+                                          }
+                                        },
+                                        child: const Text("Save",
+                                            style: TextStyle(
+                                                color: Colors.white)
+                                        )
+                                    ),
+                                  ],
+                                ),
+                              )
+                          ),
                         ],
                       ),
                     ),

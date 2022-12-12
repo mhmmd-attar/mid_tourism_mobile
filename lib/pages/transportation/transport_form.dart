@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+
 import 'package:mid_tourism_mobile/drawer.dart';
-import 'package:mid_tourism_mobile/models/transportModel.dart';
-import 'package:mid_tourism_mobile/pages/transportation/transportform.dart';
+import 'package:mid_tourism_mobile/models/transport_model.dart';
+import 'package:mid_tourism_mobile/pages/transportation/transport_form.dart';
 
 class TransportForm extends StatefulWidget {
   const TransportForm({super.key});
@@ -22,6 +25,8 @@ class _TransportForm extends State<TransportForm> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Add new vehicle'),

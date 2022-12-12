@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mid_tourism_mobile/drawer.dart';
-import 'package:mid_tourism_mobile/pages/restaurant/restaurantform.dart';
-import 'package:mid_tourism_mobile/models/restoModel.dart';
 import 'package:auto_size_text_field/auto_size_text_field.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
+
+import 'package:mid_tourism_mobile/drawer.dart';
+import 'package:mid_tourism_mobile/pages/restaurant/restaurant_form.dart';
+import 'package:mid_tourism_mobile/models/resto_model.dart';
 
 class RestaurantPage extends StatefulWidget {
   const RestaurantPage({super.key});
@@ -17,6 +18,7 @@ class _Restaurant extends State<RestaurantPage> {
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
+
     return Scaffold(
       appBar: AppBar(),
       drawer: const AppDrawer(),
@@ -86,7 +88,7 @@ class _Restaurant extends State<RestaurantPage> {
                       ))),
             ),
             FutureBuilder(
-                future: RestaurantFuture().fetchRestaurant(),
+                future: fetchRestaurant(),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (snapshot.data == null) {
                     return const Center(child: CircularProgressIndicator());
@@ -277,14 +279,6 @@ class _Restaurant extends State<RestaurantPage> {
                                                             } catch (e) {
                                                               print("$e LOOK");
                                                             }
-                                                            Navigator
-                                                                .pushReplacement(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder:
-                                                                      (context) =>
-                                                                          RestaurantPage()),
-                                                            );
                                                           },
                                                           child: const Text(
                                                               "Delete",

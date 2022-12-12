@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mid_tourism_mobile/drawer.dart';
-import 'package:mid_tourism_mobile/pages/homepage/aboutpage.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
+
+import 'package:mid_tourism_mobile/drawer.dart';
+import 'package:mid_tourism_mobile/pages/homepage/about.dart';
 
 class MyRegisterPage extends StatefulWidget {
   const MyRegisterPage({super.key, required this.title});

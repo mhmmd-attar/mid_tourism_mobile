@@ -1,8 +1,11 @@
-import 'package:auto_size_text_field/auto_size_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:auto_size_text_field/auto_size_text_field.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+
 import 'package:mid_tourism_mobile/drawer.dart';
-import 'package:mid_tourism_mobile/pages/transportation/transportform.dart';
-import 'package:mid_tourism_mobile/models/transportModel.dart';
+import 'package:mid_tourism_mobile/pages/transportation/transport_form.dart';
+import 'package:mid_tourism_mobile/models/transport_model.dart';
 
 class TransportPage extends StatefulWidget {
   const TransportPage({super.key});
@@ -14,6 +17,8 @@ class TransportPage extends StatefulWidget {
 class _Transport extends State<TransportPage> {
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
       appBar: AppBar(),
       drawer: const AppDrawer(),
@@ -83,7 +88,7 @@ class _Transport extends State<TransportPage> {
                       ))),
             ),
             FutureBuilder(
-                future: TransportFuture().fetchTransport(),
+                future: fetchTransport(),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (snapshot.data == null) {
                     return const Center(child: CircularProgressIndicator());
@@ -250,12 +255,7 @@ class _Transport extends State<TransportPage> {
                                                                           74,
                                                                           36)),
                                                           onPressed: () {
-                                                            Navigator.pushReplacement(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                    builder:
-                                                                        (context) =>
-                                                                            TransportPage()));
+
                                                           },
                                                           child: const Text(
                                                               "Delete",

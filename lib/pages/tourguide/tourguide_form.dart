@@ -1,8 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:mid_tourism_mobile/drawer.dart';
-import 'package:mid_tourism_mobile/models/tourguideModel.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+
+import 'package:mid_tourism_mobile/drawer.dart';
+import 'package:mid_tourism_mobile/models/tourguide_model.dart';
 import 'package:mid_tourism_mobile/pages/tourguide/tourguide.dart';
 
 class TourguideForm extends StatefulWidget {
@@ -24,6 +26,8 @@ class _TourguideForm extends State<TourguideForm> {
   TextEditingController _date = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Tourguide Form'),
@@ -203,12 +207,7 @@ class _TourguideForm extends State<TourguideForm> {
                                             backgroundColor:
                                                 const Color(0xff6c757d)),
                                         onPressed: () {
-                                          Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const TourguidePage()),
-                                          );
+                                          Navigator.pop(context);
                                         },
                                         child: const Text("Back",
                                             style: TextStyle(
