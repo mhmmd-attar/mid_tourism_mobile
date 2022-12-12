@@ -43,6 +43,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return MaterialApp(
         home: Scaffold(
             backgroundColor: const Color(0xff3f8dcd),
@@ -142,8 +143,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Container(
                       margin: const EdgeInsets.all(10),
                       child: ElevatedButton(
-                        onPressed: () {
-                          request.logout;
+                        onPressed: () async {
+                          final response = await request.logout('https://mid-tourism.up.railway.app/logout_flutter');
                           Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
