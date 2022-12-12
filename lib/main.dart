@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
+import 'package:mid_tourism_mobile/pages/homepage/about.dart';
 import 'package:mid_tourism_mobile/pages/homepage/login.dart';
 import 'package:mid_tourism_mobile/pages/homepage/register.dart';
 import 'package:provider/provider.dart';
@@ -144,13 +145,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       margin: const EdgeInsets.all(10),
                       child: ElevatedButton(
                         onPressed: () async {
-                          final response = await request.logout('https://mid-tourism.up.railway.app/logout_flutter');
                           Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                          builder: (context) =>
-                          const MyHomePage()),
+                            context,
+                            MaterialPageRoute(builder: (context) => const MyLoginPage()),
                           );
+                          final response = await request.logout('https://mid-tourism.up.railway.app/logout_flutter/');
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xffd3462c),

@@ -16,11 +16,6 @@ class _MyLoginPage extends State<MyLoginPage> {
   final _loginFormKey = GlobalKey<FormState>();
   bool isPasswordVisible = false;
 
-  void togglePasswordView() {
-    setState(() {
-      isPasswordVisible = !isPasswordVisible;
-    });
-  }
 
   String _username = "";
   String _password = "";
@@ -117,12 +112,13 @@ class _MyLoginPage extends State<MyLoginPage> {
                 height: 40,
                 child: TextFormField(
                   decoration: InputDecoration(
+                    isDense:true,
                     filled: true,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
-                    hintText: "Email",
+                    hintText: "Username",
                   ),
                   onChanged: (String? value) {
                     _username = value!;
@@ -134,14 +130,28 @@ class _MyLoginPage extends State<MyLoginPage> {
                 width: 280,
                 height: 40,
                 child: TextFormField(
-                  obscureText: true,
+                  obscureText: !isPasswordVisible,
                   decoration: InputDecoration(
+                    isDense:true,
                     filled: true,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                     hintText: "Password",
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        !isPasswordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Theme.of(context).primaryColorDark,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          isPasswordVisible = !isPasswordVisible;
+                        });
+                      },
+                    ),
                   ),
                   onChanged: (String? value) {
                     _password = value!;

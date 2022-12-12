@@ -9,11 +9,13 @@ class MyRegisterPage extends StatefulWidget {
   const MyRegisterPage({super.key, required this.title});
   final String title;
 
+
   @override
   State<MyRegisterPage> createState() => _MyRegisterPage();
 }
 
 class _MyRegisterPage extends State<MyRegisterPage> {
+  bool isPasswordVisible = false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -110,12 +112,13 @@ class _MyRegisterPage extends State<MyRegisterPage> {
                     height: 40,
                     child: TextFormField(
                       decoration: InputDecoration(
+                        isDense:true,
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30.0),
                         ),
-                        hintText: "Email",
+                        hintText: "Username",
                       ),
                     ),
                   ),
@@ -124,13 +127,28 @@ class _MyRegisterPage extends State<MyRegisterPage> {
                     width: 280,
                     height: 40,
                     child: TextFormField(
+                      obscureText: !isPasswordVisible,
                       decoration: InputDecoration(
+                        isDense:true,
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30.0),
                         ),
                         hintText: "Password",
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            !isPasswordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Theme.of(context).primaryColorDark,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              isPasswordVisible = !isPasswordVisible;
+                            });
+                          },
+                        ),
                       ),
                     ),
                   ),
