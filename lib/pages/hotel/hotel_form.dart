@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:typed_data';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -243,8 +244,12 @@ class _HotelForm extends State<HotelForm> {
                             // Using padding of 8 pixels
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               decoration: InputDecoration(
-                                hintText: "Enter your hotel's star rating!",
+                                hintText: "Enter your hotel's star rating! (1-5)",
                                 labelText: "Star Rating",
                                 // Added a circular border to make it neater
                                 border: OutlineInputBorder(

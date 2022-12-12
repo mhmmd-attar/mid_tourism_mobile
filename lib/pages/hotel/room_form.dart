@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:typed_data';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -211,6 +212,10 @@ class _RoomForm extends State<RoomForm> {
                             // Using padding of 8 pixels
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               decoration: InputDecoration(
                                 hintText: "Enter your room price!",
                                 labelText: "Room Price",
@@ -281,12 +286,35 @@ class _RoomForm extends State<RoomForm> {
                                 ),
                               )
                           ),
-                          Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
+                      Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                    minimumSize: const Size(120, 50),
+                                    shape: const StadiumBorder(),
+                                    backgroundColor:
+                                    const Color(0xff6c757d)
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => RoomPage(hotelPk: widget.hotelPk)),
+                                      );
+                                    },
+                                    child: const Text("Back",
+                                        style: TextStyle(
+                                            color: Colors.white
+                                            )
+                                        )
+                                      ),
+                                      ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
                                           minimumSize: const Size(280, 50),
                                           shape: const StadiumBorder(),
                                           backgroundColor:
@@ -296,7 +324,7 @@ class _RoomForm extends State<RoomForm> {
                                           _formKey.currentState!.save();
                                           try {
                                             Uint8List hotelPhotoByte =  await roomPhoto!.readAsBytes();
-                                            final uri = Uri.parse('https://mid-tourism.up.railway.app/hotel/add_room_flutter/');
+                                            final uri = Uri.parse('https://mid-tourism.up.railway.app/hotel/add_room_flutter/${widget.hotelPk}');
                                             final request = http.MultipartRequest('POST', uri);
                                             var multipartFile = await http.MultipartFile.fromBytes(
                                                 'room_photo', hotelPhotoByte,
@@ -338,8 +366,9 @@ class _RoomForm extends State<RoomForm> {
                                           )
                                       )
                                   )
-                              )
-                          ),
+                              ])
+                            )
+                          )
                         ],
                       ),
                     ),

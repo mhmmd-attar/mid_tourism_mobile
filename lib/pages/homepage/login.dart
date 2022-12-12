@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mid_tourism_mobile/main.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 
@@ -61,7 +62,7 @@ class _MyLoginPage extends State<MyLoginPage> {
                 child: const FittedBox(
                   fit: BoxFit.fitWidth,
                   child: Image(
-                    image: AssetImage("Saly-44.png"),
+                    image: AssetImage("assets/Saly-44.png"),
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -76,7 +77,11 @@ class _MyLoginPage extends State<MyLoginPage> {
                         fit: BoxFit.fitWidth,
                         child: ElevatedButton(
                             onPressed: () {
-                              Navigator.pop(context);
+                              Navigator.pushReplacement(
+                                  context,
+                                MaterialPageRoute(builder: (context) => const MyHomePage()
+                                )
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xffd3462c),

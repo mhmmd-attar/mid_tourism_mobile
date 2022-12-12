@@ -33,7 +33,7 @@ class _MyAboutPage extends State<MyAboutPage> {
                               padding: EdgeInsets.only(
                                   left: 150, top: 50, right: 150, bottom: 20),
                               child: Image(
-                                image: AssetImage("Saly-44.png"),
+                                image: AssetImage("assets/Saly-44.png"),
                                 fit: BoxFit.contain,
                               ),
                             ))),
@@ -90,7 +90,7 @@ class _MyAboutPage extends State<MyAboutPage> {
                               padding: EdgeInsets.only(
                                   left: 200, right: 200, bottom: 20),
                               child: Image(
-                                image: AssetImage("essential.png"),
+                                image: AssetImage("assets/essential.png"),
                                 fit: BoxFit.contain,
                               ),
                             ))),
@@ -126,7 +126,7 @@ class _MyAboutPage extends State<MyAboutPage> {
                               padding: EdgeInsets.only(
                                   left: 200, right: 200, bottom: 20),
                               child: Image(
-                                image: AssetImage("experience.png"),
+                                image: AssetImage("assets/experience.png"),
                                 fit: BoxFit.contain,
                               ),
                             ))),
@@ -162,7 +162,7 @@ class _MyAboutPage extends State<MyAboutPage> {
                               padding: EdgeInsets.only(
                                   left: 200, right: 200, bottom: 20),
                               child: Image(
-                                image: AssetImage("entertainment.png"),
+                                image: AssetImage("assets/entertainment.png"),
                                 fit: BoxFit.contain,
                               ),
                             ))),

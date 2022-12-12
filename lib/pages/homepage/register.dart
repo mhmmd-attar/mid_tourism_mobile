@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-
+import 'package:mid_tourism_mobile/main.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/pages/homepage/about.dart';
 
@@ -66,7 +66,11 @@ class _MyRegisterPage extends State<MyRegisterPage> {
                             fit: BoxFit.fitWidth,
                             child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.pop(context);
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => const MyHomePage()
+                                      )
+                                  );
                                 },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color(0xffd3462c),
@@ -99,7 +103,10 @@ class _MyRegisterPage extends State<MyRegisterPage> {
                                     style: TextStyle(
                                         fontSize: 20,
                                         fontFamily: 'Quicksand',
-                                        color: Color(0xff000000)))),
+                                        color: Color(0xff000000)
+                                    )
+                                )
+                            ),
                           )
                       ),
                     ],

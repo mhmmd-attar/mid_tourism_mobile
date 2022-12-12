@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/pages/hotel/room_form.dart';
+import 'package:mid_tourism_mobile/pages/hotel/room.dart';
 import 'package:mid_tourism_mobile/pages/hotel/hotel.dart';
 import 'package:mid_tourism_mobile/models/room_model.dart';
 
@@ -67,24 +68,30 @@ class _Room extends State<RoomPage> {
                                     const Color(0xffFFFFFF).withOpacity(0.8))),
                       ),
                     ])),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              RoomForm(hotelPk: widget.hotelPk)));
-                },
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff24a0ed),
-                    shape: const StadiumBorder(),
-                    minimumSize: const Size(260, 50)),
-                child: const Text("Create Room",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: 'Quicksand',
-                      color: Color(0xffFFFFFF),
-                    ))),
+            Visibility(
+              visible: request.loggedIn,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RoomForm(hotelPk: widget.hotelPk)
+                        )
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xff24a0ed),
+                      shape: const StadiumBorder(),
+                      minimumSize: const Size(260, 50)),
+                  child: const Text("Create Room",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Quicksand',
+                        color: Color(0xffFFFFFF),
+                      )
+                  )
+              ),
+            ),
             Container(
               margin: const EdgeInsets.all(10),
               child: ElevatedButton(
@@ -198,7 +205,20 @@ class _Room extends State<RoomPage> {
                                         AutoSizeTextField(
                                           enabled: false,
                                           readOnly: true,
-                                          maxLines: 4,
+                                          controller: TextEditingController(
+                                              text: snapshot.data![index].fields.isBooked ? "Booked" : "Available"
+                                          ),
+                                          decoration: const InputDecoration(
+                                            labelText: "Availability",
+                                            isDense: true,
+                                            contentPadding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 0),
+                                            border: InputBorder.none,
+                                          ),
+                                        ),
+                                        AutoSizeTextField(
+                                          enabled: false,
+                                          readOnly: true,
+                                          maxLines: 3,
                                           controller: TextEditingController(
                                               text: snapshot.data![index].fields.roomDescription
                                           ),
@@ -226,36 +246,67 @@ class _Room extends State<RoomPage> {
                                                         child: ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
                                                               backgroundColor: Colors.blue,
-                                                              maximumSize: const Size(100, 50)
+                                                              maximumSize: const Size(130, 50)
                                                             ),
-                                                            onPressed: () {},
-                                                            child: const Text(
-                                                                "Book Room",
+                                                            onPressed: () async {
+                                                              try {
+                                                                final response = await request.get(
+                                                                    'https://mid-tourism.up.railway.app/hotel/is_booked_flutter/${snapshot.data![index].pk}'
+                                                                );
+                                                              } catch (e) {
+                                                                print("$e LOOK");
+                                                              }
+                                                              Navigator.pushReplacement(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                    builder: (context) => RoomPage(hotelPk: widget.hotelPk)
+                                                                ),
+                                                              );
+                                                            },
+                                                            child: Text(
+                                                                snapshot.data![index].fields.isBooked ? "Cancel Booking" : "Book Now",
                                                                 style: TextStyle(
                                                                     color: Colors.white
                                                                 )
                                                             )
                                                         )
-                                                    ))
-                                                ,
-                                                Container(
-                                                    padding:
-                                                        const EdgeInsetsDirectional.fromSTEB(6, 0, 12, 10),
-                                                    child: FittedBox(
-                                                      child: ElevatedButton(
-                                                          style: ElevatedButton.styleFrom(
-                                                                  backgroundColor: Colors.red,
-                                                                  maximumSize: const Size(74, 50)
-                                                          ),
-                                                          onPressed: () {},
-                                                          child: const Text(
-                                                              "Delete",
-                                                              style: TextStyle(
-                                                                  color: Colors.white)
-                                                          )
-                                                      ),
                                                     )
                                                 ),
+                                                Visibility(
+                                                  visible: request.loggedIn,
+                                                    child: Container(
+                                                        padding:
+                                                        const EdgeInsetsDirectional.fromSTEB(6, 0, 12, 10),
+                                                        child: FittedBox(
+                                                          child: ElevatedButton(
+                                                              style: ElevatedButton.styleFrom(
+                                                                  backgroundColor: Colors.red,
+                                                                  maximumSize: const Size(74, 50)
+                                                              ),
+                                                              onPressed: () async {
+                                                                try {
+                                                                  final response = await request.get(
+                                                                      'https://mid-tourism.up.railway.app/hotel/delete_room_flutter/${snapshot.data![index].pk}'
+                                                                  );
+                                                                } catch (e) {
+                                                                  print("$e LOOK");
+                                                                }
+                                                                Navigator.pushReplacement(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder: (context) => RoomPage(hotelPk: widget.hotelPk)
+                                                                  ),
+                                                                );
+                                                              },
+                                                              child: const Text(
+                                                                  "Delete",
+                                                                  style: TextStyle(
+                                                                      color: Colors.white)
+                                                              )
+                                                          ),
+                                                        )
+                                                    ),
+                                                )
                                               ],
                                             ),
                                           ),

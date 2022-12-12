@@ -67,26 +67,29 @@ class _Hotel extends State<HotelPage> {
                               )),
                         ),
                       ])),
-              Container(
-                margin: const EdgeInsets.all(10),
-                child: ElevatedButton(
-                    onPressed: () async {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HotelForm()),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff24a0ed),
-                        shape: const StadiumBorder(),
-                        minimumSize: const Size(260, 50)),
-                    child: const Text("Create Hotel",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: 'Quicksand',
-                          color: Color(0xffFFFFFF),
-                        ))),
+              Visibility(
+                visible: request.loggedIn,
+                child: Container(
+                  margin: const EdgeInsets.all(10),
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HotelForm()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xff24a0ed),
+                          shape: const StadiumBorder(),
+                          minimumSize: const Size(260, 50)),
+                      child: const Text("Create Hotel",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'Quicksand',
+                            color: Color(0xffFFFFFF),
+                          ))),
+                ),
               ),
               FutureBuilder(
                   future: fetchHotel(),
@@ -270,39 +273,42 @@ class _Hotel extends State<HotelPage> {
                                                         ),
                                                       )
                                                   ),
-                                                  Container(
-                                                      padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 6, 10),
-                                                      child: FittedBox(
-                                                        child: ElevatedButton(
-                                                            style: ElevatedButton.styleFrom(
-                                                                backgroundColor: Colors.red,
-                                                                maximumSize: const Size(74, 50)
-                                                            ),
-                                                            onPressed: () async {
-                                                              try {
-                                                                final response = await request.get(
-                                                                    'https://mid-tourism.up.railway.app/hotel/delete_hotel_flutter/${snapshot.data![index].pk}'
+                                                  Visibility(
+                                                    visible: request.loggedIn,
+                                                    child: Container(
+                                                        padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 6, 10),
+                                                        child: FittedBox(
+                                                          child: ElevatedButton(
+                                                              style: ElevatedButton.styleFrom(
+                                                                  backgroundColor: Colors.red,
+                                                                  maximumSize: const Size(74, 50)
+                                                              ),
+                                                              onPressed: () async {
+                                                                try {
+                                                                  final response = await request.get(
+                                                                      'https://mid-tourism.up.railway.app/hotel/delete_hotel_flutter/${snapshot.data![index].pk}'
+                                                                  );
+                                                                } catch (e) {
+                                                                  print("$e LOOK");
+                                                                }
+                                                                Navigator.pushReplacement(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder: (context) => const HotelPage()
+                                                                  ),
                                                                 );
-                                                              } catch (e) {
-                                                                print("$e LOOK");
-                                                              }
-                                                              Navigator.pushReplacement(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                    builder: (context) => const HotelPage()
-                                                                ),
-                                                              );
-                                                            },
-                                                            child: const Text(
-                                                                "Delete",
-                                                                textAlign: TextAlign.center,
-                                                                style: TextStyle(
-                                                                  color: Colors.white,
-                                                                )
-                                                            )
-                                                        ),
-                                                      )
-                                                  ),
+                                                              },
+                                                              child: const Text(
+                                                                  "Delete",
+                                                                  textAlign: TextAlign.center,
+                                                                  style: TextStyle(
+                                                                    color: Colors.white,
+                                                                  )
+                                                              )
+                                                          ),
+                                                        )
+                                                    ),
+                                                  )
                                                 ],
                                               ),
                                             ),

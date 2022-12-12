@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 Future<List<Room>> fetchRoom(id) async {
   var url =
-      Uri.parse('https://mid-tourism.up.railway.app/hotel/show_json_room_flutter/$id/');
+      Uri.parse('https://mid-tourism.up.railway.app/hotel/show_json_room_flutter/$id');
   var response = await http.get(
     url,
     headers: {
