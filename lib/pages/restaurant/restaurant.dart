@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text_field/auto_size_text_field.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/pages/restaurant/restaurant_form.dart';
 import 'package:mid_tourism_mobile/models/resto_model.dart';
@@ -66,27 +66,29 @@ class _Restaurant extends State<RestaurantPage> {
                             )),
                       ),
                     ])),
-            Container(
-              margin: const EdgeInsets.all(10),
-              child: ElevatedButton(
-                  onPressed: () async {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const RestaurantForm()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff24a0ed),
-                      shape: const StadiumBorder(),
-                      minimumSize: const Size(260, 50)),
-                  child: const Text("Create Restaurant",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'Quicksand',
-                        color: Color(0xffFFFFFF),
-                      ))),
-            ),
+            Visibility(
+                visible: request.loggedIn,
+                child: Container(
+                  margin: const EdgeInsets.all(10),
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RestaurantForm()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xff24a0ed),
+                          shape: const StadiumBorder(),
+                          minimumSize: const Size(260, 50)),
+                      child: const Text("Create Restaurant",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'Quicksand',
+                            color: Color(0xffFFFFFF),
+                          ))),
+                )),
             FutureBuilder(
                 future: fetchRestaurant(),
                 builder: (context, AsyncSnapshot snapshot) {
@@ -197,6 +199,11 @@ class _Restaurant extends State<RestaurantPage> {
                                           ),
                                         ),
                                         AutoSizeTextField(
+                                          keyboardType: TextInputType.number,
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter
+                                                .digitsOnly,
+                                          ],
                                           enabled: false,
                                           readOnly: true,
                                           controller: TextEditingController(
@@ -244,61 +251,64 @@ class _Restaurant extends State<RestaurantPage> {
                                           ),
                                         ),
                                       ]),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.bottomRight,
-                                          child: FittedBox(
-                                            fit: BoxFit.fitWidth,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Container(
-                                                    padding:
-                                                        const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                            6, 0, 12, 10),
-                                                    child: FittedBox(
-                                                      child: ElevatedButton(
-                                                          style: ElevatedButton
-                                                              .styleFrom(
+                                      Visibility(
+                                          visible: request.loggedIn,
+                                          child: Expanded(
+                                            child: Align(
+                                              alignment: Alignment.bottomRight,
+                                              child: FittedBox(
+                                                fit: BoxFit.fitWidth,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  children: [
+                                                    Container(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                6, 0, 12, 10),
+                                                        child: FittedBox(
+                                                          child: ElevatedButton(
+                                                              style: ElevatedButton.styleFrom(
                                                                   backgroundColor:
                                                                       Colors
                                                                           .red,
                                                                   maximumSize:
                                                                       const Size(
-                                                                          74,
-                                                                          36)),
-                                                          onPressed: () async {
-                                                            try {
-                                                              final response =
-                                                                  await request.get(
-                                                                      'https://mid-tourism.up.railway.app/resto/delete_restaurant_flutter/${snapshot.data![index].pk}');
-                                                            } catch (e) {
-                                                              print("$e LOOK");
-                                                            }
-                                                            Navigator
-                                                                .pushReplacement(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder:
-                                                                      (context) =>
-                                                                          const RestaurantPage()),
-                                                            );
-                                                          },
-                                                          child: const Text(
-                                                              "Delete",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .white))),
-                                                    )),
-                                              ],
+                                                                          74, 36)),
+                                                              onPressed:
+                                                                  () async {
+                                                                try {
+                                                                  final response =
+                                                                      await request
+                                                                          .get(
+                                                                              'https://mid-tourism.up.railway.app/resto/delete_restaurant_flutter/${snapshot.data![index].pk}');
+                                                                } catch (e) {
+                                                                  print(
+                                                                      "$e LOOK");
+                                                                }
+                                                                Navigator
+                                                                    .pushReplacement(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder:
+                                                                          (context) =>
+                                                                              const RestaurantPage()),
+                                                                );
+                                                              },
+                                                              child: const Text(
+                                                                  "Delete",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white))),
+                                                        )),
+                                                  ],
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                      )
+                                          ))
                                     ]),
                                   ),
                                 ),

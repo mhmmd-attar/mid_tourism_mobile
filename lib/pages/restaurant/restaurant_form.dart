@@ -247,7 +247,7 @@ class _RestaurantForm extends State<RestaurantForm> {
                               decoration: InputDecoration(
                                 hintText:
                                     "Enter your restaurant's phone number!",
-                                labelText: "Amount",
+                                labelText: "Restaurant Phone",
                                 // Added a circular border to make it neater
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5.0),
@@ -377,54 +377,84 @@ class _RestaurantForm extends State<RestaurantForm> {
                               padding: const EdgeInsets.all(15.0),
                               child: Align(
                                   alignment: Alignment.bottomCenter,
-                                  child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          minimumSize: const Size(280, 50),
-                                          shape: const StadiumBorder(),
-                                          backgroundColor:
-                                              const Color(0xff3f8dcd)),
-                                      onPressed: () async {
-                                        if (_formKey.currentState!.validate()) {
-                                          _formKey.currentState!.save();
-                                          try {
-                                            Uint8List resto_photo_bytes =
-                                                await resto_photo!
-                                                    .readAsBytes();
-                                            final uri = Uri.parse(
-                                                'https://mid-tourism.up.railway.app/resto/create_resto_flutter/');
-                                            final request =
-                                                http.MultipartRequest(
-                                                    'POST', uri);
-                                            var multipartFile = await http
-                                                    .MultipartFile
-                                                .fromBytes('resto_photo',
-                                                    resto_photo_bytes,
-                                                    filename:
-                                                        'resto_photo_$resto_email',
-                                                    contentType: MediaType(
-                                                        'image', 'jpg'));
-                                            request.files.add(multipartFile);
-                                            request.fields["resto_name"] =
-                                                resto_name;
-                                            request.fields["resto_address"] =
-                                                resto_address;
-                                            request.fields["resto_email"] =
-                                                resto_email;
-                                            request.fields["resto_phone"] =
-                                                resto_phone;
-                                            request.fields[
-                                                    "resto_description"] =
-                                                resto_description;
-                                            request.fields["resto_delivery"] =
-                                                resto_delivery;
+                                  child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                minimumSize:
+                                                    const Size(120, 50),
+                                                shape: const StadiumBorder(),
+                                                backgroundColor:
+                                                    const Color(0xff6c757d)),
+                                            onPressed: () {
+                                              Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const RestaurantPage()),
+                                              );
+                                            },
+                                            child: const Text("Back",
+                                                style: TextStyle(
+                                                    color: Colors.white))),
+                                        ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                minimumSize:
+                                                    const Size(280, 50),
+                                                shape: const StadiumBorder(),
+                                                backgroundColor:
+                                                    const Color(0xff3f8dcd)),
+                                            onPressed: () async {
+                                              if (_formKey.currentState!
+                                                  .validate()) {
+                                                _formKey.currentState!.save();
+                                                try {
+                                                  Uint8List resto_photo_bytes =
+                                                      await resto_photo!
+                                                          .readAsBytes();
+                                                  final uri = Uri.parse(
+                                                      'https://mid-tourism.up.railway.app/resto/create_resto_flutter/');
+                                                  final request =
+                                                      http.MultipartRequest(
+                                                          'POST', uri);
+                                                  var multipartFile = await http
+                                                          .MultipartFile
+                                                      .fromBytes('resto_photo',
+                                                          resto_photo_bytes,
+                                                          filename:
+                                                              'resto_photo_$resto_email',
+                                                          contentType:
+                                                              MediaType('image',
+                                                                  'jpg'));
+                                                  request.files
+                                                      .add(multipartFile);
+                                                  request.fields["resto_name"] =
+                                                      resto_name;
+                                                  request.fields[
+                                                          "resto_address"] =
+                                                      resto_address;
+                                                  request.fields[
+                                                          "resto_email"] =
+                                                      resto_email;
+                                                  request.fields[
+                                                          "resto_phone"] =
+                                                      resto_phone;
+                                                  request.fields[
+                                                          "resto_description"] =
+                                                      resto_description;
+                                                  request.fields[
+                                                          "resto_delivery"] =
+                                                      resto_delivery;
 
-                                            final response =
-                                                await request.send();
-                                          } catch (e) {
-                                            print("$e LOOK 1");
-                                          }
+                                                  final response =
+                                                      await request.send();
+                                                } catch (e) {
+                                                  print("$e LOOK 1");
+                                                }
 
-                                          var unused_method = """try {
+                                                var unused_method = """try {
                                             final response = await request.post(
                                                 'https://mid-tourism.up.railway.app/resto/create_resto_flutter/',
                                                 {
@@ -443,24 +473,26 @@ class _RestaurantForm extends State<RestaurantForm> {
                                             print(" LOOK");
                                           }""";
 
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return const AlertDialog(
-                                                    content: Text(
-                                                        'Successfully saved!'));
-                                              });
-                                          Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const RestaurantPage()),
-                                          );
-                                        }
-                                      },
-                                      child: const Text("Save",
-                                          style: TextStyle(
-                                              color: Colors.white))))),
+                                                showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return const AlertDialog(
+                                                          content: Text(
+                                                              'Successfully saved!'));
+                                                    });
+                                                Navigator.pushReplacement(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const RestaurantPage()),
+                                                );
+                                              }
+                                            },
+                                            child: const Text("Save",
+                                                style: TextStyle(
+                                                    color: Colors.white)))
+                                      ]))),
                         ],
                       ),
                     ),

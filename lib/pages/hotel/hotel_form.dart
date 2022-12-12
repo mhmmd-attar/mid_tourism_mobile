@@ -254,36 +254,35 @@ class _HotelForm extends State<HotelForm> {
                               child: Align(
                                 alignment: Alignment.bottomCenter,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     ElevatedButton(
                                         style: ElevatedButton.styleFrom(
                                             minimumSize: const Size(120, 50),
                                             shape: const StadiumBorder(),
                                             backgroundColor:
-                                            const Color(0xff6c757d)
-                                        ),
+                                                const Color(0xff6c757d)),
                                         onPressed: () {
                                           Navigator.pushReplacement(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) => const HotelPage()),
+                                                builder: (context) =>
+                                                    const HotelPage()),
                                           );
                                         },
                                         child: const Text("Back",
                                             style: TextStyle(
-                                                color: Colors.white
-                                            )
-                                        )
-                                    ),
+                                                color: Colors.white))),
                                     ElevatedButton(
                                         style: ElevatedButton.styleFrom(
                                             minimumSize: const Size(120, 50),
                                             shape: const StadiumBorder(),
                                             backgroundColor:
-                                            const Color(0xff3f8dcd)),
+                                                const Color(0xff3f8dcd)),
                                         onPressed: () {
-                                          if (_formKey.currentState!.validate()) {
+                                          if (_formKey.currentState!
+                                              .validate()) {
                                             _formKey.currentState!.save();
                                             Fields newFields = Fields(
                                               hotelName: hotelName,
@@ -294,32 +293,29 @@ class _HotelForm extends State<HotelForm> {
                                               hotelPhoto: hotelPhoto,
                                             );
                                             Map<String, dynamic> jsonFields =
-                                            newFields.toJson();
+                                                newFields.toJson();
                                             Hotel newHotel = Hotel(
                                                 model: model,
                                                 pk: pk,
                                                 fields: newFields);
                                             Map<String, dynamic> jsonHotel =
-                                            newHotel.toJson();
+                                                newHotel.toJson();
                                             showDialog(
                                                 context: context,
-                                                builder: (BuildContext context) {
+                                                builder:
+                                                    (BuildContext context) {
                                                   return const AlertDialog(
                                                       content: Text(
-                                                          'Successfully saved!')
-                                                  );
+                                                          'Successfully saved!'));
                                                 });
                                           }
                                         },
                                         child: const Text("Save",
                                             style: TextStyle(
-                                                color: Colors.white)
-                                        )
-                                    ),
+                                                color: Colors.white))),
                                   ],
                                 ),
-                              )
-                          ),
+                              )),
                         ],
                       ),
                     ),
