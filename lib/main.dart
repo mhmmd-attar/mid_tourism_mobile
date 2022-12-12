@@ -130,8 +130,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const MyRegisterPage(
-                                        title: 'Register')),
+                                    builder: (context) =>
+                                        const MyRegisterPage()),
                               );
                             },
                             style: ElevatedButton.styleFrom(

@@ -123,7 +123,7 @@ class _MyRegisterPage extends State<MyRegisterPage> {
                 height: 40,
                 child: TextFormField(
                   decoration: InputDecoration(
-                    isDense:true,
+                    isDense: true,
                     filled: true,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
@@ -149,7 +149,7 @@ class _MyRegisterPage extends State<MyRegisterPage> {
                 child: TextFormField(
                   obscureText: !isPasswordVisible,
                   decoration: InputDecoration(
-                    isDense:true
+                    isDense: true,
                     filled: true,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
