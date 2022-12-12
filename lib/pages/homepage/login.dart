@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-
 import 'package:mid_tourism_mobile/main.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/pages/homepage/about.dart';
@@ -14,10 +13,8 @@ class MyLoginPage extends StatefulWidget {
 }
 
 class _MyLoginPage extends State<MyLoginPage> {
-  final _loginFormKey = GlobalKey<FormState>();
-
-  String _username = "";
-  String _password = "";
+  String _username_login = "";
+  String _password_login = "";
 
   @override
   Widget build(BuildContext context) {
@@ -36,20 +33,14 @@ class _MyLoginPage extends State<MyLoginPage> {
                 child: FittedBox(
                     fit: BoxFit.fitWidth,
                     child: ConstrainedBox(
-                      constraints: const BoxConstraints(
-                          minWidth: 1,
-                          minHeight: 1
-                      ),
-                      child: const Text(
-                          "MID Tourism",
+                      constraints:
+                          const BoxConstraints(minWidth: 1, minHeight: 1),
+                      child: const Text("MID Tourism",
                           style: TextStyle(
                               fontSize: 60,
                               fontFamily: 'Quicksand',
-                              color: Color(0xffFFFFFF)
-                          )
-                      ),
-                    )
-                ),
+                              color: Color(0xffFFFFFF))),
+                    )),
               ),
               Center(
                 child: Text("Log-in Page",
@@ -63,16 +54,13 @@ class _MyLoginPage extends State<MyLoginPage> {
                 child: FittedBox(
                     fit: BoxFit.fitWidth,
                     child: ConstrainedBox(
-                      constraints: const BoxConstraints(
-                          minWidth: 1,
-                          minHeight: 1
-                      ),
+                      constraints:
+                          const BoxConstraints(minWidth: 1, minHeight: 1),
                       child: const Image(
                         image: AssetImage("assets/Saly-44.png"),
                         fit: BoxFit.contain,
                       ),
-                    )
-                ),
+                    )),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -86,7 +74,8 @@ class _MyLoginPage extends State<MyLoginPage> {
                             onPressed: () {
                               Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(builder: (context) => const MyHomePage()),
+                                MaterialPageRoute(
+                                    builder: (context) => const MyHomePage()),
                               );
                             },
                             style: ElevatedButton.styleFrom(
@@ -136,7 +125,7 @@ class _MyLoginPage extends State<MyLoginPage> {
                     hintText: "Username",
                   ),
                   onChanged: (String? value) {
-                    _username = value!;
+                    _username_login = value!;
                   },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
@@ -161,7 +150,7 @@ class _MyLoginPage extends State<MyLoginPage> {
                     hintText: "Password",
                   ),
                   onChanged: (String? value) {
-                    _password = value!;
+                    _password_login = value!;
                   },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
@@ -175,30 +164,26 @@ class _MyLoginPage extends State<MyLoginPage> {
                 margin: const EdgeInsets.all(10),
                 child: ElevatedButton(
                     onPressed: () async {
-                      if (_loginFormKey.currentState!.validate()) {
-                        final response = await request.login(
-                            "https://mid-tourism.up.railway.app/login_flutter/",
-                            {
-                              'username': _username,
-                              'password': _password,
+                      final response = await request.login(
+                          "https://mid-tourism.up.railway.app/login_flutter/", {
+                        'username': _username_login,
+                        'password': _password_login,
+                      });
+                      if (request.loggedIn) {
+                        // Code here will run if the login succeeded.
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const MyAboutPage(),
+                            ));
+                      } else {
+                        // Code here will run if the login failed (wrong username/password).
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return const AlertDialog(
+                                  content: Text('Wrong Credentials!'));
                             });
-                        if (request.loggedIn) {
-                          // Code here will run if the login succeeded.
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const MyAboutPage(),
-                              )
-                          );
-                        } else {
-                          // Code here will run if the login failed (wrong username/password).
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return const AlertDialog(
-                                    content: Text('Wrong Credentials!'));
-                              });
-                        }
                       }
                     },
                     style: ElevatedButton.styleFrom(
