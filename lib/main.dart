@@ -54,13 +54,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   Container(
                     padding: const EdgeInsets.only(left: 15, right: 15),
-                    child: const FittedBox(
+                    child: FittedBox(
                       fit: BoxFit.fitWidth,
-                      child: Text("MID Tourism",
-                          style: TextStyle(
-                              fontSize: 60,
-                              fontFamily: 'Quicksand',
-                              color: Color(0xffFFFFFF))),
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(
+                            minWidth: 1,
+                            minHeight: 1
+                        ),
+                        child: const Text(
+                            "MID Tourism",
+                            style: TextStyle(
+                                fontSize: 60,
+                                fontFamily: 'Quicksand',
+                                color: Color(0xffFFFFFF)
+                            )
+                        ),
+                      )
                     ),
                   ),
                   Center(
@@ -82,12 +91,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Container(
                     padding: const EdgeInsets.only(left: 7.5, right: 7.5),
-                    child: const FittedBox(
+                    child: FittedBox(
                       fit: BoxFit.fitWidth,
-                      child: Image(
-                        image: AssetImage("Saly-44.png"),
-                        fit: BoxFit.contain,
-                      ),
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(
+                            minWidth: 1,
+                            minHeight: 1
+                        ),
+                        child: const Image(
+                          image: AssetImage("assets/Saly-44.png"),
+                          fit: BoxFit.contain,
+                        ),
+                      )
                     ),
                   ),
                   Container(
@@ -120,7 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                const MyRegisterPage(title: 'Register')),
+                                const MyRegisterPage()),
                           );
                         },
                         style: ElevatedButton.styleFrom(

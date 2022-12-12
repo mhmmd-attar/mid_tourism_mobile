@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 
+import 'package:mid_tourism_mobile/main.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/pages/homepage/about.dart';
 
@@ -14,13 +15,6 @@ class MyLoginPage extends StatefulWidget {
 
 class _MyLoginPage extends State<MyLoginPage> {
   final _loginFormKey = GlobalKey<FormState>();
-  bool isPasswordVisible = false;
-
-  void togglePasswordView() {
-    setState(() {
-      isPasswordVisible = !isPasswordVisible;
-    });
-  }
 
   String _username = "";
   String _password = "";
@@ -39,13 +33,22 @@ class _MyLoginPage extends State<MyLoginPage> {
             children: <Widget>[
               Container(
                 padding: const EdgeInsets.only(left: 15, right: 15),
-                child: const FittedBox(
-                  fit: BoxFit.fitWidth,
-                  child: Text("MID Tourism",
-                      style: TextStyle(
-                          fontSize: 60,
-                          fontFamily: 'Quicksand',
-                          color: Color(0xffFFFFFF))),
+                child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(
+                          minWidth: 1,
+                          minHeight: 1
+                      ),
+                      child: const Text(
+                          "MID Tourism",
+                          style: TextStyle(
+                              fontSize: 60,
+                              fontFamily: 'Quicksand',
+                              color: Color(0xffFFFFFF)
+                          )
+                      ),
+                    )
                 ),
               ),
               Center(
@@ -56,14 +59,19 @@ class _MyLoginPage extends State<MyLoginPage> {
                         color: const Color(0xffFFFFFF).withOpacity(0.5))),
               ),
               Container(
-                constraints: const BoxConstraints(maxHeight: 300),
-                padding: const EdgeInsets.only(left: 10, right: 10),
-                child: const FittedBox(
-                  fit: BoxFit.fitWidth,
-                  child: Image(
-                    image: AssetImage("Saly-44.png"),
-                    fit: BoxFit.contain,
-                  ),
+                padding: const EdgeInsets.only(left: 7.5, right: 7.5),
+                child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(
+                          minWidth: 1,
+                          minHeight: 1
+                      ),
+                      child: const Image(
+                        image: AssetImage("assets/Saly-44.png"),
+                        fit: BoxFit.contain,
+                      ),
+                    )
                 ),
               ),
               Row(
@@ -76,7 +84,10 @@ class _MyLoginPage extends State<MyLoginPage> {
                         fit: BoxFit.fitWidth,
                         child: ElevatedButton(
                             onPressed: () {
-                              Navigator.pop(context);
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => const MyHomePage()),
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xffd3462c),
@@ -122,10 +133,16 @@ class _MyLoginPage extends State<MyLoginPage> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
-                    hintText: "Email",
+                    hintText: "Username",
                   ),
                   onChanged: (String? value) {
                     _username = value!;
+                  },
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Username cannot be empty!';
+                    }
+                    return null;
                   },
                 ),
               ),
@@ -146,34 +163,42 @@ class _MyLoginPage extends State<MyLoginPage> {
                   onChanged: (String? value) {
                     _password = value!;
                   },
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Password cannot be empty!';
+                    }
+                    return null;
+                  },
                 ),
               ),
               Container(
                 margin: const EdgeInsets.all(10),
                 child: ElevatedButton(
                     onPressed: () async {
-                      print(_username + _password);
-                      final response = await request.login(
-                          "https://mid-tourism.up.railway.app/login_flutter/", {
-                        'username': _username,
-                        'password': _password,
-                      });
-                      if (request.loggedIn) {
-                        // Code here will run if the login succeeded.
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const MyAboutPage(),
-                            )
-                        );
-                      } else {
-                        // Code here will run if the login failed (wrong username/password).
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return const AlertDialog(
-                                  content: Text('Wrong Credentials!'));
+                      if (_loginFormKey.currentState!.validate()) {
+                        final response = await request.login(
+                            "https://mid-tourism.up.railway.app/login_flutter/",
+                            {
+                              'username': _username,
+                              'password': _password,
                             });
+                        if (request.loggedIn) {
+                          // Code here will run if the login succeeded.
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const MyAboutPage(),
+                              )
+                          );
+                        } else {
+                          // Code here will run if the login failed (wrong username/password).
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const AlertDialog(
+                                    content: Text('Wrong Credentials!'));
+                              });
+                        }
                       }
                     },
                     style: ElevatedButton.styleFrom(
