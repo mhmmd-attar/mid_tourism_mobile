@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: const FittedBox(
                       fit: BoxFit.fitWidth,
                       child: Image(
-                        image: AssetImage("Saly-44.png"),
+                        image: AssetImage("assets/Saly-44.png"),
                         fit: BoxFit.contain,
                       ),
                     ),
@@ -98,8 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                const MyLoginPage()),
+                                builder: (context) => const MyLoginPage()),
                           );
                         },
                         style: ElevatedButton.styleFrom(
@@ -120,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                const MyRegisterPage(title: 'Register')),
+                                    const MyRegisterPage(title: 'Register')),
                           );
                         },
                         style: ElevatedButton.styleFrom(
