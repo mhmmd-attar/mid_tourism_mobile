@@ -2,14 +2,12 @@ import 'dart:convert';
 import 'dart:html';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/models/resto_model.dart';
 import 'package:mid_tourism_mobile/pages/restaurant/restaurant.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io' as io;
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
@@ -87,12 +85,10 @@ class _RestaurantForm extends State<RestaurantForm> {
   String resto_description = "";
   String resto_delivery = "";
   Uint8List? resto_photo_bytes;
-  String base64photo = "";
 
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
-
     return Scaffold(
         appBar: AppBar(),
         drawer: const AppDrawer(),
@@ -374,7 +370,7 @@ class _RestaurantForm extends State<RestaurantForm> {
                                 )
                               : Text(
                                   "No Image",
-                                  style: TextStyle(fontSize: 20),
+                                  style: TextStyle(fontSize: 15),
                                 ),
 
                           Padding(
@@ -446,6 +442,7 @@ class _RestaurantForm extends State<RestaurantForm> {
                                           } catch (e) {
                                             print(" LOOK");
                                           }""";
+
                                           showDialog(
                                               context: context,
                                               builder: (BuildContext context) {
@@ -453,7 +450,12 @@ class _RestaurantForm extends State<RestaurantForm> {
                                                     content: Text(
                                                         'Successfully saved!'));
                                               });
-                                          Navigator.pop(context);
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const RestaurantPage()),
+                                          );
                                         }
                                       },
                                       child: const Text("Save",

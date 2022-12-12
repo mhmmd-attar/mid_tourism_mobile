@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-Future<List<Room>> fetchRoom() async {
-  var url = Uri.parse('https://mid-tourism.up.railway.app/hotel/json_room');
+Future<List<Room>> fetchRoom(id) async {
+  var url =
+      Uri.parse('https://mid-tourism.up.railway.app/hotel/show_json_room/$id/');
   var response = await http.get(
     url,
     headers: {

@@ -279,6 +279,14 @@ class _Restaurant extends State<RestaurantPage> {
                                                             } catch (e) {
                                                               print("$e LOOK");
                                                             }
+                                                            Navigator
+                                                                .pushReplacement(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          const RestaurantPage()),
+                                                            );
                                                           },
                                                           child: const Text(
                                                               "Delete",
