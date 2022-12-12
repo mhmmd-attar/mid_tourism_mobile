@@ -156,17 +156,20 @@ class _Restaurant extends State<RestaurantPage> {
                                         Align(
                                           alignment: Alignment.topLeft,
                                           child: FittedBox(
-                                            fit: BoxFit.fitWidth,
-                                            child: Text(
-                                              snapshot.data![index].fields
-                                                  .restoName,
-                                              style: const TextStyle(
-                                                fontSize: 24,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ),
+                                              fit: BoxFit.fitWidth,
+                                              child: ConstrainedBox(
+                                                constraints: BoxConstraints(
+                                                    minWidth: 1, minHeight: 1),
+                                                child: Text(
+                                                  snapshot.data![index].fields
+                                                      .restoName,
+                                                  style: const TextStyle(
+                                                    fontSize: 24,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              )),
                                         ),
                                         AutoSizeTextField(
                                           enabled: false,
