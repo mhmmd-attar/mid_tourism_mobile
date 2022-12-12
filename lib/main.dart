@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mid_tourism_mobile/drawer.dart';
+import 'package:mid_tourism_mobile/pages/homepage/about.dart';
 import 'package:mid_tourism_mobile/pages/homepage/login.dart';
 import 'package:mid_tourism_mobile/pages/homepage/register.dart';
 import 'package:provider/provider.dart';
@@ -43,6 +44,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return MaterialApp(
         home: Scaffold(
             backgroundColor: const Color(0xff3f8dcd),
@@ -55,22 +57,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     padding: const EdgeInsets.only(left: 15, right: 15),
                     child: FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(
-                            minWidth: 1,
-                            minHeight: 1
-                        ),
-                        child: const Text(
-                            "MID Tourism",
-                            style: TextStyle(
-                                fontSize: 60,
-                                fontFamily: 'Quicksand',
-                                color: Color(0xffFFFFFF)
-                            )
-                        ),
-                      )
-                    ),
+                        fit: BoxFit.fitWidth,
+                        child: ConstrainedBox(
+                          constraints:
+                              const BoxConstraints(minWidth: 1, minHeight: 1),
+                          child: const Text("MID Tourism",
+                              style: TextStyle(
+                                  fontSize: 60,
+                                  fontFamily: 'Quicksand',
+                                  color: Color(0xffFFFFFF))),
+                        )),
                   ),
                   Center(
                     child: Text("Go Anywhere, Know Every place",
@@ -92,62 +88,87 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     padding: const EdgeInsets.only(left: 7.5, right: 7.5),
                     child: FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(
-                            minWidth: 1,
-                            minHeight: 1
-                        ),
-                        child: const Image(
-                          image: AssetImage("assets/Saly-44.png"),
-                          fit: BoxFit.contain,
-                        ),
-                      )
+                        fit: BoxFit.fitWidth,
+                        child: ConstrainedBox(
+                          constraints:
+                              const BoxConstraints(minWidth: 1, minHeight: 1),
+                          child: const Image(
+                            image: AssetImage("assets/Saly-44.png"),
+                            fit: BoxFit.contain,
+                          ),
+                        )),
+                  ),
+                  Visibility(
+                      visible: !request.loggedIn,
+                      child: Container(
+                        margin: const EdgeInsets.all(10),
+                        height: 50.0,
+                        child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MyLoginPage()),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xffFFFFFF),
+                                shape: const StadiumBorder(),
+                                minimumSize: const Size(280, 50)),
+                            child: const Text("Login",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontFamily: 'Quicksand',
+                                    color: Color(0xff000000)))),
+                      )),
+                  Visibility(
+                      visible: !request.loggedIn,
+                      child: Container(
+                        margin: const EdgeInsets.all(10),
+                        child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MyRegisterPage(
+                                        title: 'Register')),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xffd3462c),
+                                shape: const StadiumBorder(),
+                                minimumSize: const Size(280, 50)),
+                            child: const Text("Register",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontFamily: 'Quicksand',
+                                    color: Color(0xffFFFFFF)))),
+                      )),
+                  Visibility(
+                    visible: request.loggedIn,
+                    child: Container(
+                      margin: const EdgeInsets.all(10),
+                      child: ElevatedButton(
+                          onPressed: () async {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const MyRegisterPage()),
+                            );
+                            final response = await request.logout(
+                                'https://mid-tourism.up.railway.app/logout_flutter/');
+                          },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xffd3462c),
+                              shape: const StadiumBorder(),
+                              minimumSize: const Size(280, 50)),
+                          child: const Text("Log Out",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontFamily: 'Quicksand',
+                                  color: Color(0xffFFFFFF)))),
                     ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    height: 50.0,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                const MyLoginPage()),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xffFFFFFF),
-                            shape: const StadiumBorder(),
-                            minimumSize: const Size(280, 50)),
-                        child: const Text("Login",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontFamily: 'Quicksand',
-                                color: Color(0xff000000)))),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                const MyRegisterPage()),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xffd3462c),
-                            shape: const StadiumBorder(),
-                            minimumSize: const Size(280, 50)),
-                        child: const Text("Register",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontFamily: 'Quicksand',
-                                color: Color(0xffFFFFFF)))),
-                  ),
+                  )
 
                   // Added behavior when budget is typed
                 ],

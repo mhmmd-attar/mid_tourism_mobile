@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mid_tourism_mobile/pages/tourguide/tourguide.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:mid_tourism_mobile/drawer.dart';
-import 'package:mid_tourism_mobile/models/tourguide_model.dart';
-import 'package:mid_tourism_mobile/pages/tourguide/tourguide.dart';
 
 class TourguideForm extends StatefulWidget {
   const TourguideForm({super.key});
@@ -178,21 +177,6 @@ class _TourguideForm extends State<TourguideForm> {
                             ),
                           ),
                           Padding(
-                            // Using padding of 8 pixels
-                            padding: const EdgeInsets.all(8.0),
-                            child: Checkbox(
-                              activeColor: Colors.limeAccent,
-                              checkColor: Colors.black,
-                              focusColor: Colors.lightGreenAccent,
-                              value: (isBooked = false),
-                              onChanged: (value) {
-                                setState(() {
-                                  isBooked = (value! ? true : false);
-                                });
-                              },
-                            ),
-                          ),
-                          Padding(
                               padding: const EdgeInsets.only(top: 10.0),
                               child: Align(
                                 alignment: Alignment.bottomCenter,
@@ -213,42 +197,48 @@ class _TourguideForm extends State<TourguideForm> {
                                             style: TextStyle(
                                                 color: Colors.white))),
                                     ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            minimumSize: const Size(120, 50),
-                                            shape: const StadiumBorder(),
-                                            backgroundColor:
-                                                const Color(0xff3f8dcd)),
-                                        onPressed: () {
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            _formKey.currentState!.save();
-                                            Fields newFields = Fields(
-                                              company: company,
-                                              date: date,
-                                              destination: destination,
-                                              isBooked: isBooked,
-                                            );
-                                            Map<String, dynamic> jsonFields =
-                                                newFields.toJson();
-                                            Tourguide newTourguide = Tourguide(
-                                                model: model,
-                                                pk: pk,
-                                                fields: newFields);
-                                            Map<String, dynamic> jsonTourguide =
-                                                newTourguide.toJson();
-                                            showDialog(
-                                                context: context,
-                                                builder:
-                                                    (BuildContext context) {
-                                                  return const AlertDialog(
-                                                      content: Text(
-                                                          'Successfully saved!'));
-                                                });
+                                      style: ElevatedButton.styleFrom(
+                                          minimumSize: const Size(120, 50),
+                                          shape: const StadiumBorder(),
+                                          backgroundColor:
+                                          const Color(0xff3f8dcd)),
+                                      onPressed: () async {
+                                        if (_formKey.currentState!.validate()) {
+                                          _formKey.currentState!.save();
+                                          try {
+                                            final uri = Uri.parse(
+                                                'https://mid-tourism.up.railway.app/tourguide/add_schedule_flutter/');
+                                            final request =
+                                            http.MultipartRequest(
+                                                'POST', uri);
+                                            request.fields["date"] = date;
+                                            request.fields["company"] = company;
+                                            request.fields["destination"] = destination;
+                                            final response =
+                                            await request.send();
+                                          } catch (e) {
+                                            print("$e ERROR FOUND");
                                           }
-                                        },
-                                        child: const Text("Save",
-                                            style: TextStyle(
-                                                color: Colors.white))),
+                                          showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return const AlertDialog(
+                                                    content: Text(
+                                                        'Successfully saved!'));
+                                              });
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                const TourguidePage()),
+                                          );
+                                        }
+                                      },
+                                      child: const Text("Save",
+                                          style: TextStyle(
+                                              color: Colors.white)
+                                      ),
+                                    ),
                                   ],
                                 ),
                               )),

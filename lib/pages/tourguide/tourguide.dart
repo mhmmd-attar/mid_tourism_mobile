@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text_field/auto_size_text_field.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-
 import 'package:mid_tourism_mobile/drawer.dart';
 import 'package:mid_tourism_mobile/pages/tourguide/tourguide_form.dart';
 import 'package:mid_tourism_mobile/models/tourguide_model.dart';
@@ -64,26 +63,28 @@ class _Tourguide extends State<TourguidePage> {
                                     const Color(0xffFFFFFF).withOpacity(0.8))),
                       ),
                     ])),
-            Container(
-              margin: const EdgeInsets.all(10),
-              child: ElevatedButton(
-                  onPressed: () async {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const TourguideForm()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff24a0ed),
-                      shape: const StadiumBorder(),
-                      minimumSize: const Size(260, 50)),
-                  child: const Text("Add Tourguide",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: 'Quicksand',
-                          color: Color(0xffFFFFFF)))),
-            ),
+            Visibility(
+                visible: request.loggedIn,
+                child:Container(
+                  margin: const EdgeInsets.all(10),
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const TourguideForm()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xff24a0ed),
+                          shape: const StadiumBorder(),
+                          minimumSize: const Size(260, 50)),
+                      child: const Text("Add Tourguide",
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontFamily: 'Quicksand',
+                              color: Color(0xffFFFFFF)))),
+                )),
             FutureBuilder(
                 future: fetchTourguide(),
                 builder: (context, AsyncSnapshot snapshot) {
@@ -199,7 +200,9 @@ class _Tourguide extends State<TourguidePage> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.end,
                                               children: [
-                                                Container(
+                                              Visibility(
+                                              visible: request.loggedIn,
+                                                child:Container(
                                                     padding:
                                                         const EdgeInsetsDirectional
                                                                 .fromSTEB(
@@ -212,12 +215,29 @@ class _Tourguide extends State<TourguidePage> {
                                                               backgroundColor:
                                                                   Colors.blue,
                                                             ),
-                                                            onPressed: () {},
+                                                            onPressed: () async {
+                                                              try {
+                                                                final response =
+                                                                await request.get(
+                                                                    'https://mid-tourism.up.railway.app/tourguide/update_booked_flutter/${snapshot.data![index].pk}');
+                                                              } catch (e) {
+                                                                print("$e ERROR");
+                                                              }
+                                                              Navigator
+                                                                  .pushReplacement(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) =>
+                                                                    const TourguidePage()),
+                                                              );
+                                                            },
                                                             child: const Text(
                                                                 "Change Availability",
                                                                 style: TextStyle(
                                                                     color: Colors
-                                                                        .white))))),
+                                                                        .white)))
+                                                    ))),
                                               ],
                                             ),
                                           ),

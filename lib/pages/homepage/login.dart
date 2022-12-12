@@ -13,6 +13,8 @@ class MyLoginPage extends StatefulWidget {
 }
 
 class _MyLoginPage extends State<MyLoginPage> {
+  bool isPasswordVisible = false;
+
   String _username_login = "";
   String _password_login = "";
 
@@ -117,6 +119,7 @@ class _MyLoginPage extends State<MyLoginPage> {
                 height: 40,
                 child: TextFormField(
                   decoration: InputDecoration(
+                    isDense: true,
                     filled: true,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
@@ -140,14 +143,28 @@ class _MyLoginPage extends State<MyLoginPage> {
                 width: 280,
                 height: 40,
                 child: TextFormField(
-                  obscureText: true,
+                  obscureText: !isPasswordVisible,
                   decoration: InputDecoration(
+                    isDense: true,
                     filled: true,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                     hintText: "Password",
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        !isPasswordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Theme.of(context).primaryColorDark,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          isPasswordVisible = !isPasswordVisible;
+                        });
+                      },
+                    ),
                   ),
                   onChanged: (String? value) {
                     _password_login = value!;

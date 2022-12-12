@@ -24,26 +24,6 @@ Future<List<Tourguide>> fetchTourguide() async {
   }
   return listTourguide;
 }
-//
-// Future<int> getLength() async {
-//   var url = Uri.parse(
-//       'https://mid-tourism.up.railway.app/tourguide/json');
-//   var response = await http.get(
-//     url,
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   );
-//   var data = jsonDecode(utf8.decode(response.bodyBytes));
-//   List<Tourguide> listTourguide = [];
-//   for (var d in data) {
-//     if (d != null) {
-//       listTourguide.add(Tourguide.fromJson(d));
-//     }
-//   }
-//
-//   return listTourguide.length;
-// }
 
 List<Tourguide> tourguideFromJson(String str) => List<Tourguide>.from(json.decode(str).map((x) => Tourguide.fromJson(x)));
 
